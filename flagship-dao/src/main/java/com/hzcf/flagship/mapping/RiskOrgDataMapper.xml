@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskOrgDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskOrgData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="org_short_name" property="orgShortName" jdbcType="VARCHAR" />
+    <result column="principal_name" property="principalName" jdbcType="VARCHAR" />
+    <result column="principal_no" property="principalNo" jdbcType="VARCHAR" />
+    <result column="is_principal_detail" property="isPrincipalDetail" jdbcType="CHAR" />
+    <result column="principal_send_aging" property="principalSendAging" jdbcType="INTEGER" />
+    <result column="credit_manager_name" property="creditManagerName" jdbcType="VARCHAR" />
+    <result column="credit_manager_no" property="creditManagerNo" jdbcType="VARCHAR" />
+    <result column="is_credit_manager_detail" property="isCreditManagerDetail" jdbcType="CHAR" />
+    <result column="manager_send_aging" property="managerSendAging" jdbcType="INTEGER" />
+    <result column="subcenter_no" property="subcenterNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, org_no, org_short_name, principal_name, principal_no, is_principal_detail, principal_send_aging, 
+    credit_manager_name, credit_manager_no, is_credit_manager_detail, manager_send_aging, 
+    subcenter_no, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskOrgDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_org_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_org_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_org_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskOrgDataExample" >
+    delete from f_risk_org_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskOrgData" >
+    insert into f_risk_org_data (id, org_no, org_short_name, 
+      principal_name, principal_no, is_principal_detail, 
+      principal_send_aging, credit_manager_name, 
+      credit_manager_no, is_credit_manager_detail, manager_send_aging, 
+      subcenter_no, create_time)
+    values (#{id,jdbcType=BIGINT}, #{orgNo,jdbcType=VARCHAR}, #{orgShortName,jdbcType=VARCHAR}, 
+      #{principalName,jdbcType=VARCHAR}, #{principalNo,jdbcType=VARCHAR}, #{isPrincipalDetail,jdbcType=CHAR}, 
+      #{principalSendAging,jdbcType=INTEGER}, #{creditManagerName,jdbcType=VARCHAR}, 
+      #{creditManagerNo,jdbcType=VARCHAR}, #{isCreditManagerDetail,jdbcType=CHAR}, #{managerSendAging,jdbcType=INTEGER}, 
+      #{subcenterNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskOrgData" >
+    insert into f_risk_org_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="orgShortName != null" >
+        org_short_name,
+      </if>
+      <if test="principalName != null" >
+        principal_name,
+      </if>
+      <if test="principalNo != null" >
+        principal_no,
+      </if>
+      <if test="isPrincipalDetail != null" >
+        is_principal_detail,
+      </if>
+      <if test="principalSendAging != null" >
+        principal_send_aging,
+      </if>
+      <if test="creditManagerName != null" >
+        credit_manager_name,
+      </if>
+      <if test="creditManagerNo != null" >
+        credit_manager_no,
+      </if>
+      <if test="isCreditManagerDetail != null" >
+        is_credit_manager_detail,
+      </if>
+      <if test="managerSendAging != null" >
+        manager_send_aging,
+      </if>
+      <if test="subcenterNo != null" >
+        subcenter_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortName != null" >
+        #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="principalName != null" >
+        #{principalName,jdbcType=VARCHAR},
+      </if>
+      <if test="principalNo != null" >
+        #{principalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrincipalDetail != null" >
+        #{isPrincipalDetail,jdbcType=CHAR},
+      </if>
+      <if test="principalSendAging != null" >
+        #{principalSendAging,jdbcType=INTEGER},
+      </if>
+      <if test="creditManagerName != null" >
+        #{creditManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditManagerNo != null" >
+        #{creditManagerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isCreditManagerDetail != null" >
+        #{isCreditManagerDetail,jdbcType=CHAR},
+      </if>
+      <if test="managerSendAging != null" >
+        #{managerSendAging,jdbcType=INTEGER},
+      </if>
+      <if test="subcenterNo != null" >
+        #{subcenterNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskOrgDataExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_org_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_org_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgShortName != null" >
+        org_short_name = #{record.orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principalName != null" >
+        principal_name = #{record.principalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principalNo != null" >
+        principal_no = #{record.principalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPrincipalDetail != null" >
+        is_principal_detail = #{record.isPrincipalDetail,jdbcType=CHAR},
+      </if>
+      <if test="record.principalSendAging != null" >
+        principal_send_aging = #{record.principalSendAging,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditManagerName != null" >
+        credit_manager_name = #{record.creditManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditManagerNo != null" >
+        credit_manager_no = #{record.creditManagerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCreditManagerDetail != null" >
+        is_credit_manager_detail = #{record.isCreditManagerDetail,jdbcType=CHAR},
+      </if>
+      <if test="record.managerSendAging != null" >
+        manager_send_aging = #{record.managerSendAging,jdbcType=INTEGER},
+      </if>
+      <if test="record.subcenterNo != null" >
+        subcenter_no = #{record.subcenterNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_org_data
+    set id = #{record.id,jdbcType=BIGINT},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      org_short_name = #{record.orgShortName,jdbcType=VARCHAR},
+      principal_name = #{record.principalName,jdbcType=VARCHAR},
+      principal_no = #{record.principalNo,jdbcType=VARCHAR},
+      is_principal_detail = #{record.isPrincipalDetail,jdbcType=CHAR},
+      principal_send_aging = #{record.principalSendAging,jdbcType=INTEGER},
+      credit_manager_name = #{record.creditManagerName,jdbcType=VARCHAR},
+      credit_manager_no = #{record.creditManagerNo,jdbcType=VARCHAR},
+      is_credit_manager_detail = #{record.isCreditManagerDetail,jdbcType=CHAR},
+      manager_send_aging = #{record.managerSendAging,jdbcType=INTEGER},
+      subcenter_no = #{record.subcenterNo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskOrgData" >
+    update f_risk_org_data
+    <set >
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortName != null" >
+        org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="principalName != null" >
+        principal_name = #{principalName,jdbcType=VARCHAR},
+      </if>
+      <if test="principalNo != null" >
+        principal_no = #{principalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrincipalDetail != null" >
+        is_principal_detail = #{isPrincipalDetail,jdbcType=CHAR},
+      </if>
+      <if test="principalSendAging != null" >
+        principal_send_aging = #{principalSendAging,jdbcType=INTEGER},
+      </if>
+      <if test="creditManagerName != null" >
+        credit_manager_name = #{creditManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditManagerNo != null" >
+        credit_manager_no = #{creditManagerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isCreditManagerDetail != null" >
+        is_credit_manager_detail = #{isCreditManagerDetail,jdbcType=CHAR},
+      </if>
+      <if test="managerSendAging != null" >
+        manager_send_aging = #{managerSendAging,jdbcType=INTEGER},
+      </if>
+      <if test="subcenterNo != null" >
+        subcenter_no = #{subcenterNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskOrgData" >
+    update f_risk_org_data
+    set org_no = #{orgNo,jdbcType=VARCHAR},
+      org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      principal_name = #{principalName,jdbcType=VARCHAR},
+      principal_no = #{principalNo,jdbcType=VARCHAR},
+      is_principal_detail = #{isPrincipalDetail,jdbcType=CHAR},
+      principal_send_aging = #{principalSendAging,jdbcType=INTEGER},
+      credit_manager_name = #{creditManagerName,jdbcType=VARCHAR},
+      credit_manager_no = #{creditManagerNo,jdbcType=VARCHAR},
+      is_credit_manager_detail = #{isCreditManagerDetail,jdbcType=CHAR},
+      manager_send_aging = #{managerSendAging,jdbcType=INTEGER},
+      subcenter_no = #{subcenterNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getOrgData" parameterType="hashmap" resultMap="BaseResultMap">
+  <![CDATA[  
+  	SELECT
+		*
+	FROM
+		(
+			SELECT
+				 org_no,
+				 org_short_name,
+				 principal_name,
+				 principal_no,
+		         is_principal_detail,
+		         credit_manager_name,
+				 is_credit_manager_detail,
+				 credit_manager_no
+			FROM
+				f_risk_org_data
+			ORDER BY
+				create_time DESC
+		) a
+	GROUP BY
+		org_no
+	HAVING
+			 trim(principal_no) != ''
+	OR trim(credit_manager_no) != ''
+	]]>
+  </select>
+  
+  <select id="selectByOrgShortNameAndPrincipalNo" parameterType="com.hzcf.flagship.model.RiskOrgData" resultType="hashmap">
+  
+  	SELECT
+		<include refid="Base_Column_List" />
+	FROM
+			f_risk_org_data
+		WHERE
+			org_short_name =#{orgShortName}
+		AND principal_no = #{principalNo}
+		AND subcenter_no = #{subcenterNo}
+		AND credit_manager_no = #{creditManagerNo}
+		AND  is_principal_detail = #{isPrincipalDetail}
+		AND is_credit_manager_detail = #{isCreditManagerDetail}
+		AND principal_send_aging = #{principalSendAging}
+		<!--AND manager_send_aging = #{managerSendAging}  -->
+  </select>
+  <!-- 通过营业部编号查询最新机构简称 或全称 -->
+  <select id="selectShortNameByOrgNo" parameterType="String" resultType="hashmap">
+	SELECT
+		struct.org_no,
+	  	case when org.org_short_name is null or  org.org_short_name = '' then struct.org_name
+ 		else org.org_short_name end as org_name
+	FROM
+	(
+		SELECT
+			s.org_no,
+			s.org_name
+		FROM
+			f_risk_org_struct s
+		WHERE
+			s.org_no = #{orgNo}
+		ORDER BY
+			s.create_time DESC
+		LIMIT 1
+	) struct
+LEFT JOIN (
+	SELECT
+			org.org_no,
+			org.org_short_name
+		FROM
+			f_risk_org_data org
+		WHERE
+			org.org_no = #{orgNo}
+		ORDER BY
+			org.create_time DESC
+	LIMIT 1
+) org ON org.org_no = struct.org_no
+  </select>
+  <update id="updateCreateTime" parameterType="hashmap">
+  	 update f_risk_org_data
+   	 set create_time = #{create_time}
+   	  where  org_no = #{org_no}
+      and  org_short_name = #{org_short_name}
+      and principal_no = #{principal_no}
+      and subcenter_no = #{subcenter_no}
+	  AND credit_manager_no = #{credit_manager_no}
+	  AND  is_principal_detail = #{is_principal_detail}
+	  AND is_credit_manager_detail = #{is_credit_manager_detail}
+	  AND principal_send_aging = #{principal_send_aging}
+	<!-- AND manager_send_aging = #{manager_send_aging} -->
+  </update>
+<!--   查找分中心下的所有营业部编号 -->
+  <select id="getBranchCenterChildOrgNos" parameterType="map" resultType="String">
+		SELECT
+			GROUP_CONCAT('\'',org_no,'\'') orgNos
+		FROM
+			 (SELECT
+	   			 org_no,
+	    		subcenter_no
+		FROM
+	    (SELECT
+	            org_no,
+	            subcenter_no
+	        FROM
+	            (
+	                SELECT
+	                    org_no,
+	                    subcenter_no,
+	                    create_time
+	                FROM
+	                   f_risk_org_data
+	                ORDER BY
+	                    create_time DESC
+	            ) a
+	        JOIN (
+	            SELECT
+	                create_time_first,
+	                org_no2
+	            FROM
+	                (SELECT
+                        create_time create_time_first,
+                        org_no org_no2
+	                 FROM
+	                     f_risk_org_data ORDER BY create_time ) f
+	            GROUP BY
+	                org_no2
+	        ) c ON a.org_no = c.org_no2
+	        WHERE
+	           <![CDATA[ create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)]]>
+	        OR create_time = create_time_first
+	        ORDER BY
+	            create_time DESC
+	    ) m
+		GROUP BY org_no) org WHERE org.subcenter_no=#{orgNo}
+  </select>
+  
+  <select id="selectOrgDataBySubcenterNo" parameterType="String" resultMap="BaseResultMap">
+ 
+ 		SELECT * FROM(
+		SELECT org.org_short_name, org.org_no,org.subcenter_no
+		FROM f_risk_org_data org
+		JOIN (
+				SELECT *
+	      FROM(
+						SELECT subcenter_no,`status`
+						FROM f_risk_subcenter
+						ORDER BY create_time DESC
+				) rul
+				GROUP BY rul.subcenter_no
+		) sub ON org.subcenter_no=sub.subcenter_no AND sub.`status`=1
+		ORDER BY create_time DESC
+	) a 
+	GROUP BY org_no
+	HAVING subcenter_no= #{subcenterNo}
+  		
+  </select>
+  <!-- 检查营业部是否分配分中心 ： 当日有业绩 不在f_risk_org_data表中的营业部  -->
+  <select id="checkSubcenterIsNull" resultType="hashmap" parameterType="String">
+	SELECT
+			result.org_no orgNo,
+			result.orgName,
+			result.pName
+		FROM
+		(
+			SELECT
+					cm1.org_no,
+					struct.orgName,
+          			struct.pName
+			FROM(
+							select
+							org_no
+				from 
+					 f_risk_loan_cm1 
+				 where record_date = #{recordDate}
+     		group by org_no
+) cm1
+left join (
+		select 
+				org_no orgNo,
+				org_name orgName,
+				pName
+		from (
+						 select 
+								s2.org_no,
+								s2.org_name,
+							 	 s.org_no pOrgNo,
+								s.org_name pName
+					 from f_risk_org_struct s
+					 join f_risk_org_struct s2 on s.org_no = s2.parent_no
+     				 where  s2.rank = 5 order by s2.create_time desc
+				) s group by org_no
+)struct on cm1.org_no = struct.orgNo
+ where struct.orgName is not null
+) result
+where result.org_no not in(
+		SELECT
+					org_no
+					from(
+					 select org_no from f_risk_org_data order by create_time desc 
+					) d group by org_no
+) 
+  </select>
+  
+  <!-- 查询分中心下所有的营业部 -->
+  <select id="getOrgListBySubcenter" parameterType="String" resultType="String">
+  	SELECT org_no FROM (
+		SELECT * FROM(
+				SELECT org.org_short_name, org.org_no,org.subcenter_no
+				FROM f_risk_org_data org
+				JOIN (
+						SELECT *
+						FROM(
+								SELECT subcenter_no,`status`
+								FROM f_risk_subcenter
+								ORDER BY create_time DESC
+						) rul
+						GROUP BY rul.subcenter_no
+				) sub ON org.subcenter_no=sub.subcenter_no AND sub.`status`=1
+				ORDER BY create_time DESC
+			) a 
+			GROUP BY org_no
+			HAVING subcenter_no= #{subcenterNo}
+		) b
+  </select>
+  
+  <!-- 查询机构属于哪个分中心 -->
+  <select id="getSubcenterByOrg" parameterType="String" resultType="map">
+  	SELECT subcenter_no 
+  	FROM(
+		SELECT *
+		FROM f_risk_org_data
+		ORDER BY create_time DESC
+	) o
+	GROUP BY org_no
+	HAVING org_no = #{orgNo}
+  </select>
+</mapper> 

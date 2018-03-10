@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.AssetPersonMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.AssetPerson" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dep_no" property="depNo" jdbcType="VARCHAR" />
+    <result column="dep_name" property="depName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="district_no" property="districtNo" jdbcType="VARCHAR" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="salesdep_no" property="salesdepNo" jdbcType="VARCHAR" />
+    <result column="salesdep_name" property="salesdepName" jdbcType="VARCHAR" />
+    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+    <result column="sub_team_name" property="subTeamName" jdbcType="VARCHAR" />
+    <result column="person_no" property="personNo" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="dimission_time" property="dimissionTime" jdbcType="DATE" />
+    <result column="caretor" property="caretor" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dep_no, dep_name, name, district_no, district_name, salesdep_no, salesdep_name, 
+    team_name, sub_team_name, person_no, mobile, dimission_time, caretor, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.AssetPersonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_asset_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_asset_person
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_asset_person
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.AssetPersonExample" >
+    delete from f_asset_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.AssetPerson" >
+    insert into f_asset_person (id, dep_no, dep_name, 
+      name, district_no, district_name, 
+      salesdep_no, salesdep_name, team_name, 
+      sub_team_name, person_no, mobile, 
+      dimission_time, caretor, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{depNo,jdbcType=VARCHAR}, #{depName,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{districtNo,jdbcType=VARCHAR}, #{districtName,jdbcType=VARCHAR}, 
+      #{salesdepNo,jdbcType=VARCHAR}, #{salesdepName,jdbcType=VARCHAR}, #{teamName,jdbcType=VARCHAR}, 
+      #{subTeamName,jdbcType=VARCHAR}, #{personNo,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, 
+      #{dimissionTime,jdbcType=DATE}, #{caretor,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.AssetPerson" >
+    insert into f_asset_person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="depNo != null" >
+        dep_no,
+      </if>
+      <if test="depName != null" >
+        dep_name,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="districtNo != null" >
+        district_no,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="salesdepNo != null" >
+        salesdep_no,
+      </if>
+      <if test="salesdepName != null" >
+        salesdep_name,
+      </if>
+      <if test="teamName != null" >
+        team_name,
+      </if>
+      <if test="subTeamName != null" >
+        sub_team_name,
+      </if>
+      <if test="personNo != null" >
+        person_no,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="dimissionTime != null" >
+        dimission_time,
+      </if>
+      <if test="caretor != null" >
+        caretor,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="depNo != null" >
+        #{depNo,jdbcType=VARCHAR},
+      </if>
+      <if test="depName != null" >
+        #{depName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="districtNo != null" >
+        #{districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesdepNo != null" >
+        #{salesdepNo,jdbcType=VARCHAR},
+      </if>
+      <if test="salesdepName != null" >
+        #{salesdepName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamName != null" >
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="subTeamName != null" >
+        #{subTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="personNo != null" >
+        #{personNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="dimissionTime != null" >
+        #{dimissionTime,jdbcType=DATE},
+      </if>
+      <if test="caretor != null" >
+        #{caretor,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.AssetPersonExample" resultType="java.lang.Integer" >
+    select count(*) from f_asset_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_asset_person
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.depNo != null" >
+        dep_no = #{record.depNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depName != null" >
+        dep_name = #{record.depName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtNo != null" >
+        district_no = #{record.districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtName != null" >
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesdepNo != null" >
+        salesdep_no = #{record.salesdepNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesdepName != null" >
+        salesdep_name = #{record.salesdepName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamName != null" >
+        team_name = #{record.teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subTeamName != null" >
+        sub_team_name = #{record.subTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personNo != null" >
+        person_no = #{record.personNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dimissionTime != null" >
+        dimission_time = #{record.dimissionTime,jdbcType=DATE},
+      </if>
+      <if test="record.caretor != null" >
+        caretor = #{record.caretor,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_asset_person
+    set id = #{record.id,jdbcType=BIGINT},
+      dep_no = #{record.depNo,jdbcType=VARCHAR},
+      dep_name = #{record.depName,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      district_no = #{record.districtNo,jdbcType=VARCHAR},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      salesdep_no = #{record.salesdepNo,jdbcType=VARCHAR},
+      salesdep_name = #{record.salesdepName,jdbcType=VARCHAR},
+      team_name = #{record.teamName,jdbcType=VARCHAR},
+      sub_team_name = #{record.subTeamName,jdbcType=VARCHAR},
+      person_no = #{record.personNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      dimission_time = #{record.dimissionTime,jdbcType=DATE},
+      caretor = #{record.caretor,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.AssetPerson" >
+    update f_asset_person
+    <set >
+      <if test="depNo != null" >
+        dep_no = #{depNo,jdbcType=VARCHAR},
+      </if>
+      <if test="depName != null" >
+        dep_name = #{depName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="districtNo != null" >
+        district_no = #{districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesdepNo != null" >
+        salesdep_no = #{salesdepNo,jdbcType=VARCHAR},
+      </if>
+      <if test="salesdepName != null" >
+        salesdep_name = #{salesdepName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamName != null" >
+        team_name = #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="subTeamName != null" >
+        sub_team_name = #{subTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="personNo != null" >
+        person_no = #{personNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="dimissionTime != null" >
+        dimission_time = #{dimissionTime,jdbcType=DATE},
+      </if>
+      <if test="caretor != null" >
+        caretor = #{caretor,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.AssetPerson" >
+    update f_asset_person
+    set dep_no = #{depNo,jdbcType=VARCHAR},
+      dep_name = #{depName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      district_no = #{districtNo,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      salesdep_no = #{salesdepNo,jdbcType=VARCHAR},
+      salesdep_name = #{salesdepName,jdbcType=VARCHAR},
+      team_name = #{teamName,jdbcType=VARCHAR},
+      sub_team_name = #{subTeamName,jdbcType=VARCHAR},
+      person_no = #{personNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=CHAR},
+      dimission_time = #{dimissionTime,jdbcType=DATE},
+      caretor = #{caretor,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryAssetPersonList" parameterType="map" resultMap="BaseResultMap">
+      SELECT
+          p.id,
+          p.dep_name,
+          p.`name`,
+          p.district_name,
+          p.salesdep_name,
+          p.team_name,
+          p.sub_team_name,
+          p.mobile,
+          p.dimission_time,
+          p.person_no
+      FROM
+          f_asset_person AS p
+      where 1=1
+      <include refid="Custom_Where_Clause" />
+      LIMIT #{startIndex},#{pageSize}
+  </select>
+
+  <select id="queryAssetPersonListCount" resultType="java.lang.Long" parameterType="hashmap">
+    SELECT count(1) FROM
+      f_asset_person AS p
+    WHERE 1 = 1
+    <include refid="Custom_Where_Clause" />
+  </select>
+
+  <sql id="Custom_Where_Clause">
+    <if test="depNo != null and depNo != ''" >
+      and p.dep_no = #{depNo}
+    </if>
+    <if test="name != null and name != ''" >
+      and p.name  LIKE CONCAT('%',#{name},'%')
+    </if>
+    <if test="mobile != null and mobile != ''" >
+      and p.mobile = #{mobile}
+    </if>
+  </sql>
+
+  <!--  批量导入花名册数据 -->
+  <insert id="insertAssetPersonBatch" parameterType="java.util.List">
+      insert into f_asset_person (
+          dep_no,
+          dep_name,
+          name,
+          district_no,
+          district_name,
+          salesdep_no,
+          salesdep_name,
+          team_name,
+          sub_team_name,
+          person_no,
+          mobile,
+          dimission_time,
+          caretor,
+          create_time
+      )
+      values
+      <foreach collection="list" item="item" index="index" separator=",">
+          (
+          #{item.depNo,jdbcType=VARCHAR},
+          #{item.depName,jdbcType=VARCHAR},
+          #{item.name,jdbcType=VARCHAR},
+          #{item.districtNo,jdbcType=VARCHAR},
+          #{item.districtName,jdbcType=VARCHAR},
+          #{item.salesdepNo,jdbcType=VARCHAR},
+          #{item.salesdepName,jdbcType=VARCHAR},
+          #{item.teamName,jdbcType=VARCHAR},
+          #{item.subTeamName,jdbcType=VARCHAR},
+          #{item.personNo,jdbcType=VARCHAR},
+          #{item.mobile,jdbcType=VARCHAR},
+          #{item.dimissionTime,jdbcType=DATE},
+          #{item.caretor,jdbcType=INTEGER},
+          #{item.createTime,jdbcType=TIMESTAMP}
+          )
+      </foreach>
+  </insert>
+
+  <!-- 注意：如果deleteList为null，会报错 -->
+  <delete id="deleteAssetPersonBatch" parameterType="java.util.List">
+    DELETE FROM f_asset_person
+    WHERE 1 = 1
+    AND person_no IN (<foreach collection="list" item="item" separator=",">#{item,jdbcType=VARCHAR}</foreach>)
+  </delete>
+</mapper>

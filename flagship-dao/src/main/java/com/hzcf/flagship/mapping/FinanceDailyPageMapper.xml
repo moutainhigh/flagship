@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinanceDailyPageMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinanceDailyPage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="data_name" property="dataName" jdbcType="VARCHAR" />
+    <result column="data_figure_value" property="dataFigureValue" jdbcType="DECIMAL" />
+    <result column="data_string_value" property="dataStringValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, data_name, data_figure_value, data_string_value
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinanceDailyPageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_daily_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_daily_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_daily_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinanceDailyPageExample" >
+    delete from f_finance_daily_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinanceDailyPage" >
+    insert into f_finance_daily_page (id, record_date, data_name, 
+      data_figure_value, data_string_value)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{dataName,jdbcType=VARCHAR}, 
+      #{dataFigureValue,jdbcType=DECIMAL}, #{dataStringValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinanceDailyPage" >
+    insert into f_finance_daily_page
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="dataName != null" >
+        data_name,
+      </if>
+      <if test="dataFigureValue != null" >
+        data_figure_value,
+      </if>
+      <if test="dataStringValue != null" >
+        data_string_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="dataName != null" >
+        #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFigureValue != null" >
+        #{dataFigureValue,jdbcType=DECIMAL},
+      </if>
+      <if test="dataStringValue != null" >
+        #{dataStringValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinanceDailyPageExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_daily_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_daily_page
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.dataName != null" >
+        data_name = #{record.dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataFigureValue != null" >
+        data_figure_value = #{record.dataFigureValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dataStringValue != null" >
+        data_string_value = #{record.dataStringValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_daily_page
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      data_name = #{record.dataName,jdbcType=VARCHAR},
+      data_figure_value = #{record.dataFigureValue,jdbcType=DECIMAL},
+      data_string_value = #{record.dataStringValue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinanceDailyPage" >
+    update f_finance_daily_page
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="dataName != null" >
+        data_name = #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFigureValue != null" >
+        data_figure_value = #{dataFigureValue,jdbcType=DECIMAL},
+      </if>
+      <if test="dataStringValue != null" >
+        data_string_value = #{dataStringValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinanceDailyPage" >
+    update f_finance_daily_page
+    set record_date = #{recordDate,jdbcType=DATE},
+      data_name = #{dataName,jdbcType=VARCHAR},
+      data_figure_value = #{dataFigureValue,jdbcType=DECIMAL},
+      data_string_value = #{dataStringValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 批量插入当日基本历史数据 -->
+  <insert id="insertFinanceDailyPages" parameterType="java.util.List">
+  	insert into f_finance_daily_page (record_date,data_name,data_figure_value) 
+	values 
+	<foreach collection="list" index="" item="item" separator=",">
+		(
+			#{item.recordDate,jdbcType=DATE},
+			#{item.dataName,jdbcType=VARCHAR},
+			#{item.dataFigureValue,jdbcType=DECIMAL}
+		)
+  	</foreach>
+  </insert>
+  
+  <select id="getValueByCodeAndDate" resultMap="BaseResultMap" parameterType="hashmap">
+   SELECT
+	record_date,
+	data_name,
+	data_figure_value
+FROM
+	f_finance_daily_page
+WHERE
+	(
+		record_date =#{recordDate}
+		OR (
+			record_date = (
+				SELECT
+					record_date
+				FROM
+					f_finance_daily_page
+				WHERE
+				<![CDATA[  
+					record_date <= #{recordDate}
+					]]>
+				OR record_date = (
+						SELECT
+							record_date
+						FROM
+							f_finance_daily_page
+						WHERE
+							record_date >= #{recordDate}
+						ORDER BY
+							record_date 
+						LIMIT 1
+				)
+				ORDER BY
+					record_date DESC
+				LIMIT 1
+			)
+		)
+	)
+AND data_name IN (
+	#{codeOne},#{codeTwo},#{codeThree},#{codeFour}
+)
+ORDER BY
+	data_figure_value;
+  
+  </select>
+  
+  <select id="selectByDataName" parameterType="hashmap" resultType="bigdecimal">
+   SELECT
+		data_figure_value dataVal
+	FROM
+		f_finance_daily_page
+	WHERE
+		data_name =#{dataName}
+	and record_date =#{days}
+  </select>
+  
+  <select id="selectIndex" parameterType="hashmap" resultType="bigdecimal">
+	SELECT
+		ROUND((#{plan}* data_figure_value ),2)as lineVal
+	FROM
+		`f_finance_daily_page`
+	WHERE
+		data_name =	#{code}
+	AND record_date = #{days}
+  </select>
+</mapper>

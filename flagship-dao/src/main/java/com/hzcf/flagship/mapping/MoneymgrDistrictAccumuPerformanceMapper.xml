@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.MoneymgrDistrictAccumuPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="performance_value" property="performanceValue" jdbcType="DECIMAL" />
+    <result column="new_client_num" property="newClientNum" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, district_name, performance_value, new_client_num, principal, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_moneymgr_district_accumu_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_moneymgr_district_accumu_performance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_moneymgr_district_accumu_performance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformanceExample" >
+    delete from f_moneymgr_district_accumu_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformance" >
+    insert into f_moneymgr_district_accumu_performance (id, record_date, district_name, 
+      performance_value, new_client_num, principal, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{districtName,jdbcType=VARCHAR}, 
+      #{performanceValue,jdbcType=DECIMAL}, #{newClientNum,jdbcType=INTEGER}, #{principal,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformance" >
+    insert into f_moneymgr_district_accumu_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="performanceValue != null" >
+        performance_value,
+      </if>
+      <if test="newClientNum != null" >
+        new_client_num,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceValue != null" >
+        #{performanceValue,jdbcType=DECIMAL},
+      </if>
+      <if test="newClientNum != null" >
+        #{newClientNum,jdbcType=INTEGER},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformanceExample" resultType="java.lang.Integer" >
+    select count(*) from f_moneymgr_district_accumu_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_moneymgr_district_accumu_performance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.districtName != null" >
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.performanceValue != null" >
+        performance_value = #{record.performanceValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.newClientNum != null" >
+        new_client_num = #{record.newClientNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_moneymgr_district_accumu_performance
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      performance_value = #{record.performanceValue,jdbcType=DECIMAL},
+      new_client_num = #{record.newClientNum,jdbcType=INTEGER},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformance" >
+    update f_moneymgr_district_accumu_performance
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceValue != null" >
+        performance_value = #{performanceValue,jdbcType=DECIMAL},
+      </if>
+      <if test="newClientNum != null" >
+        new_client_num = #{newClientNum,jdbcType=INTEGER},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.MoneymgrDistrictAccumuPerformance" >
+    update f_moneymgr_district_accumu_performance
+    set record_date = #{recordDate,jdbcType=DATE},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      performance_value = #{performanceValue,jdbcType=DECIMAL},
+      new_client_num = #{newClientNum,jdbcType=INTEGER},
+      principal = #{principal,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 获得指定时间区域具体数据:区域名称,区域负责人,区域累计业绩,区域累计新用户数,月计划,上月咨询师人数 -->
+  <select id="getDistrictData" resultType="hashmap" parameterType="string">
+  	SELECT o.district_name district_name,
+			d.record_date record_date,
+			o.district_principal district_principal,
+			performance_value,
+			new_client_num,
+			(
+				SELECT month_plan 
+				FROM f_moneymgr_org_data org 
+				WHERE org.org_name='合计' 
+				AND district_name=o.district_name
+				AND record_date = o.record_date
+			) district_month_plan,
+			sum(o.counselor_num_last_month) counselor_num_last_month,
+			count(*) district_org_num
+	FROM f_moneymgr_org_data o
+	JOIN f_moneymgr_district_accumu_performance d ON o.district_name=d.district_name
+	WHERE o.record_date=CONCAT(SUBSTR(#{dateString},1,8),'01') 
+		AND d.record_date=#{dateString}
+		AND o.district_name != ''
+		AND o.org_name!='合计'
+	GROUP BY o.district_name
+  </select>
+  
+  <select id="getDiffOfCountAndDistrictNumByDate" resultType="hashmap" parameterType="Date">
+  	SELECT record_date ,COUNT(district_name) -COUNT(DISTINCT district_name) diff
+	FROM f_moneymgr_district_accumu_performance
+	GROUP BY record_date
+	HAVING record_date=#{date,jdbcType=DATE}
+  </select>
+</mapper>

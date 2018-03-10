@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinanceOrgMapMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinanceOrgMap" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bi_org_name" property="biOrgName" jdbcType="VARCHAR" />
+    <result column="org_short_name" property="orgShortName" jdbcType="VARCHAR" />
+    <result column="manage_office" property="manageOffice" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="opening_date" property="openingDate" jdbcType="DATE" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="abscissa" property="abscissa" jdbcType="VARCHAR" />
+    <result column="ordinate" property="ordinate" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bi_org_name, org_short_name, manage_office, province, opening_date, principal, 
+    abscissa, ordinate, creator, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinanceOrgMapExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_org_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_org_map
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_org_map
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinanceOrgMapExample" >
+    delete from f_finance_org_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinanceOrgMap" >
+    insert into f_finance_org_map (id, bi_org_name, org_short_name, 
+      manage_office, province, opening_date, 
+      principal, abscissa, ordinate, 
+      creator, create_time)
+    values (#{id,jdbcType=BIGINT}, #{biOrgName,jdbcType=VARCHAR}, #{orgShortName,jdbcType=VARCHAR}, 
+      #{manageOffice,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{openingDate,jdbcType=DATE}, 
+      #{principal,jdbcType=VARCHAR}, #{abscissa,jdbcType=VARCHAR}, #{ordinate,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinanceOrgMap" >
+    insert into f_finance_org_map
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="biOrgName != null" >
+        bi_org_name,
+      </if>
+      <if test="orgShortName != null" >
+        org_short_name,
+      </if>
+      <if test="manageOffice != null" >
+        manage_office,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="openingDate != null" >
+        opening_date,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="abscissa != null" >
+        abscissa,
+      </if>
+      <if test="ordinate != null" >
+        ordinate,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="biOrgName != null" >
+        #{biOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortName != null" >
+        #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="manageOffice != null" >
+        #{manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="openingDate != null" >
+        #{openingDate,jdbcType=DATE},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="abscissa != null" >
+        #{abscissa,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinate != null" >
+        #{ordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinanceOrgMapExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_org_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_org_map
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.biOrgName != null" >
+        bi_org_name = #{record.biOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgShortName != null" >
+        org_short_name = #{record.orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manageOffice != null" >
+        manage_office = #{record.manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openingDate != null" >
+        opening_date = #{record.openingDate,jdbcType=DATE},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abscissa != null" >
+        abscissa = #{record.abscissa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordinate != null" >
+        ordinate = #{record.ordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_org_map
+    set id = #{record.id,jdbcType=BIGINT},
+      bi_org_name = #{record.biOrgName,jdbcType=VARCHAR},
+      org_short_name = #{record.orgShortName,jdbcType=VARCHAR},
+      manage_office = #{record.manageOffice,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      opening_date = #{record.openingDate,jdbcType=DATE},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      abscissa = #{record.abscissa,jdbcType=VARCHAR},
+      ordinate = #{record.ordinate,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinanceOrgMap" >
+    update f_finance_org_map
+    <set >
+      <if test="biOrgName != null" >
+        bi_org_name = #{biOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortName != null" >
+        org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="manageOffice != null" >
+        manage_office = #{manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="openingDate != null" >
+        opening_date = #{openingDate,jdbcType=DATE},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="abscissa != null" >
+        abscissa = #{abscissa,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinate != null" >
+        ordinate = #{ordinate,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinanceOrgMap" >
+    update f_finance_org_map
+    set bi_org_name = #{biOrgName,jdbcType=VARCHAR},
+      org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      manage_office = #{manageOffice,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      opening_date = #{openingDate,jdbcType=DATE},
+      principal = #{principal,jdbcType=VARCHAR},
+      abscissa = #{abscissa,jdbcType=VARCHAR},
+      ordinate = #{ordinate,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 批量插入 融资机构对应关系 数据 -->
+  <insert id="insertFinaceOrgMap" parameterType="java.util.List">
+     insert into f_finance_org_map (id, bi_org_name, org_short_name, 
+      manage_office, province, opening_date, 
+      principal, abscissa, ordinate, 
+      creator, create_time) values
+  <foreach collection="list" item="item" index="index" separator="," >
+  (
+      #{item.id}, #{item.biOrgName}, #{item.orgShortName}, 
+      #{item.manageOffice}, #{item.province}, #{item.openingDate}, 
+      #{item.principal}, #{item.abscissa}, #{item.ordinate}, 
+      #{item.creator}, #{item.createTime}
+      )
+  </foreach>
+  </insert>
+  
+  <!-- 融资机构对应关系列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		id,
+		bi_org_name,
+		org_short_name,
+		manage_office,
+		province,
+		DATE_FORMAT(opening_date, '%Y/%m/%d') opening_date,
+		principal,
+		abscissa,
+		ordinate,
+		creator,
+		create_time
+	FROM
+	f_finance_org_map
+ WHERE
+	1 = 1
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--融资机构对应关系分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_finance_org_map
+	WHERE 1=1
+  </select>
+  <select id="findAllDistrict" parameterType="hashmap" resultType="hashmap">
+	  SELECT DISTINCT
+		manage_office district_name
+	FROM
+		f_finance_org_map
+	WHERE
+		manage_office !=''
+    AND manage_office IS NOT NULL
+
+  
+  </select>
+</mapper>

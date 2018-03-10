@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinanceMonthDistrictMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinanceMonthDistrict" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="loan_value" property="loanValue" jdbcType="DECIMAL" />
+    <result column="apply_quantity" property="applyQuantity" jdbcType="INTEGER" />
+    <result column="approval_rate" property="approvalRate" jdbcType="DECIMAL" />
+    <result column="approval_average" property="approvalAverage" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, district_name, loan_value, apply_quantity, approval_rate, approval_average, 
+    create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinanceMonthDistrictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_month_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_month_district
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_month_district
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinanceMonthDistrictExample" >
+    delete from f_finance_month_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinanceMonthDistrict" >
+    insert into f_finance_month_district (id, record_date, district_name, 
+      loan_value, apply_quantity, approval_rate, 
+      approval_average, create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{districtName,jdbcType=VARCHAR}, 
+      #{loanValue,jdbcType=DECIMAL}, #{applyQuantity,jdbcType=INTEGER}, #{approvalRate,jdbcType=DECIMAL}, 
+      #{approvalAverage,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinanceMonthDistrict" >
+    insert into f_finance_month_district
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="loanValue != null" >
+        loan_value,
+      </if>
+      <if test="applyQuantity != null" >
+        apply_quantity,
+      </if>
+      <if test="approvalRate != null" >
+        approval_rate,
+      </if>
+      <if test="approvalAverage != null" >
+        approval_average,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanValue != null" >
+        #{loanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="applyQuantity != null" >
+        #{applyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="approvalRate != null" >
+        #{approvalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalAverage != null" >
+        #{approvalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinanceMonthDistrictExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_month_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_month_district
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.districtName != null" >
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanValue != null" >
+        loan_value = #{record.loanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyQuantity != null" >
+        apply_quantity = #{record.applyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvalRate != null" >
+        approval_rate = #{record.approvalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.approvalAverage != null" >
+        approval_average = #{record.approvalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_month_district
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      loan_value = #{record.loanValue,jdbcType=DECIMAL},
+      apply_quantity = #{record.applyQuantity,jdbcType=INTEGER},
+      approval_rate = #{record.approvalRate,jdbcType=DECIMAL},
+      approval_average = #{record.approvalAverage,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinanceMonthDistrict" >
+    update f_finance_month_district
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanValue != null" >
+        loan_value = #{loanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="applyQuantity != null" >
+        apply_quantity = #{applyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="approvalRate != null" >
+        approval_rate = #{approvalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalAverage != null" >
+        approval_average = #{approvalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinanceMonthDistrict" >
+    update f_finance_month_district
+    set record_date = #{recordDate,jdbcType=DATE},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      loan_value = #{loanValue,jdbcType=DECIMAL},
+      apply_quantity = #{applyQuantity,jdbcType=INTEGER},
+      approval_rate = #{approvalRate,jdbcType=DECIMAL},
+      approval_average = #{approvalAverage,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="financeDistrictOfMonthList" parameterType="hashmap" resultType="hashmap">
+ 	 SELECT
+		d.district_name districtName, <!-- 区域名称 -->
+		d.loan_value loanValue,<!-- 月放款额-->
+		d.apply_quantity applyQuantity,<!-- 月进件件数 -->
+		d.approval_rate * 100 approvalRate,<!-- 月批核率 -->
+		d.approval_average approvalAverage,<!-- 月批核件均-->
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				approval_rate > d.approval_rate
+			AND record_date =#{recordDate}
+		) + 1 AS approvalRateRanking,<!-- 批核率排名 -->
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				approval_average > d.approval_average
+			AND record_date =#{recordDate}
+		) + 1 AS approvalAverageRanking,<!--批核件均排名 -->
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				loan_value > d.loan_value
+				AND record_date =#{recordDate}
+		) + 1 AS loanValueRanking,<!-- 月放款金额排名 -->
+		ROUND(
+			d.loan_value / p.month_plan ,2
+		) * 100 planYieldRate,<!-- 计划达成率 -->
+		(
+			SELECT
+				COUNT(d2.id)
+			FROM
+				f_finance_month_district d2
+			JOIN f_finance_personal_info p2 ON d2.district_name = p2.manage_office
+			AND p2.record_date=DATE_ADD(#{recordDate},INTERVAL -DAY(#{recordDate})+1 DAY)
+			AND p2.org_name = '合计'
+			WHERE
+				d2.loan_value / p2.month_plan > d.loan_value / p.month_plan
+				AND d2.record_date =#{recordDate}
+		) + 1 AS planYieldRateRanking,<!-- 计划达成率排名 -->
+		ROUND(
+			d.apply_quantity / p.sales_num / (
+				SELECT
+					TIMESTAMPDIFF(
+						DAY,
+						#{recordDate},
+						(
+							DATE_add(
+								#{recordDate},
+								INTERVAL 1 MONTH
+							)
+						)
+					)
+			) ,2
+		) salesNumAvg,<!-- 日人均进件数-->
+		(
+			SELECT
+				COUNT(d2.id)
+			FROM
+				f_finance_month_district d2
+			JOIN f_finance_personal_info p2 ON d2.district_name = p2.manage_office
+			AND p2.record_date=DATE_ADD(#{recordDate},INTERVAL -DAY(#{recordDate})+1 DAY)
+			AND p2.org_name = '合计'
+			WHERE
+				d2.apply_quantity / p2.sales_num > d.apply_quantity / p.sales_num
+				AND d2.record_date =#{recordDate}
+		) + 1 AS salesNumAvgRanking,<!--日人均进件数排名-->
+		ROUND(
+			d.loan_value / p.total_emp_num ,2
+		) totalEmpNumAvg,<!-- 全员人均产能 -->
+		(
+			SELECT
+				COUNT(d2.id)
+			FROM
+				f_finance_month_district d2
+			JOIN f_finance_personal_info p2 ON d2.district_name = p2.manage_office
+			AND p2.record_date=DATE_ADD(#{recordDate},INTERVAL -DAY(#{recordDate})+1 DAY)
+			AND p2.org_name = '合计'
+			WHERE
+				d2.loan_value / p2.total_emp_num > d.loan_value / p.total_emp_num
+				AND d2.record_date =#{recordDate}
+		) + 1 AS totalEmpNumAvgRanking,<!-- 全员人均产能排名-->
+		ROUND(
+			d.loan_value / p.sales_num ,2
+		) counselorAvg,<!-- 咨询师人均产能 -->
+		(
+			SELECT
+				COUNT(d2.id)
+			FROM
+				f_finance_month_district d2
+			JOIN f_finance_personal_info p2 ON d2.district_name = p2.manage_office
+			AND p2.record_date=DATE_ADD(#{recordDate},INTERVAL -DAY(#{recordDate})+1 DAY)
+			AND p2.org_name = '合计'
+			WHERE
+				d2.loan_value / p2.sales_num > d.loan_value / p.sales_num
+			AND d2.record_date =#{recordDate}
+		) + 1 AS counselorAvgRanking<!-- 咨询师人均产能排名 -->
+	FROM
+		f_finance_month_district d
+	JOIN f_finance_personal_info p ON d.district_name = p.manage_office
+			AND d.record_date=p.record_date
+	WHERE
+		d.record_date = #{recordDate}
+	AND p.org_name = '合计'
+	AND d.district_name = #{districtName}
+	ORDER BY d.create_time DESC
+	LIMIT 1
+  
+  </select>
+  <select id="findMonthDistrictTheLatestOne" resultMap="BaseResultMap" parameterType="hashmap">
+	  SELECT
+			<include refid="Base_Column_List"></include>
+		FROM
+			f_finance_month_district
+		ORDER BY
+			record_date DESC limit 1
+  </select>
+  <select id="findLastDateByDistrict" resultMap="BaseResultMap" parameterType="hashmap">
+   	SELECT
+			<include refid="Base_Column_List"></include>
+		FROM
+			f_finance_month_district
+		WHERE
+		district_name = #{districtName}
+		ORDER BY
+			record_date DESC limit 1
+  </select>
+  
+  <select id="findRankingOfLastMonth" parameterType="hashmap" resultType="hashmap">
+	  SELECT
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				approval_rate > d.approval_rate
+			AND record_date = #{recordDate}
+		) + 1 AS approvalRateRanking , <!--  批核率排名 --> 
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				approval_average > d.approval_average
+			AND record_date = #{recordDate}
+		) + 1 AS approvalAverageRanking ,   <!--  批核件均排名 -->  
+			(SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				loan_value > d.loan_value
+			AND record_date = #{recordDate}
+		) + 1 AS loanValueRanking ,  <!--  月放款金额排名 --> 
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				loan_value / p.month_plan > d.loan_value / p.month_plan
+			AND record_date = #{recordDate}
+		) + 1 AS planYieldRateRanking , <!--  计划达成率排名 --> 
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				apply_quantity / p.sales_num > d.apply_quantity / p.sales_num
+			AND record_date = #{recordDate}
+		) + 1 AS salesNumAvgRanking ,  <!--  日人均进件数排名--> 
+			(SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				loan_value / p.total_emp_num > d.loan_value / p.total_emp_num
+			AND record_date = #{recordDate}
+		) + 1 AS totalEmpNumAvgRanking ,  <!-- 全员人均产能排名 -->
+		(
+			SELECT
+				COUNT(id)
+			FROM
+				f_finance_month_district
+			WHERE
+				loan_value / p.sales_num > d.loan_value / p.sales_num
+			AND record_date = #{recordDate}
+		) + 1 AS counselorAvgRanking  <!-- 咨询师人均产能排名  --> 
+	FROM
+		f_finance_month_district d
+	JOIN f_finance_personal_info p ON d.district_name = p.manage_office
+	AND d.record_date = p.record_date
+	WHERE
+		d.record_date = #{recordDate}
+	AND p.org_name = '合计'
+	AND d.district_name = #{districtName}
+	ORDER BY d.create_time DESC
+	LIMIT 1
+  </select>
+  
+  <select id="getDiffOfCountAndDistrictNumByDate" resultType="hashmap" parameterType="Date">
+  	SELECT record_date ,COUNT(district_name) -COUNT(DISTINCT district_name) diff
+	FROM f_finance_month_district
+	GROUP BY record_date
+	HAVING record_date=#{date,jdbcType=DATE}
+  </select>
+</mapper>

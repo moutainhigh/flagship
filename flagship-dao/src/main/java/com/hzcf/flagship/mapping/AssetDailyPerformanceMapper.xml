@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.AssetDailyPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.AssetDailyPerformance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+    <result column="performance_daily" property="performanceDaily" jdbcType="DECIMAL" />
+    <result column="performance_sum" property="performanceSum" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, org_no, business_no, performance_daily, performance_sum, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.AssetDailyPerformanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_asset_daily_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_asset_daily_performance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_asset_daily_performance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.AssetDailyPerformanceExample" >
+    delete from f_asset_daily_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.AssetDailyPerformance" >
+    insert into f_asset_daily_performance (id, record_date, org_no, 
+      business_no, performance_daily, performance_sum, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{orgNo,jdbcType=VARCHAR}, 
+      #{businessNo,jdbcType=VARCHAR}, #{performanceDaily,jdbcType=DECIMAL}, #{performanceSum,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.AssetDailyPerformance" >
+    insert into f_asset_daily_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="businessNo != null" >
+        business_no,
+      </if>
+      <if test="performanceDaily != null" >
+        performance_daily,
+      </if>
+      <if test="performanceSum != null" >
+        performance_sum,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNo != null" >
+        #{businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceDaily != null" >
+        #{performanceDaily,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceSum != null" >
+        #{performanceSum,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.AssetDailyPerformanceExample" resultType="java.lang.Integer" >
+    select count(*) from f_asset_daily_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_asset_daily_performance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessNo != null" >
+        business_no = #{record.businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.performanceDaily != null" >
+        performance_daily = #{record.performanceDaily,jdbcType=DECIMAL},
+      </if>
+      <if test="record.performanceSum != null" >
+        performance_sum = #{record.performanceSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_asset_daily_performance
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      business_no = #{record.businessNo,jdbcType=VARCHAR},
+      performance_daily = #{record.performanceDaily,jdbcType=DECIMAL},
+      performance_sum = #{record.performanceSum,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.AssetDailyPerformance" >
+    update f_asset_daily_performance
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNo != null" >
+        business_no = #{businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceDaily != null" >
+        performance_daily = #{performanceDaily,jdbcType=DECIMAL},
+      </if>
+      <if test="performanceSum != null" >
+        performance_sum = #{performanceSum,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.AssetDailyPerformance" >
+    update f_asset_daily_performance
+    set record_date = #{recordDate,jdbcType=DATE},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      business_no = #{businessNo,jdbcType=VARCHAR},
+      performance_daily = #{performanceDaily,jdbcType=DECIMAL},
+      performance_sum = #{performanceSum,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+	 
+	 SELECT
+	 DATE_FORMAT(per.record_date,'%Y-%m-%d') recordDate,
+	 org.org_name orgName,
+	MAX(CASE  per.business_no WHEN 'financialCredit' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) creditPlan,
+	MAX(CASE  per.business_no WHEN 'financialCredit' THEN IFNULL(per.performance_daily,'--') ELSE '--' END ) creditDailyVal,
+	MAX(CASE  per.business_no WHEN 'financialCredit' THEN IFNULL(per.performance_sum,'--') ELSE '--' END ) creditTotalVal,
+	MAX(CASE  per.business_no WHEN 'financialCredit' THEN IFNULL(CONCAT(ROUND((per.performance_sum/p.plan_value)*100,2),'%'),'--') ELSE '--' END ) creditRate,
+	
+	MAX(CASE  per.business_no WHEN 'accidentInsurance' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) accidentPlan,
+	MAX(CASE  per.business_no WHEN 'accidentInsurance' THEN IFNULL(per.performance_daily,'--') ELSE '--' END ) accidentDailyVal,
+	MAX(CASE  per.business_no WHEN 'accidentInsurance' THEN IFNULL(per.performance_sum,'--') ELSE '--' END ) accidentTotalVal,
+	MAX(CASE  per.business_no WHEN 'accidentInsurance' THEN IFNULL(CONCAT(ROUND((per.performance_sum/p.plan_value)*100,2),'%'),'--') ELSE '--' END ) accidentRate,
+	
+	MAX(CASE  per.business_no WHEN 'carInsurance' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) carInsurancePlan,
+	MAX(CASE  per.business_no WHEN 'carInsurance' THEN IFNULL(per.performance_daily,'--') ELSE '--' END ) carInsuranceDailyVal,
+	MAX(CASE  per.business_no WHEN 'carInsurance' THEN IFNULL(per.performance_sum,'--') ELSE '--' END ) carInsuranceTotalVal,
+	MAX(CASE  per.business_no WHEN 'carInsurance' THEN IFNULL(CONCAT(ROUND((per.performance_sum/p.plan_value)*100,2),'%'),'--') ELSE '--' END ) carInsuranceRate,
+	
+	MAX(CASE  per.business_no WHEN 'carInsuranceNum' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) carInsuranceNumPlan,
+	MAX(CASE  per.business_no WHEN 'carInsuranceNum' THEN IFNULL(per.performance_daily,'--') ELSE '--' END ) carInsuranceNumDailyVal,
+	MAX(CASE  per.business_no WHEN 'carInsuranceNum' THEN IFNULL(per.performance_sum,'--') ELSE '--' END ) carInsuranceNumTotalVal,
+	MAX(CASE  per.business_no WHEN 'carInsuranceNum' THEN IFNULL(CONCAT(ROUND((per.performance_sum/p.plan_value)*100,2),'%'),'--') ELSE '--' END ) carInsuranceNumRate,
+	
+	MAX(CASE  per.business_no WHEN 'lifeInsurance' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) lifePlan,
+	MAX(CASE  per.business_no WHEN 'lifeInsurance' THEN IFNULL(per.performance_daily,'--') ELSE '--' END ) lifeDailyVal,
+	MAX(CASE  per.business_no WHEN 'lifeInsurance' THEN IFNULL(per.performance_sum,'--') ELSE '--' END ) lifeTotalVal,
+	MAX(CASE  per.business_no WHEN 'lifeInsurance' THEN IFNULL(CONCAT(ROUND((per.performance_sum/p.plan_value)*100,2),'%'),'--') ELSE '--' END ) lifeRate
+	FROM
+		f_asset_daily_performance per
+	LEFT JOIN f_asset_org_struct org ON per.org_no=org.org_no
+	LEFT JOIN f_asset_plan p ON per.org_no=p.org_no AND per.business_no=p.business_no
+				AND p.year=DATE_FORMAT(#{beginDate},'%Y')
+				AND p.month=DATE_FORMAT(#{beginDate},'%m月')
+	<include refid="dynamicPageWhere"/> 			
+	GROUP BY per.record_date,per.org_no
+	<if test="orgNo != null">
+	   having per.org_no = #{orgNo}
+	</if>
+	ORDER BY per.record_date DESC
+	<if test="state == null">
+		limit #{startIndex},#{pageSize}
+	</if>
+  </select>
+  
+  <sql id="dynamicPageWhere">
+  	<choose>
+	    <when test="all != null">
+	       <![CDATA[  WHERE per.record_date>=#{beginDate} AND per.record_date<=#{endDate}]]>
+	    </when>
+	    <otherwise>
+	      WHERE per.record_date=#{beginDate}
+	    </otherwise>
+	</choose>
+  </sql>
+  
+  <select id="findAllByPageCount" resultType="hashMap" parameterType="hashmap">
+ 	 SELECT
+		COUNT(*)
+	 FROM
+		f_asset_daily_performance per
+	 LEFT JOIN f_asset_org_struct org ON per.org_no=org.org_no
+	 LEFT JOIN f_asset_plan p ON per.org_no=p.org_no AND per.business_no=p.business_no
+				AND p.year=DATE_FORMAT(#{beginDate},'%Y')
+				AND p.month=DATE_FORMAT(#{beginDate},'%m')
+		<include refid="dynamicPageWhere"/>
+	 GROUP BY per.record_date,per.org_no
+	 <if test="orgNo != null">
+	   having per.org_no = #{orgNo}
+	</if>
+  </select>
+  
+  <!--   获取年份  -->
+   <select id="getYears" resultType="map" >
+	SELECT
+		DISTINCT DATE_FORMAT(record_date,'%Y') years
+	FROM
+		f_asset_daily_performance
+	   <![CDATA[  WHERE record_date<DATE_FORMAT(NOW(),'%Y-%m-01')]]>
+	ORDER BY years DESC;
+  </select>
+  
+  <!--   根据年获取月份  -->
+   <select id="getMonths" resultType="map" parameterType="String" >
+	SELECT
+		DISTINCT DATE_FORMAT(record_date,'%c月') months
+	FROM
+		f_asset_daily_performance
+	WHERE record_date LIKE CONCAT(#{years},'%') AND <![CDATA[record_date<DATE_FORMAT(NOW(),'%Y-%m-01')]]>
+	ORDER BY record_date DESC;
+  </select>
+  
+  <!--   根据月获取日  -->
+   <select id="getDays" resultType="map" parameterType="String" >
+	SELECT
+		DISTINCT DATE_FORMAT(record_date,'%d') days
+	FROM
+		f_asset_daily_performance
+	WHERE record_date LIKE CONCAT(#{months},'%')
+	ORDER BY days DESC;
+  </select>
+  
+  <!-- 查询某日的业绩条数 -->
+  <select id="countByDate" resultType="long" parameterType="String" >
+	SELECT COUNT(id)
+	FROM f_asset_daily_performance
+	WHERE record_date=#{date}
+  </select>
+  
+  <!-- 查询某天的重复记录数 -->
+  <select id="countRepetition" resultType="long" parameterType="String" >
+	SELECT COUNT(id)-COUNT(DISTINCT record_date,org_no,business_no)
+	FROM f_asset_daily_performance
+	WHERE record_date=#{date};
+
+  </select>
+  
+</mapper>

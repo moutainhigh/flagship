@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinanceRiskMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinanceRisk" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="manage_office" property="manageOffice" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="C_M1_numerator" property="cM1Numerator" jdbcType="DECIMAL" />
+    <result column="C_M1_denominator" property="cM1Denominator" jdbcType="DECIMAL" />
+    <result column="C_M1_value" property="cM1Value" jdbcType="DECIMAL" />
+    <result column="loss_rate_numerator" property="lossRateNumerator" jdbcType="DECIMAL" />
+    <result column="loss_rate_denominator" property="lossRateDenominator" jdbcType="DECIMAL" />
+    <result column="loss_rate" property="lossRate" jdbcType="DECIMAL" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, manage_office, org_name, C_M1_numerator, C_M1_denominator, C_M1_value, loss_rate_numerator, 
+    loss_rate_denominator, loss_rate, record_date, creator, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinanceRiskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_risk
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_risk
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_risk
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinanceRiskExample" >
+    delete from f_finance_risk
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinanceRisk" >
+    insert into f_finance_risk (id, manage_office, org_name, 
+      C_M1_numerator, C_M1_denominator, C_M1_value, 
+      loss_rate_numerator, loss_rate_denominator, 
+      loss_rate, record_date, creator, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{manageOffice,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{cM1Numerator,jdbcType=DECIMAL}, #{cM1Denominator,jdbcType=DECIMAL}, #{cM1Value,jdbcType=DECIMAL}, 
+      #{lossRateNumerator,jdbcType=DECIMAL}, #{lossRateDenominator,jdbcType=DECIMAL}, 
+      #{lossRate,jdbcType=DECIMAL}, #{recordDate,jdbcType=DATE}, #{creator,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinanceRisk" >
+    insert into f_finance_risk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="manageOffice != null" >
+        manage_office,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="cM1Numerator != null" >
+        C_M1_numerator,
+      </if>
+      <if test="cM1Denominator != null" >
+        C_M1_denominator,
+      </if>
+      <if test="cM1Value != null" >
+        C_M1_value,
+      </if>
+      <if test="lossRateNumerator != null" >
+        loss_rate_numerator,
+      </if>
+      <if test="lossRateDenominator != null" >
+        loss_rate_denominator,
+      </if>
+      <if test="lossRate != null" >
+        loss_rate,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="manageOffice != null" >
+        #{manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="cM1Numerator != null" >
+        #{cM1Numerator,jdbcType=DECIMAL},
+      </if>
+      <if test="cM1Denominator != null" >
+        #{cM1Denominator,jdbcType=DECIMAL},
+      </if>
+      <if test="cM1Value != null" >
+        #{cM1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="lossRateNumerator != null" >
+        #{lossRateNumerator,jdbcType=DECIMAL},
+      </if>
+      <if test="lossRateDenominator != null" >
+        #{lossRateDenominator,jdbcType=DECIMAL},
+      </if>
+      <if test="lossRate != null" >
+        #{lossRate,jdbcType=DECIMAL},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinanceRiskExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_risk
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_risk
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.manageOffice != null" >
+        manage_office = #{record.manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cM1Numerator != null" >
+        C_M1_numerator = #{record.cM1Numerator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cM1Denominator != null" >
+        C_M1_denominator = #{record.cM1Denominator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cM1Value != null" >
+        C_M1_value = #{record.cM1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lossRateNumerator != null" >
+        loss_rate_numerator = #{record.lossRateNumerator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lossRateDenominator != null" >
+        loss_rate_denominator = #{record.lossRateDenominator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lossRate != null" >
+        loss_rate = #{record.lossRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_risk
+    set id = #{record.id,jdbcType=BIGINT},
+      manage_office = #{record.manageOffice,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      C_M1_numerator = #{record.cM1Numerator,jdbcType=DECIMAL},
+      C_M1_denominator = #{record.cM1Denominator,jdbcType=DECIMAL},
+      C_M1_value = #{record.cM1Value,jdbcType=DECIMAL},
+      loss_rate_numerator = #{record.lossRateNumerator,jdbcType=DECIMAL},
+      loss_rate_denominator = #{record.lossRateDenominator,jdbcType=DECIMAL},
+      loss_rate = #{record.lossRate,jdbcType=DECIMAL},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinanceRisk" >
+    update f_finance_risk
+    <set >
+      <if test="manageOffice != null" >
+        manage_office = #{manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="cM1Numerator != null" >
+        C_M1_numerator = #{cM1Numerator,jdbcType=DECIMAL},
+      </if>
+      <if test="cM1Denominator != null" >
+        C_M1_denominator = #{cM1Denominator,jdbcType=DECIMAL},
+      </if>
+      <if test="cM1Value != null" >
+        C_M1_value = #{cM1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="lossRateNumerator != null" >
+        loss_rate_numerator = #{lossRateNumerator,jdbcType=DECIMAL},
+      </if>
+      <if test="lossRateDenominator != null" >
+        loss_rate_denominator = #{lossRateDenominator,jdbcType=DECIMAL},
+      </if>
+      <if test="lossRate != null" >
+        loss_rate = #{lossRate,jdbcType=DECIMAL},
+      </if>
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinanceRisk" >
+    update f_finance_risk
+    set manage_office = #{manageOffice,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      C_M1_numerator = #{cM1Numerator,jdbcType=DECIMAL},
+      C_M1_denominator = #{cM1Denominator,jdbcType=DECIMAL},
+      C_M1_value = #{cM1Value,jdbcType=DECIMAL},
+      loss_rate_numerator = #{lossRateNumerator,jdbcType=DECIMAL},
+      loss_rate_denominator = #{lossRateDenominator,jdbcType=DECIMAL},
+      loss_rate = #{lossRate,jdbcType=DECIMAL},
+      record_date = #{recordDate,jdbcType=DATE},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <!-- 批量插入融资风险表 数据 -->
+  <insert id="insertFinanceRisk" parameterType="java.util.List">
+	  insert into f_finance_risk (id, manage_office, org_name, 
+      C_M1_numerator, C_M1_denominator, C_M1_value, 
+      loss_rate_numerator, loss_rate_denominator, 
+      loss_rate, record_date, creator, 
+      create_time) values
+	<foreach collection="list" item="item" index="index" separator=",">
+	 (
+	 #{item.id,jdbcType=BIGINT}, #{item.manageOffice,jdbcType=VARCHAR}, #{item.orgName,jdbcType=VARCHAR}, 
+      #{item.cM1Numerator,jdbcType=DECIMAL}, #{item.cM1Denominator,jdbcType=DECIMAL}, #{item.cM1Value,jdbcType=DECIMAL}, 
+      #{item.lossRateNumerator,jdbcType=DECIMAL}, #{item.lossRateDenominator,jdbcType=DECIMAL}, 
+      #{item.lossRate,jdbcType=DECIMAL}, #{item.recordDate,jdbcType=DATE}, #{item.creator,jdbcType=INTEGER}, 
+      #{item.createTime,jdbcType=TIMESTAMP}
+      )
+	</foreach>
+</insert>
+  
+  <!-- 设置查询条件 -->
+  <sql id="dynamicPageWhere">
+  	<if test="orgName != null">
+  		and org_name LIKE CONCAT('%',#{orgName},'%') 
+ 	</if>
+ 	<if test="districtName != null">
+  		and manage_office LIKE CONCAT('%',#{districtName},'%') 
+ 	</if>
+	<if test="start_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') >= #{start_time}
+ 		]]>
+ 	</if>
+ 	<if test="end_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') <= #{end_time}
+ 	]]>
+ 	</if>
+  </sql>
+  
+  
+  <!--  融资风险表 列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		id,
+		manage_office,
+		org_name,
+		C_M1_numerator,
+		C_M1_denominator,
+		CONCAT(C_M1_value, '%') C_M1_value,
+		loss_rate_numerator,
+		loss_rate_denominator,
+		CONCAT(loss_rate, '%') loss_rate,
+		DATE_FORMAT(record_date, '%Y/%m/%d') record_date,
+		creator,
+		create_time
+	FROM
+		f_finance_risk
+	WHERE
+		1 = 1
+	 <include refid="dynamicPageWhere"/>
+	order by record_date desc,id desc
+		limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--融资风险表 分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_finance_risk
+	WHERE 1=1
+	<include refid="dynamicPageWhere"/>
+  </select>
+  
+  <!-- 查询今年CM1回款率 -->
+  <select id="findCM1ListOfThisYear" resultType="map">
+  	SELECT DATE_FORMAT(record_date,'%c') `month`,C_M1_value `value`
+	FROM f_finance_risk
+	WHERE manage_office='整体'
+	AND record_date>=(
+		 CONCAT
+		(	
+			DATE_FORMAT((SELECT record_date
+			FROM f_finance_risk
+			ORDER BY record_date DESC
+			LIMIT 1),'%Y'),'-01-01')
+		)
+	GROUP BY record_date
+	ORDER BY record_date DESC;
+  </select>
+  
+  <!-- 查询今年新增损失率列表 -->
+  <select id="findLossListOfThisYear" resultType="map">
+  	SELECT DATE_FORMAT(record_date,'%c') `month`,loss_rate `value`
+	FROM f_finance_risk
+	WHERE manage_office='整体'
+	AND record_date>=(
+		 CONCAT
+		(	
+			DATE_FORMAT((SELECT record_date
+			FROM f_finance_risk
+			ORDER BY record_date DESC
+			LIMIT 1),'%Y'),'-01-01')
+		)
+	GROUP BY record_date
+	ORDER BY record_date DESC;
+  </select>
+  <!-- 根据指定月的第一天 和最后一天 删除当月数据 -->
+  <delete id="deleteFinanceRiskByFirstDayAndLastDay" parameterType="hashmap">
+  	<![CDATA[
+  	DELETE
+	FROM
+		f_finance_risk
+	WHERE
+		record_date >= #{firstDay}
+	AND record_date <= #{lastDay}
+	 ]]>
+  </delete>
+</mapper>

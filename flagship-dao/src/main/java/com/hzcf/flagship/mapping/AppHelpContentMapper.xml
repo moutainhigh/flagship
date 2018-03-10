@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.AppHelpContentMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.AppHelpContent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="question" property="question" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="browse_num" property="browseNum" jdbcType="INTEGER" />
+    <result column="is_hot" property="isHot" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hzcf.flagship.model.AppHelpContent" extends="BaseResultMap" >
+    <result column="answer" property="answer" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sort_id, question, url, browse_num, is_hot, creator, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    answer
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hzcf.flagship.model.AppHelpContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from f_app_help_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.AppHelpContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_app_help_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from f_app_help_content
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from f_app_help_content
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.AppHelpContentExample" >
+    delete from f_app_help_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.AppHelpContent" >
+    insert into f_app_help_content (id, sort_id, question, 
+      url, browse_num, is_hot, 
+      creator, create_time, answer
+      )
+    values (#{id,jdbcType=INTEGER}, #{sortId,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{browseNum,jdbcType=INTEGER}, #{isHot,jdbcType=INTEGER}, 
+      #{creator,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{answer,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.AppHelpContent" >
+    insert into f_app_help_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sortId != null" >
+        sort_id,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="browseNum != null" >
+        browse_num,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="browseNum != null" >
+        #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.AppHelpContentExample" resultType="java.lang.Integer" >
+    select count(*) from f_app_help_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_app_help_content
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortId != null" >
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.question != null" >
+        question = #{record.question,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.browseNum != null" >
+        browse_num = #{record.browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.isHot != null" >
+        is_hot = #{record.isHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update f_app_help_content
+    set id = #{record.id,jdbcType=INTEGER},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      question = #{record.question,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      browse_num = #{record.browseNum,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      answer = #{record.answer,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_app_help_content
+    set id = #{record.id,jdbcType=INTEGER},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      question = #{record.question,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      browse_num = #{record.browseNum,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.AppHelpContent" >
+    update f_app_help_content
+    <set >
+      <if test="sortId != null" >
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="browseNum != null" >
+        browse_num = #{browseNum,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hzcf.flagship.model.AppHelpContent" >
+    update f_app_help_content
+    set sort_id = #{sortId,jdbcType=INTEGER},
+      question = #{question,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      browse_num = #{browseNum,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      answer = #{answer,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.AppHelpContent" >
+    update f_app_help_content
+    set sort_id = #{sortId,jdbcType=INTEGER},
+      question = #{question,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      browse_num = #{browseNum,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  
+   <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+	SELECT
+		hc.id cid,
+		hs.id sid,
+		hs.name name,
+		hc.browse_num,
+		hc.question question,
+		hc.create_time create_time
+	FROM
+	f_app_help_content hc
+	LEFT JOIN f_app_help_sort hs ON hc.sort_id = hs.id
+	<where>
+		<if test="question != null">
+  			and hc.question like '%${question}%'
+ 		</if>
+ 		<if test="sortId != null">
+  			and hc.sort_id =#{sortId}
+ 		</if>
+	</where>
+	order by hc.create_time desc
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+	SELECT
+		count(*)
+	FROM
+	f_app_help_content hc
+	LEFT JOIN f_app_help_sort hs ON hc.sort_id = hs.id
+	<where>
+		<if test="question != null">
+  			and hc.question like '%${question}%'
+ 		</if>
+ 		<if test="sortId != null">
+  			and hc.sort_id =#{sortId}
+ 		</if>
+	</where>
+
+  </select>
+  <select id="findByContentID" resultType="hashmap" parameterType="int">
+  SELECT
+		hc.id cid,
+		hs.id sid,
+		hs.name name,
+		hc.is_hot isHot,
+		hc.answer answer,
+		hc.question question,
+		hc.create_time create_time
+	FROM
+	f_app_help_content hc
+	LEFT JOIN f_app_help_sort hs ON hc.sort_id = hs.id
+	WHERE hc.id = #{id}
+  </select>
+  
+  <select id="getCountBySortId" parameterType="com.hzcf.flagship.model.AppHelpContent" resultType="long">
+  	select count(*) from f_app_help_content where sort_id =#{sortId}
+  </select>
+
+  <!-- 根据问题种类查询 -->
+  <select id="selectBySortName" parameterType="String" resultType="map">
+  
+  	SELECT
+		c.id,c.question,c.is_hot isHot,
+		(
+			CASE WHEN 
+					c.create_time>=date_sub(CURDATE(),interval 3 day) THEN 1
+			ELSE  0
+			END
+		) isNew
+	FROM 
+		f_app_help_content c
+	JOIN
+		f_app_help_sort s
+	ON
+		s.id = c.sort_id
+	AND 
+		s.name=#{sortName}
+	ORDER BY 
+		c.is_hot DESC,c.browse_num DESC,c.create_time DESC
+  </select>
+  <!-- 根据id查找问答 -->
+  <select id="selectById" parameterType="String" resultType="map">
+	SELECT
+		question,
+		answer
+	FROM
+		`f_app_help_content`
+	WHERE
+		id = #{id}
+  </select>
+  <!-- 自增1 -->
+  <update id="addTimes" parameterType="String">
+   update 
+   		f_app_help_content
+    set 
+    	browse_num = browse_num + 1
+   where id=#{id}
+  </update>
+</mapper>

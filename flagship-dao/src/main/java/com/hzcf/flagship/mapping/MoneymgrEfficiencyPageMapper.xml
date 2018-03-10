@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.MoneymgrEfficiencyPageMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.MoneymgrEfficiencyPage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="org_num" property="orgNum" jdbcType="INTEGER" />
+    <result column="counselor_num" property="counselorNum" jdbcType="INTEGER" />
+    <result column="manager_num" property="managerNum" jdbcType="INTEGER" />
+    <result column="per_capita_capacity" property="perCapitaCapacity" jdbcType="DECIMAL" />
+    <result column="per_capita_new_client" property="perCapitaNewClient" jdbcType="DECIMAL" />
+    <result column="new_client_num" property="newClientNum" jdbcType="INTEGER" />
+    <result column="counselor_manager_ratio" property="counselorManagerRatio" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, org_num, counselor_num, manager_num, per_capita_capacity, per_capita_new_client, 
+    new_client_num, counselor_manager_ratio, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_moneymgr_efficiency_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_moneymgr_efficiency_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_moneymgr_efficiency_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPageExample" >
+    delete from f_moneymgr_efficiency_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPage" >
+    insert into f_moneymgr_efficiency_page (id, record_date, org_num, 
+      counselor_num, manager_num, per_capita_capacity, 
+      per_capita_new_client, new_client_num, counselor_manager_ratio, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{orgNum,jdbcType=INTEGER}, 
+      #{counselorNum,jdbcType=INTEGER}, #{managerNum,jdbcType=INTEGER}, #{perCapitaCapacity,jdbcType=DECIMAL}, 
+      #{perCapitaNewClient,jdbcType=DECIMAL}, #{newClientNum,jdbcType=INTEGER}, #{counselorManagerRatio,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPage" >
+    insert into f_moneymgr_efficiency_page
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="orgNum != null" >
+        org_num,
+      </if>
+      <if test="counselorNum != null" >
+        counselor_num,
+      </if>
+      <if test="managerNum != null" >
+        manager_num,
+      </if>
+      <if test="perCapitaCapacity != null" >
+        per_capita_capacity,
+      </if>
+      <if test="perCapitaNewClient != null" >
+        per_capita_new_client,
+      </if>
+      <if test="newClientNum != null" >
+        new_client_num,
+      </if>
+      <if test="counselorManagerRatio != null" >
+        counselor_manager_ratio,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNum != null" >
+        #{orgNum,jdbcType=INTEGER},
+      </if>
+      <if test="counselorNum != null" >
+        #{counselorNum,jdbcType=INTEGER},
+      </if>
+      <if test="managerNum != null" >
+        #{managerNum,jdbcType=INTEGER},
+      </if>
+      <if test="perCapitaCapacity != null" >
+        #{perCapitaCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="perCapitaNewClient != null" >
+        #{perCapitaNewClient,jdbcType=DECIMAL},
+      </if>
+      <if test="newClientNum != null" >
+        #{newClientNum,jdbcType=INTEGER},
+      </if>
+      <if test="counselorManagerRatio != null" >
+        #{counselorManagerRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPageExample" resultType="java.lang.Integer" >
+    select count(*) from f_moneymgr_efficiency_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_moneymgr_efficiency_page
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.orgNum != null" >
+        org_num = #{record.orgNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.counselorNum != null" >
+        counselor_num = #{record.counselorNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.managerNum != null" >
+        manager_num = #{record.managerNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.perCapitaCapacity != null" >
+        per_capita_capacity = #{record.perCapitaCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.perCapitaNewClient != null" >
+        per_capita_new_client = #{record.perCapitaNewClient,jdbcType=DECIMAL},
+      </if>
+      <if test="record.newClientNum != null" >
+        new_client_num = #{record.newClientNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.counselorManagerRatio != null" >
+        counselor_manager_ratio = #{record.counselorManagerRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_moneymgr_efficiency_page
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      org_num = #{record.orgNum,jdbcType=INTEGER},
+      counselor_num = #{record.counselorNum,jdbcType=INTEGER},
+      manager_num = #{record.managerNum,jdbcType=INTEGER},
+      per_capita_capacity = #{record.perCapitaCapacity,jdbcType=DECIMAL},
+      per_capita_new_client = #{record.perCapitaNewClient,jdbcType=DECIMAL},
+      new_client_num = #{record.newClientNum,jdbcType=INTEGER},
+      counselor_manager_ratio = #{record.counselorManagerRatio,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPage" >
+    update f_moneymgr_efficiency_page
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNum != null" >
+        org_num = #{orgNum,jdbcType=INTEGER},
+      </if>
+      <if test="counselorNum != null" >
+        counselor_num = #{counselorNum,jdbcType=INTEGER},
+      </if>
+      <if test="managerNum != null" >
+        manager_num = #{managerNum,jdbcType=INTEGER},
+      </if>
+      <if test="perCapitaCapacity != null" >
+        per_capita_capacity = #{perCapitaCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="perCapitaNewClient != null" >
+        per_capita_new_client = #{perCapitaNewClient,jdbcType=DECIMAL},
+      </if>
+      <if test="newClientNum != null" >
+        new_client_num = #{newClientNum,jdbcType=INTEGER},
+      </if>
+      <if test="counselorManagerRatio != null" >
+        counselor_manager_ratio = #{counselorManagerRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.MoneymgrEfficiencyPage" >
+    update f_moneymgr_efficiency_page
+    set record_date = #{recordDate,jdbcType=DATE},
+      org_num = #{orgNum,jdbcType=INTEGER},
+      counselor_num = #{counselorNum,jdbcType=INTEGER},
+      manager_num = #{managerNum,jdbcType=INTEGER},
+      per_capita_capacity = #{perCapitaCapacity,jdbcType=DECIMAL},
+      per_capita_new_client = #{perCapitaNewClient,jdbcType=DECIMAL},
+      new_client_num = #{newClientNum,jdbcType=INTEGER},
+      counselor_manager_ratio = #{counselorManagerRatio,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findEfficiencyForDays" resultType="hashmap" parameterType="hashmap">
+    SELECT
+    org_num orgNum, counselor_num counselorNum, manager_num managerNum, per_capita_capacity perCapitaCapacity,
+    per_capita_new_client perCapitaNewClient, new_client_num newClientNum, counselor_manager_ratio counselorManagerRatio
+    FROM f_moneymgr_efficiency_page
+    WHERE record_date = #{dateString}
+  </select>
+  <!-- 根据日期查询全国总机构数 -->
+  <select id="selectByDate" resultMap="BaseResultMap" parameterType="String">
+  	SELECT
+	org_num
+	FROM
+	f_moneymgr_efficiency_page
+	WHERE
+	record_date = #{days}
+  </select>
+  
+  <!-- 批量插入当月所有人员人效结果页数据 -->
+  <insert id="insertEfficiencyForMonth" parameterType="java.util.List">
+  	insert into f_moneymgr_efficiency_page 
+		(
+			record_date,org_num,counselor_num,manager_num,
+			per_capita_capacity,per_capita_new_client,new_client_num,
+			counselor_manager_ratio,create_time) values 
+	<foreach collection="list" item="item" index="index" separator=","> 
+		(
+			#{item.recordDate,jdbcType=DATE},
+			#{item.orgNum,jdbcType=INTEGER},
+			#{item.counselorNum,jdbcType=INTEGER},
+			#{item.managerNum,jdbcType=INTEGER},
+			#{item.perCapitaCapacity,jdbcType=DECIMAL},
+			#{item.perCapitaNewClient,jdbcType=DECIMAL},
+			#{item.newClientNum,jdbcType=INTEGER},
+			#{item.counselorManagerRatio,jdbcType=INTEGER},
+			#{item.createTime,jdbcType=TIMESTAMP}
+		)
+	</foreach>
+  </insert>
+<!--  查询人均新客户数 咨询师人数 管理员人数 咨询师/管理员人数 人均产能-->
+  <select id="selectInfoByDate" parameterType="String" resultType="map">
+  	SELECT 
+	per_capita_new_client perNewClient, ROUND(counselor_num/org_num,0)  counselorNum, ROUND(manager_num/org_num,0)  managerNum, 
+	counselor_manager_ratio counselorManagerRatio, per_capita_capacity perCapitaCapacity
+	FROM	f_moneymgr_efficiency_page
+	WHERE record_date = #{dateString}
+  </select>
+</mapper>

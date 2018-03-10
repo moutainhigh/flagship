@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskCm1DetailMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskCm1Detail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="batch" property="batch" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="is_overdue" property="isOverdue" jdbcType="INTEGER" />
+    <result column="business_unit_name" property="businessUnitName" jdbcType="VARCHAR" />
+    <result column="business_unit_no" property="businessUnitNo" jdbcType="VARCHAR" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="district_no" property="districtNo" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="client_manager" property="clientManager" jdbcType="VARCHAR" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="payed_money" property="payedMoney" jdbcType="DECIMAL" />
+    <result column="repayment_money" property="repaymentMoney" jdbcType="DECIMAL" />
+    <result column="periods" property="periods" jdbcType="INTEGER" />
+    <result column="hand_amount" property="handAmount" jdbcType="DECIMAL" />
+    <result column="first_repayment_date" property="firstRepaymentDate" jdbcType="DATE" />
+    <result column="now_principal_interest" property="nowPrincipalInterest" jdbcType="DECIMAL" />
+    <result column="month_repayment" property="monthRepayment" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, type, contract_no, month, batch, product_name, product_no, is_overdue, 
+    business_unit_name, business_unit_no, district_name, district_no, org_name, org_no, 
+    client_manager, client_name, payed_money, repayment_money, periods, hand_amount, 
+    first_repayment_date, now_principal_interest, month_repayment, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskCm1DetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_cm1_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_cm1_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_cm1_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskCm1DetailExample" >
+    delete from f_risk_cm1_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskCm1Detail" >
+    insert into f_risk_cm1_detail (id, record_date, type, 
+      contract_no, month, batch, 
+      product_name, product_no, is_overdue, 
+      business_unit_name, business_unit_no, district_name, 
+      district_no, org_name, org_no, 
+      client_manager, client_name, payed_money, 
+      repayment_money, periods, hand_amount, 
+      first_repayment_date, now_principal_interest, 
+      month_repayment, create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{type,jdbcType=CHAR}, 
+      #{contractNo,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{batch,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productNo,jdbcType=VARCHAR}, #{isOverdue,jdbcType=INTEGER}, 
+      #{businessUnitName,jdbcType=VARCHAR}, #{businessUnitNo,jdbcType=VARCHAR}, #{districtName,jdbcType=VARCHAR}, 
+      #{districtNo,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgNo,jdbcType=VARCHAR}, 
+      #{clientManager,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, #{payedMoney,jdbcType=DECIMAL}, 
+      #{repaymentMoney,jdbcType=DECIMAL}, #{periods,jdbcType=INTEGER}, #{handAmount,jdbcType=DECIMAL}, 
+      #{firstRepaymentDate,jdbcType=DATE}, #{nowPrincipalInterest,jdbcType=DECIMAL}, 
+      #{monthRepayment,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskCm1Detail" >
+    insert into f_risk_cm1_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="contractNo != null" >
+        contract_no,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="batch != null" >
+        batch,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="isOverdue != null" >
+        is_overdue,
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name,
+      </if>
+      <if test="businessUnitNo != null" >
+        business_unit_no,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="districtNo != null" >
+        district_no,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="clientManager != null" >
+        client_manager,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="payedMoney != null" >
+        payed_money,
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money,
+      </if>
+      <if test="periods != null" >
+        periods,
+      </if>
+      <if test="handAmount != null" >
+        hand_amount,
+      </if>
+      <if test="firstRepaymentDate != null" >
+        first_repayment_date,
+      </if>
+      <if test="nowPrincipalInterest != null" >
+        now_principal_interest,
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isOverdue != null" >
+        #{isOverdue,jdbcType=INTEGER},
+      </if>
+      <if test="businessUnitName != null" >
+        #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUnitNo != null" >
+        #{businessUnitNo,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtNo != null" >
+        #{districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientManager != null" >
+        #{clientManager,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="payedMoney != null" >
+        #{payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymentMoney != null" >
+        #{repaymentMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="handAmount != null" >
+        #{handAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="firstRepaymentDate != null" >
+        #{firstRepaymentDate,jdbcType=DATE},
+      </if>
+      <if test="nowPrincipalInterest != null" >
+        #{nowPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="monthRepayment != null" >
+        #{monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskCm1DetailExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_cm1_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_cm1_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.contractNo != null" >
+        contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batch != null" >
+        batch = #{record.batch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOverdue != null" >
+        is_overdue = #{record.isOverdue,jdbcType=INTEGER},
+      </if>
+      <if test="record.businessUnitName != null" >
+        business_unit_name = #{record.businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessUnitNo != null" >
+        business_unit_no = #{record.businessUnitNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtName != null" >
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtNo != null" >
+        district_no = #{record.districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientManager != null" >
+        client_manager = #{record.clientManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null" >
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payedMoney != null" >
+        payed_money = #{record.payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.repaymentMoney != null" >
+        repayment_money = #{record.repaymentMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.periods != null" >
+        periods = #{record.periods,jdbcType=INTEGER},
+      </if>
+      <if test="record.handAmount != null" >
+        hand_amount = #{record.handAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.firstRepaymentDate != null" >
+        first_repayment_date = #{record.firstRepaymentDate,jdbcType=DATE},
+      </if>
+      <if test="record.nowPrincipalInterest != null" >
+        now_principal_interest = #{record.nowPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthRepayment != null" >
+        month_repayment = #{record.monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_cm1_detail
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      type = #{record.type,jdbcType=CHAR},
+      contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=VARCHAR},
+      batch = #{record.batch,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      is_overdue = #{record.isOverdue,jdbcType=INTEGER},
+      business_unit_name = #{record.businessUnitName,jdbcType=VARCHAR},
+      business_unit_no = #{record.businessUnitNo,jdbcType=VARCHAR},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      district_no = #{record.districtNo,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      client_manager = #{record.clientManager,jdbcType=VARCHAR},
+      client_name = #{record.clientName,jdbcType=VARCHAR},
+      payed_money = #{record.payedMoney,jdbcType=DECIMAL},
+      repayment_money = #{record.repaymentMoney,jdbcType=DECIMAL},
+      periods = #{record.periods,jdbcType=INTEGER},
+      hand_amount = #{record.handAmount,jdbcType=DECIMAL},
+      first_repayment_date = #{record.firstRepaymentDate,jdbcType=DATE},
+      now_principal_interest = #{record.nowPrincipalInterest,jdbcType=DECIMAL},
+      month_repayment = #{record.monthRepayment,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskCm1Detail" >
+    update f_risk_cm1_detail
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isOverdue != null" >
+        is_overdue = #{isOverdue,jdbcType=INTEGER},
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUnitNo != null" >
+        business_unit_no = #{businessUnitNo,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtNo != null" >
+        district_no = #{districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientManager != null" >
+        client_manager = #{clientManager,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="payedMoney != null" >
+        payed_money = #{payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money = #{repaymentMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="periods != null" >
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="handAmount != null" >
+        hand_amount = #{handAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="firstRepaymentDate != null" >
+        first_repayment_date = #{firstRepaymentDate,jdbcType=DATE},
+      </if>
+      <if test="nowPrincipalInterest != null" >
+        now_principal_interest = #{nowPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskCm1Detail" >
+    update f_risk_cm1_detail
+    set record_date = #{recordDate,jdbcType=DATE},
+      type = #{type,jdbcType=CHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      batch = #{batch,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      is_overdue = #{isOverdue,jdbcType=INTEGER},
+      business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      business_unit_no = #{businessUnitNo,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      district_no = #{districtNo,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      client_manager = #{clientManager,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      payed_money = #{payedMoney,jdbcType=DECIMAL},
+      repayment_money = #{repaymentMoney,jdbcType=DECIMAL},
+      periods = #{periods,jdbcType=INTEGER},
+      hand_amount = #{handAmount,jdbcType=DECIMAL},
+      first_repayment_date = #{firstRepaymentDate,jdbcType=DATE},
+      now_principal_interest = #{nowPrincipalInterest,jdbcType=DECIMAL},
+      month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 查询风控基础数据CM1( 营业部-3 批次-4 )下拉框内容 -->
+  <select id="getOrgNameOrBatch" parameterType="hashmap" resultType="hashmap">
+  	select
+  	<if test="status == 3">
+  		DISTINCT org_name, org_no 
+  	</if>
+  	<if test="status ==4">
+  		DISTINCT batch
+  	</if>
+  	from f_risk_cm1_detail
+  	where record_date = #{recordDate}
+  	<if test="status == 3">
+  		and business_unit_no = #{business_unit_no}
+		and district_no = #{district_no}
+  	</if>
+  </select>
+  <!-- 查询风控基础数据CM1( 事业部-1 大区-2)下拉框内容 -->
+  <select id="getbusinessOrDistrictName" parameterType="hashmap" resultType="hashmap">
+ 	 select
+ 	 <if test="status == 1">
+  		DISTINCT no business_unit_no,name business_unit_name
+ 	 </if>
+ 	  <if test="status == 2">
+  		DISTINCT no district_no,name district_name 
+ 	 </if>
+	from f_app_permission
+	<if test="status == 1">
+		where rank = 3
+	</if>
+	<if test="status == 2">
+		where rank = 4
+		and parent_no = #{business_unit_no}
+	</if> 
+  </select>
+  
+  
+  <!-- 日数据列表动态查询条件 -->
+  <sql id="dynamicPageWhere">
+  	<if test="cm1_time != null">
+		 and rcd.record_date =#{cm1_time}
+	</if>
+	<if test="cm1_batch != '全部'">
+		 and rcd.batch =#{cm1_batch}
+	</if>
+	<if test="cm1_contract_no != null">
+		and rcd.contract_no = #{cm1_contract_no}
+	</if>
+	<if test="cm1_type != '全部'">
+		and  rcd.type =#{cm1_type}
+	</if>
+	<if test="cm1_business_unit_name != '全部'">
+		and  rcd.business_unit_no =#{cm1_business_unit_name}
+	</if>
+	<if test="cm1_district_name != '全部'">
+		and  rcd.district_no =#{cm1_district_name}
+	</if>
+	<if test="cm1_org_name != '全部'">
+		and  rcd.org_no =#{cm1_org_name}
+	</if>
+	<if test="cm1_is_overdue != '全部'">
+		and rcd.is_overdue =#{cm1_is_overdue}
+	</if>
+  </sql>
+  <!-- 风控基础数据 - 日数据页面 -->
+  <select id="findAllRetMapByPage" parameterType="hashmap" resultType="hashmap">
+  	SELECT
+		rcd.contract_no,
+		<if test="status == null ">
+			IFNULL(DATE_FORMAT(rcd.record_date,'%Y年%c月'),'') record_date,
+		</if>
+		<if test="status == 'daily'">
+			IFNULL(DATE_FORMAT(rcd.record_date,'%Y-%m-%d'),'') record_date,
+		</if>
+	  	IFNULL(rcd.batch,'') batch,
+	 	 case when rcd.is_overdue = 0 then '是' else  '否'  end as  is_overdue,
+	 	  IFNULL(rcd.payed_money,'') payed_money,
+	  	IFNULL(rcd.repayment_money,'') repayment_money,
+	  	IFNULL(rcd.business_unit_name,'') business_unit_name,
+	  	IFNULL(rcd.district_name,'') district_name,
+	  	IFNULL(rcd.org_name,'') org_name,
+	  	IFNULL(rcd.client_manager,'') client_manager,    
+	  	IFNULL(rcd. client_name,'') client_name,
+	  	IFNULL(sub.name,'') name  
+	FROM
+		f_risk_cm1_detail rcd
+	LEFT JOIN (
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				org_no,
+				subcenter_no
+			FROM
+				f_risk_org_data
+			ORDER BY
+				create_time DESC
+		) org
+		GROUP BY org_no
+			) rod ON rcd.org_no = rod.org_no
+		LEFT JOIN (
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					subcenter_no,
+					IFNULL(short_name, name) name,
+					create_time,
+					status
+			FROM
+				f_risk_subcenter
+			ORDER BY
+				create_time DESC
+		) rul
+	GROUP BY
+		rul.subcenter_no
+	HAVING
+		rul. STATUS = 1
+ 	) sub ON sub.subcenter_no = rod.subcenter_no
+	where 1 = 1
+	<include refid="dynamicPageWhere"/>
+	<!-- isExport 标识导出还是列表 -->
+	<if test="isExport == null">
+		limit #{startIndex},#{pageSize}
+	</if>
+ </select>
+  
+    <select id="findAllByPageCount" parameterType="hashmap" resultType="long">
+  SELECT
+		count(*)
+	FROM
+		f_risk_cm1_detail rcd
+	LEFT JOIN (
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				org_no,
+				subcenter_no
+			FROM
+				f_risk_org_data
+			ORDER BY
+				create_time DESC
+		) org
+		GROUP BY org_no
+			) rod ON rcd.org_no = rod.org_no
+		LEFT JOIN (
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					subcenter_no,
+					IFNULL(short_name, name) name,
+					create_time,
+					status
+			FROM
+				f_risk_subcenter
+			ORDER BY
+				create_time DESC
+		) rul
+	GROUP BY
+		rul.subcenter_no
+	HAVING
+		rul. STATUS = 1
+ 	) sub ON sub.subcenter_no = rod.subcenter_no
+	where 1 = 1
+	<include refid="dynamicPageWhere"/>
+  </select>
+  
+ <!--  风控中心-基础数据-月数据页面-初始化月份	  --> 
+  <select id="getCm1MonthTime" resultType="hashmap">
+  SELECT DISTINCT
+		CONCAT(
+			DATE_FORMAT(record_date, '%Y-%m'),'-26'
+		) dateValue,
+			DATE_FORMAT(record_date, '%Y年%c月')
+		dateText
+	FROM
+		f_risk_cm1_detail
+	where DATE_FORMAT(record_date, '%d') = '26'
+	order by record_date desc limit 12
+  </select>
+</mapper>

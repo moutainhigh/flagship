@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.AppUserMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.AppUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="employee_no" property="employeeNo" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="im_password" property="imPassword" jdbcType="VARCHAR" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
+    <result column="head_image_name" property="headImageName" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, username, password, employee_no, mobile, status, im_password, sort_id, 
+    head_image_name, creator_id, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.AppUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_app_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_app_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from f_app_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.AppUserExample" >
+    delete from f_app_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.AppUser" >
+    insert into f_app_user (id, name, username, 
+      password, employee_no, mobile, 
+      status, im_password, sort_id, 
+      head_image_name, creator_id, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{employeeNo,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{imPassword,jdbcType=VARCHAR}, #{sortId,jdbcType=INTEGER}, 
+      #{headImageName,jdbcType=VARCHAR}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.AppUser" >
+    insert into f_app_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="employeeNo != null" >
+        employee_no,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="imPassword != null" >
+        im_password,
+      </if>
+      <if test="sortId != null" >
+        sort_id,
+      </if>
+      <if test="headImageName != null" >
+        head_image_name,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNo != null" >
+        #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="imPassword != null" >
+        #{imPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="headImageName != null" >
+        #{headImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.AppUserExample" resultType="java.lang.Integer" >
+    select count(*) from f_app_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_app_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeNo != null" >
+        employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.imPassword != null" >
+        im_password = #{record.imPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortId != null" >
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.headImageName != null" >
+        head_image_name = #{record.headImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_app_user
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      im_password = #{record.imPassword,jdbcType=VARCHAR},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      head_image_name = #{record.headImageName,jdbcType=VARCHAR},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.AppUser" >
+    update f_app_user
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNo != null" >
+        employee_no = #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="imPassword != null" >
+        im_password = #{imPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="headImageName != null" >
+        head_image_name = #{headImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.AppUser" >
+    update f_app_user
+    set name = #{name,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      employee_no = #{employeeNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      im_password = #{imPassword,jdbcType=VARCHAR},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      head_image_name = #{headImageName,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <sql id="dynamicPageWhere">
+  	<if test="name != null">
+  		and u.name LIKE CONCAT('%',#{name},'%') 
+ 	</if>
+ 	<if test="username != null">
+  		and u.username LIKE CONCAT('%',#{username},'%') 
+ 	</if>
+ 	<if test="mobile != null">
+  		and u.mobile LIKE CONCAT('%',#{mobile},'%') 
+ 	</if> 
+  </sql>
+  
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+	  	SELECT 
+		  u.id,
+		  u.employee_no employeeNo,
+		  CASE WHEN u.mobile in('',null) THEN '' else CONCAT(LEFT(u.mobile,3), '****' ,RIGHT(u.mobile,4)) end as mobile,
+		  u.name,
+		  username,
+		  u.status,
+		  r.permission_id,
+		  s.name sortname,
+		  GROUP_CONCAT(p.name) AS auname,
+		  GROUP_CONCAT(p.id) AS auid
+		FROM
+		  f_app_user u 
+		  LEFT JOIN f_app_user_permission_relation r 
+		    ON u.id = r.user_id 
+		  LEFT JOIN f_app_permission p 
+		    ON r.permission_id = p.id 
+		    and p.status = 1
+		  LEFT JOIN f_app_user_sort s
+				ON u.sort_id = s.id
+	     
+  		WHERE u.`status` != '3' 
+		AND u.`status` != '6'
+		AND u.mobile != '18834525784'
+	<include refid="dynamicPageWhere"/> 
+		GROUP BY u.mobile
+	    ORDER BY u.id DESC 
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+  
+ <!--  SELECT COUNT(DISTINCT u.id) FROM
+	  f_app_user u 
+	  LEFT JOIN f_app_user_permission_relation r 
+	    ON u.id = r.user_id 
+	  LEFT JOIN f_app_permission p 
+	    ON r.permission_id = p.id 
+	      
+	WHERE 1=1 -->
+	
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(u.id) FROM
+	  f_app_user u  
+	WHERE  u.`status` != '3' 
+	AND u.`status` != '6'
+	AND u.mobile != '18834525784'
+	<include refid="dynamicPageWhere"/>
+  </select>
+  
+  
+  <select id="findByMobile" resultType="java.lang.Object" parameterType="String">
+  	select 
+  		id 
+  	from 
+  		f_app_user 
+  	where 
+  		mobile=#{mobile}
+  </select>
+  
+  <select id="findNotDelByMobile" resultType="java.lang.Object" parameterType="String">
+  	select 
+  		id 
+  	from 
+  		f_app_user 
+  	where 
+  		mobile=#{mobile}
+  	and status not in (3,6)
+  </select>
+  
+  <delete id="deleteDelUserByMobile" parameterType="String">
+  	delete 
+	from f_app_user 
+	where 
+  		mobile=#{mobile}
+	and status in (3,6)
+  </delete>
+  
+  <select id="findByUID" resultType="hashmap" parameterType="int">
+	  	SELECT 
+		  u.id,
+		  u.mobile,
+		  u.name,
+		  u.username,
+		  u.employee_no employeeNo,
+		  u.status,
+		  u.sort_id sortId,
+		  r.permission_id,
+		  GROUP_CONCAT(DISTINCT p.name) AS auname,
+		  GROUP_CONCAT(DISTINCT p.id) AS auid,
+		  GROUP_CONCAT(DISTINCT u2.name) friends,
+		  GROUP_CONCAT(DISTINCT rs.to_user_id) AS letterId
+		FROM
+		  f_app_user u 
+		  LEFT JOIN f_app_user_permission_relation r 
+		    ON u.id = r.user_id 
+		  LEFT JOIN f_app_permission p 
+		    ON r.permission_id = p.id 
+		  LEFT JOIN f_app_user_relationships rs
+			ON u.id=rs.from_user_id AND rs.`status`=1
+		  LEFT JOIN f_app_user u2
+			ON u2.id=rs.to_user_id AND u2.`status`=1
+  		WHERE u.id=#{id} 
+  		And p.status = 1
+  		
+    </select>
+  
+   <select id="countByUserName" resultType="int" parameterType="String">
+  		select 
+  			count(id) 
+  		from
+  			f_app_user
+  		where username=#{username}
+  	</select>
+  	
+  	<select id="selectByTelephoneAndPsw" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+  	 select 
+		 id, status,name, im_password, sort_id,head_image_name headImageName
+   	FROM f_app_user
+    WHERE mobile = #{telephone,jdbcType=VARCHAR}
+    	and password = #{password,jdbcType=VARCHAR}
+    	and status in('1','4')
+  	</select>
+  	
+  	<update id="updateByTelephone" parameterType="hashmap">
+  	update f_app_user
+    set 
+      password = #{password,jdbcType=VARCHAR}
+    where mobile = #{telephone,jdbcType=VARCHAR}
+  	</update>
+  	
+  	<!-- 根据手机号查询用户信息 -->
+  	<select id="selectByTelephone" parameterType="string" resultMap="BaseResultMap">
+  		select 
+  		<include refid="Base_Column_List" />
+  		from f_app_user
+		where mobile=#{telephone}
+  	</select>
+  	
+  	<!-- 根据手机号查询用户信息list -->
+  	<select id="selectAppUserByTelephone" parameterType="string" resultMap="BaseResultMap">
+  		select 
+  		<include refid="Base_Column_List" />
+  		from f_app_user
+		where mobile=#{telephone}
+  	</select>
+  	
+	<!-- 查询个人详情 -->
+	<select id="getUserInfoById" parameterType="string" resultType="map">
+		SELECT
+			id hxId,name,head_image_name headImgUrl,mobile,status,im_password imPassword
+		FROM
+			f_app_user
+		WHERE
+			id = #{userId}
+	</select>
+	
+  	<!-- 根据所有用户 -->
+  	<select id="getAllUser" parameterType="hashmap" resultType="hashmap">
+  		select 
+  		<include refid="Base_Column_List" />
+  		from f_app_user u
+  		where u.status = 1
+  		AND u.mobile != '18834525784'
+  			<if test="sortId != null" >
+	     	  	 and sort_id = #{sortId,jdbcType=INTEGER}
+	       </if>
+	       <if test="id != null" >
+	     	  	 and id != #{id,jdbcType=INTEGER}
+	       </if>
+  	</select>
+  	 <!-- 根据手机号和所属分类查询用户详情 -->
+	<select id="selectAppUserByIdAndSortId" parameterType="map"  resultType="map">
+		SELECT
+			id hxId,name,head_image_name headImgUrl, mobile
+		FROM
+			f_app_user
+		WHERE
+			id IN (
+				SELECT 
+					to_user_id
+				FROM
+					f_app_user_relationships
+				WHERE
+					from_user_id = #{userId}
+			)
+			AND status = '1'
+			AND sort_id = #{sortId}
+	</select>
+	<select id="findLastOneUser" resultMap="BaseResultMap" >
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			f_app_user u
+		ORDER BY
+			u.id DESC
+		LIMIT 1
+	</select>
+	<!-- 修改默认头像 -->
+	<update id="updateImgByImgName" parameterType="String">
+	UPDATE 
+		f_app_user
+	SET 
+		head_image_name = #{name}
+	WHERE
+		head_image_name LIKE '%defaultImage%'
+	OR 
+	head_image_name = ''
+	OR 
+	head_image_name IS NULL
+	</update>
+	<select id="findUserBySoftId" parameterType="hashmap" resultMap="BaseResultMap">
+	SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		f_app_user
+	WHERE
+		sort_id = 1
+	OR sort_id = #{sortId}
+	AND STATUS = 1
+	</select>
+</mapper>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.OrgLocationMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.OrgLocation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="abscissa" property="abscissa" jdbcType="VARCHAR" />
+    <result column="ordinate" property="ordinate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, org_name, address, abscissa, ordinate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.OrgLocationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_org_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_org_location
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_org_location
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.OrgLocationExample" >
+    delete from f_org_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.OrgLocation" >
+    insert into f_org_location (id, org_name, address, 
+      abscissa, ordinate)
+    values (#{id,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{abscissa,jdbcType=VARCHAR}, #{ordinate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.OrgLocation" >
+    insert into f_org_location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="abscissa != null" >
+        abscissa,
+      </if>
+      <if test="ordinate != null" >
+        ordinate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="abscissa != null" >
+        #{abscissa,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinate != null" >
+        #{ordinate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.OrgLocationExample" resultType="java.lang.Integer" >
+    select count(*) from f_org_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_org_location
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abscissa != null" >
+        abscissa = #{record.abscissa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordinate != null" >
+        ordinate = #{record.ordinate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_org_location
+    set id = #{record.id,jdbcType=BIGINT},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      abscissa = #{record.abscissa,jdbcType=VARCHAR},
+      ordinate = #{record.ordinate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.OrgLocation" >
+    update f_org_location
+    <set >
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="abscissa != null" >
+        abscissa = #{abscissa,jdbcType=VARCHAR},
+      </if>
+      <if test="ordinate != null" >
+        ordinate = #{ordinate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.OrgLocation" >
+    update f_org_location
+    set org_name = #{orgName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      abscissa = #{abscissa,jdbcType=VARCHAR},
+      ordinate = #{ordinate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+     <!-- 批量插入 地图表 数据 -->
+  <insert id="insertOrgLocationMapper" parameterType="java.util.List">
+	 insert into f_org_location (id, org_name, address,abscissa, 
+      ordinate) values
+	<foreach collection="list" item="item" index="index" separator=",">
+	(
+	  #{item.id}, #{item.orgName},  #{item.address}, #{item.abscissa}, 
+      #{item.ordinate}
+      )
+	</foreach>
+</insert>
+</mapper>

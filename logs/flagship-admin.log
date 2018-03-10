@@ -1,0 +1,4 @@
+2017-11-20 15:55:33.906 [   ] INFO  com.hzcf.flagship.util.HttpUtil 116 : @请求地址:http://alc.test.zhonghuirt.com/personinfo/findPersion
+2017-11-20 15:55:33.977 [   ] INFO  com.hzcf.flagship.util.HttpUtil 138 : @请求参数:http://alc.test.zhonghuirt.com/personinfo/findPersion?sign=C72C13CA61EF8DCC2AA316D7915F1DA9&params=%7B%22name%22%3A%22%E5%88%98%E8%8A%B3%22%7D
+2017-11-20 15:55:34.288 [   ] INFO  com.hzcf.flagship.util.HttpUtil 143 : @响应状态码：statusCode = 200
+2017-11-20 15:55:34.293 [   ] INFO  com.hzcf.flagship.util.HttpUtil 148 : @响应包体：{"retcode":"0","retmsg":"操作成功","total":2,"sign":"05F3F70C0858828873703E40E0B49963","data":[{"phone":"13773838393","idcard":"320622197012117503","name":"宋刘芳","depName":"B大团-营销六组"},{"phone":"13720009770","idcard":"230206199002190729","name":"刘芳","depName":"跨境电商事业部-运营部"}]}

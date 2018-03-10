@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinanceDailyPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinanceDailyPerformance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="loan_value" property="loanValue" jdbcType="DECIMAL" />
+    <result column="accumu_loan_value" property="accumuLoanValue" jdbcType="DECIMAL" />
+    <result column="loan_quantity" property="loanQuantity" jdbcType="INTEGER" />
+    <result column="apply_quantity" property="applyQuantity" jdbcType="INTEGER" />
+    <result column="accumu_approval_rate" property="accumuApprovalRate" jdbcType="DECIMAL" />
+    <result column="accumu_approval_average" property="accumuApprovalAverage" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, loan_value, accumu_loan_value, loan_quantity, apply_quantity, accumu_approval_rate, 
+    accumu_approval_average, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinanceDailyPerformanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_daily_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_daily_performance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_daily_performance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinanceDailyPerformanceExample" >
+    delete from f_finance_daily_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinanceDailyPerformance" >
+    insert into f_finance_daily_performance (id, record_date, loan_value, 
+      accumu_loan_value, loan_quantity, apply_quantity, 
+      accumu_approval_rate, accumu_approval_average, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{loanValue,jdbcType=DECIMAL}, 
+      #{accumuLoanValue,jdbcType=DECIMAL}, #{loanQuantity,jdbcType=INTEGER}, #{applyQuantity,jdbcType=INTEGER}, 
+      #{accumuApprovalRate,jdbcType=DECIMAL}, #{accumuApprovalAverage,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinanceDailyPerformance" >
+    insert into f_finance_daily_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="loanValue != null" >
+        loan_value,
+      </if>
+      <if test="accumuLoanValue != null" >
+        accumu_loan_value,
+      </if>
+      <if test="loanQuantity != null" >
+        loan_quantity,
+      </if>
+      <if test="applyQuantity != null" >
+        apply_quantity,
+      </if>
+      <if test="accumuApprovalRate != null" >
+        accumu_approval_rate,
+      </if>
+      <if test="accumuApprovalAverage != null" >
+        accumu_approval_average,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="loanValue != null" >
+        #{loanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="accumuLoanValue != null" >
+        #{accumuLoanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="loanQuantity != null" >
+        #{loanQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="applyQuantity != null" >
+        #{applyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="accumuApprovalRate != null" >
+        #{accumuApprovalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="accumuApprovalAverage != null" >
+        #{accumuApprovalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinanceDailyPerformanceExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_daily_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_daily_performance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.loanValue != null" >
+        loan_value = #{record.loanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accumuLoanValue != null" >
+        accumu_loan_value = #{record.accumuLoanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanQuantity != null" >
+        loan_quantity = #{record.loanQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyQuantity != null" >
+        apply_quantity = #{record.applyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuApprovalRate != null" >
+        accumu_approval_rate = #{record.accumuApprovalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accumuApprovalAverage != null" >
+        accumu_approval_average = #{record.accumuApprovalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_daily_performance
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      loan_value = #{record.loanValue,jdbcType=DECIMAL},
+      accumu_loan_value = #{record.accumuLoanValue,jdbcType=DECIMAL},
+      loan_quantity = #{record.loanQuantity,jdbcType=INTEGER},
+      apply_quantity = #{record.applyQuantity,jdbcType=INTEGER},
+      accumu_approval_rate = #{record.accumuApprovalRate,jdbcType=DECIMAL},
+      accumu_approval_average = #{record.accumuApprovalAverage,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinanceDailyPerformance" >
+    update f_finance_daily_performance
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="loanValue != null" >
+        loan_value = #{loanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="accumuLoanValue != null" >
+        accumu_loan_value = #{accumuLoanValue,jdbcType=DECIMAL},
+      </if>
+      <if test="loanQuantity != null" >
+        loan_quantity = #{loanQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="applyQuantity != null" >
+        apply_quantity = #{applyQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="accumuApprovalRate != null" >
+        accumu_approval_rate = #{accumuApprovalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="accumuApprovalAverage != null" >
+        accumu_approval_average = #{accumuApprovalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinanceDailyPerformance" >
+    update f_finance_daily_performance
+    set record_date = #{recordDate,jdbcType=DATE},
+      loan_value = #{loanValue,jdbcType=DECIMAL},
+      accumu_loan_value = #{accumuLoanValue,jdbcType=DECIMAL},
+      loan_quantity = #{loanQuantity,jdbcType=INTEGER},
+      apply_quantity = #{applyQuantity,jdbcType=INTEGER},
+      accumu_approval_rate = #{accumuApprovalRate,jdbcType=DECIMAL},
+      accumu_approval_average = #{accumuApprovalAverage,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 根据日期查询 -->
+  <select id="selectByDate" parameterType="String" resultMap="BaseResultMap">
+  	SELECT
+		 <include refid="Base_Column_List" />
+	FROM
+		f_finance_daily_performance
+	WHERE
+		record_date = #{days}
+	ORDER BY create_time DESC
+  </select>
+  
+  <!-- 根据起止日期查询业绩 -->
+  <select id="getPerformanceBetweenDate" parameterType="hashmap" resultType="hashmap">
+  	SELECT *
+	FROM 
+	(	
+	
+	SELECT DATE_FORMAT(record_date,'%m-%d') dayOfMonth,loan_value performanceValue
+		FROM f_finance_daily_performance
+		WHERE record_date BETWEEN #{begin} AND #{end}
+		ORDER BY record_date ,create_time DESC
+	) fd
+GROUP BY dayOfMonth
+  </select>
+  <!-- 当日人均进件 -->
+  <select id="selectAvgDailyPerEntry" parameterType="String" resultType="map">
+	SELECT
+		ROUND(	CASE WHEN (
+		apply_quantity / (
+			SELECT
+				sales_num
+			FROM
+				f_finance_personal_info
+			WHERE
+				record_date = CONCAT(
+					SUBSTR(#{days}, 1, 8),
+					'01'
+				)
+			AND manage_office = '整体'
+		)
+		) IS NULL THEN -1 ELSE (
+		apply_quantity / (
+			SELECT
+				sales_num
+			FROM
+				f_finance_personal_info
+			WHERE
+				record_date = CONCAT(
+					SUBSTR(#{days}, 1, 8),
+					'01'
+				)
+			AND manage_office = '整体'
+		)
+		) END,2) avgPerEntry
+	FROM
+		f_finance_daily_performance
+	WHERE
+		record_date = #{days}
+  </select>
+  <!-- 日人均进件目标 -->
+  <select id="selectAvgDailyPerEntryPlan" parameterType="hashmap" resultType="map">
+	SELECT
+		ROUND(CASE WHEN(
+		month_plan / sales_num / #{thisMonthDays} / (
+			SELECT
+				approval_rate * approval_average
+			FROM
+				f_finance_month_performance
+			WHERE
+				record_date = #{firstDayOfLastMonth}
+				ORDER BY create_time DESC	LIMIT 1
+		) ) IS NULL THEN -1 ELSE (
+			month_plan / sales_num / #{thisMonthDays} / (
+			SELECT
+				approval_rate * approval_average
+			FROM
+				f_finance_month_performance
+			WHERE
+				record_date = #{firstDayOfLastMonth}
+				ORDER BY create_time DESC	LIMIT 1
+		)) END,2) avgPerEntryPlan
+	FROM
+		f_finance_personal_info
+	WHERE
+		record_date = CONCAT(
+			SUBSTR(#{days}, 1, 8),
+			'01'
+		)
+	AND manage_office = "整体"
+  </select>
+  <!-- 当月日人均进件 -->
+  <select id="selectMonthAvgPerEntry"  parameterType="String" resultType="hashmap">
+	SELECT
+	DATE_FORMAT(record_date, '%e') daily,ROUND(
+	CASE
+	WHEN (
+	apply_quantity / (
+		SELECT
+			sales_num
+		FROM
+			f_finance_personal_info
+		WHERE
+			record_date = CONCAT(
+				SUBSTR(#{days}, 1, 8),
+				'01'
+			)
+		AND manage_office = '整体'
+	)
+	) IS NULL THEN
+	- 1
+	ELSE
+	(
+		apply_quantity / (
+			SELECT
+				sales_num
+			FROM
+				f_finance_personal_info
+			WHERE
+				record_date = CONCAT(
+					SUBSTR(#{days}, 1, 8),
+					'01'
+				)
+			AND manage_office = '整体'
+		)
+	)
+	END ,2)avgPer
+	FROM
+	f_finance_daily_performance
+	WHERE
+	record_date BETWEEN CONCAT(
+		SUBSTR(#{days}, 1, 8),
+		'01'
+	)
+	AND #{days}
+	ORDER BY record_date
+  </select>
+  <!-- 当月累计批核率 -->
+  <select id="selectAccumuRateForMonth" parameterType="hashmap" resultType="map">
+  	SELECT 
+	DATE_FORMAT(record_date, '%c月%e日') daily ,
+	CASE WHEN (
+	accumu_approval_rate * 100
+	) IS NULL THEN -1 ELSE accumu_approval_rate * 100 END accApproval
+	FROM 
+	`f_finance_daily_performance`
+	WHERE record_date BETWEEN #{beginDay} AND #{endDay}
+	ORDER BY record_date
+  </select>
+  <!-- 当月累计批核件均 -->
+  <select id="selectAccApprovalAvgForMonth" parameterType="hashmap" resultType="map">
+  	SELECT 
+	DATE_FORMAT(record_date, '%c月%e日') daily ,
+	CASE WHEN (
+	accumu_approval_average
+	) IS NULL THEN -1 ELSE accumu_approval_average END accApprovalAvg
+	FROM 
+	`f_finance_daily_performance`
+	WHERE record_date BETWEEN #{beginDay} AND #{endDay}
+	ORDER BY record_date
+  </select>
+</mapper>

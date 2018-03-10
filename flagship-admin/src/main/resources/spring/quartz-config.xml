@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 更新理财数据-->
+	<bean id="updateMoneymgrDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="updateMoneymgrDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>updateMoneymgrData</value>
+		</property>
+	</bean>
+	<bean id="updateMoneymgrDataJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="updateMoneymgrDataJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 40 3 * * ?</value><!-- 每天凌晨3点40分执行 -->
+		</property>
+	</bean>
+	
+	<!-- 更新融资数据 -->
+	<bean id="updateFinanceDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="updateFinanceDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>updateFinanceData</value>
+		</property>
+	</bean>
+	<bean id="updateFinanceDataJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="updateFinanceDataJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 41 3 * * ?</value><!-- 每天凌晨3点41分执行 -->
+		</property>
+	</bean>
+	
+	<!-- 凌晨检查BI抽取数据是否正常,并向管理员推送异常信息 -->
+	<bean id="checkAndPushMessageToManagerJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="checkBIGetDataIsSuccessJob" />
+		</property>
+		<property name="targetMethod">
+			<value>checkAndPushMessageToManager</value>
+		</property>
+	</bean>
+	<bean id="checkAndPushMessageToManagerJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="checkAndPushMessageToManagerJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 45 3 * * ?</value><!-- 每天凌晨3点45分执行 -->
+		</property>
+	</bean>
+	
+	<!-- 凌晨检查BI抽取数据是否正常,并向所有用户广播异常信息 -->
+	<bean id="checkAndPushMessageToAllJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="checkBIGetDataIsSuccessJob" />
+		</property>
+		<property name="targetMethod">
+			<value>checkAndPushMessageToAll</value>
+		</property>
+	</bean>
+	<bean id="checkAndPushMessageToAllJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="checkAndPushMessageToAllJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 7 * * ?</value><!-- 每天凌晨7点30分执行 -->
+		</property>
+	</bean>
+	
+	<!-- 凌晨检查数据是否正常,并向指定的人员发送短信和邮件 -->
+	<bean id="checkDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="checkDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>checkData</value>
+		</property>
+	</bean>
+	<bean id="checkDataJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="checkDataJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 48 3 * * ?</value><!-- 每天凌晨3点48分执行 -->
+		</property>
+	</bean>
+	
+	<!-- 凌晨更新风控预警级别和权限数据 -->
+	<bean id="updateRiskDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="riskJob" />
+		</property>
+		<property name="targetMethod">
+			<value>updateRiskDate</value>
+		</property>
+	</bean>
+	<bean id="updateRiskDataJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="updateRiskDataJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 3 * * ?</value><!-- 每天凌晨3点50分执行 -->
+		</property>
+	</bean>
+	
+	
+	<!-- 每天上午八点给营业部负责人发送邮件 -->
+	<bean id="sendRiskDataEmailJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="sendRiskEmailDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>sendRiskDataEmail</value>
+		</property>
+	</bean>
+	<bean id="sendRiskDataEmailJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="sendRiskDataEmailJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 8 * * ?</value><!-- 每天上午8：00执行 -->
+		</property>
+	</bean>
+	
+	<!-- 每天凌晨四点校验员工在职情况 -->
+	<bean id="checkUserStatusJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="checkDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>checkUserStatus</value>
+		</property>
+	</bean>
+	<bean id="checkUserStatusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="checkUserStatusJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 4 * * ?</value><!-- 每天上午4：00执行 -->
+		</property>
+	</bean>
+	
+	
+	
+	<!-- 创建营业部逾期数据excel 并上传FastDFS-->
+	<bean id="createOverdueDataAndUploadJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="createOverdueDataAndUploadJob" />
+		</property>
+		<property name="targetMethod">
+			<value>createOverdueExcelAndUpload</value>
+		</property>
+	</bean>
+	<bean id="createOverdueDataAndUploadJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="createOverdueDataAndUploadJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 4 * * ?</value><!-- 执行时间待定 -->
+		</property>
+	</bean>
+	
+	
+	<!-- 每月4,14,24号 上传营业部cm1明细数据月邮件 -->
+	<bean id="riskMonthEmailDataJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="riskMonthEmailDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>riskMonthEmailDataUpload</value>
+		</property>
+	</bean>
+	<bean id="riskMonthEmailDataJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="riskMonthEmailDataJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 3 4,14,24,7,17,27 * ?</value><!-- 每月 4,14,24,7,17,27号 凌晨3点跑批 -->
+		</property>
+	</bean>
+	
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="updateMoneymgrDataJobTrigger"/>
+				<ref bean="updateFinanceDataJobTrigger"/>
+				<ref bean="checkAndPushMessageToManagerJobTrigger"/>
+				<ref bean="checkAndPushMessageToAllJobTrigger"/>
+				<ref bean="checkDataJobTrigger"/>
+				<ref bean="updateRiskDataJobTrigger"/>
+				<ref bean="sendRiskDataEmailJobTrigger"/>
+				<ref bean="checkUserStatusJobTrigger"/>
+				<ref bean="createOverdueDataAndUploadJobTrigger"/>  -->  
+				<ref bean="riskMonthEmailDataJobTrigger"/>    
+			</list>
+		</property>
+	</bean>
+</beans>

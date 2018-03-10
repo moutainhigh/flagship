@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.MoneymgrOrgDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.MoneymgrOrgData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="district_principal" property="districtPrincipal" jdbcType="VARCHAR" />
+    <result column="month_plan" property="monthPlan" jdbcType="DECIMAL" />
+    <result column="counselor_num_last_month" property="counselorNumLastMonth" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, org_name, district_name, district_principal, month_plan, counselor_num_last_month, 
+    creator_id, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.MoneymgrOrgDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_moneymgr_org_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_moneymgr_org_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_moneymgr_org_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.MoneymgrOrgDataExample" >
+    delete from f_moneymgr_org_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.MoneymgrOrgData" >
+    insert into f_moneymgr_org_data (id, record_date, org_name, 
+      district_name, district_principal, month_plan, 
+      counselor_num_last_month, creator_id, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{orgName,jdbcType=VARCHAR}, 
+      #{districtName,jdbcType=VARCHAR}, #{districtPrincipal,jdbcType=VARCHAR}, #{monthPlan,jdbcType=DECIMAL}, 
+      #{counselorNumLastMonth,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.MoneymgrOrgData" >
+    insert into f_moneymgr_org_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="districtPrincipal != null" >
+        district_principal,
+      </if>
+      <if test="monthPlan != null" >
+        month_plan,
+      </if>
+      <if test="counselorNumLastMonth != null" >
+        counselor_num_last_month,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtPrincipal != null" >
+        #{districtPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPlan != null" >
+        #{monthPlan,jdbcType=DECIMAL},
+      </if>
+      <if test="counselorNumLastMonth != null" >
+        #{counselorNumLastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.MoneymgrOrgDataExample" resultType="java.lang.Integer" >
+    select count(*) from f_moneymgr_org_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_moneymgr_org_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtName != null" >
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtPrincipal != null" >
+        district_principal = #{record.districtPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthPlan != null" >
+        month_plan = #{record.monthPlan,jdbcType=DECIMAL},
+      </if>
+      <if test="record.counselorNumLastMonth != null" >
+        counselor_num_last_month = #{record.counselorNumLastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_moneymgr_org_data
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      district_principal = #{record.districtPrincipal,jdbcType=VARCHAR},
+      month_plan = #{record.monthPlan,jdbcType=DECIMAL},
+      counselor_num_last_month = #{record.counselorNumLastMonth,jdbcType=INTEGER},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.MoneymgrOrgData" >
+    update f_moneymgr_org_data
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtPrincipal != null" >
+        district_principal = #{districtPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPlan != null" >
+        month_plan = #{monthPlan,jdbcType=DECIMAL},
+      </if>
+      <if test="counselorNumLastMonth != null" >
+        counselor_num_last_month = #{counselorNumLastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.MoneymgrOrgData" >
+    update f_moneymgr_org_data
+    set record_date = #{recordDate,jdbcType=DATE},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      district_principal = #{districtPrincipal,jdbcType=VARCHAR},
+      month_plan = #{monthPlan,jdbcType=DECIMAL},
+      counselor_num_last_month = #{counselorNumLastMonth,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+   <!-- 批量插入 理财对比表 数据 -->
+  <insert id="insertMoneyCompare" parameterType="java.util.List">
+	 insert into f_moneymgr_org_data (id, record_date, org_name, 
+      district_name, district_principal, month_plan, 
+      counselor_num_last_month, creator_id, create_time
+      )values
+	<foreach collection="list" item="item" index="index" separator=",">
+	 (#{item.id,jdbcType=BIGINT}, #{item.recordDate,jdbcType=DATE}, #{item.orgName,jdbcType=VARCHAR}, 
+      #{item.districtName,jdbcType=VARCHAR}, #{item.districtPrincipal,jdbcType=VARCHAR}, #{item.monthPlan,jdbcType=INTEGER}, 
+      #{item.counselorNumLastMonth,jdbcType=INTEGER}, #{item.creatorId,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}
+      )
+	</foreach>
+</insert>
+
+<!-- 设置查询条件 -->
+  <sql id="dynamicPageWhere">
+  	<if test="orgName != null">
+  		and org_name LIKE CONCAT('%',#{orgName},'%') 
+ 	</if>
+ 	<if test="districtName != null">
+  		and district_name LIKE CONCAT('%',#{districtName},'%') 
+ 	</if>
+	<if test="start_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') >= #{start_time}
+ 		]]>
+ 	</if>
+ 	<if test="end_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') <= #{end_time}
+ 	]]>
+ 	</if>
+  </sql>
+  
+  <!--  理财对比表 列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+	id,
+	DATE_FORMAT(record_date, '%Y/%m/%d') record_date,
+	org_name,
+	district_name,
+	district_principal,
+	month_plan,
+	counselor_num_last_month,
+	creator_id,
+	create_time
+FROM
+	f_moneymgr_org_data
+WHERE
+	1 = 1
+	<include refid="dynamicPageWhere"/>
+	order by record_date desc ,id desc
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--理财对比表 分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_moneymgr_org_data
+	WHERE 1=1
+	<include refid="dynamicPageWhere"/> 
+  </select>
+  
+  <!--理财对比表 查询营业部数量 -->
+  <select id="getOrgNum" resultType="long" parameterType="string">
+  	SELECT COUNT(*) FROM f_moneymgr_org_data
+	WHERE record_date=#{dateString} 
+	AND district_name is not null
+	AND district_name!=''
+	AND org_name!='合计'
+  </select>
+  <!-- 根据指定月的第一天 和最后一天 删除当月数据 -->
+  <delete id="deleteOrgDataByFirstDayAndLastDay" parameterType="hashmap">
+  	<![CDATA[
+  	DELETE
+	FROM
+		f_moneymgr_org_data
+	WHERE
+		record_date >= #{firstDay}
+	AND record_date <= #{lastDay}
+	 ]]>
+  </delete>
+  
+  <!-- 统计上月咨询师人数 -->
+  <select id="getCounselorNumOfLastMonth" resultType="long" parameterType="string">
+  	SELECT counselor_num_last_month 
+	FROM f_moneymgr_org_data
+	WHERE record_date=#{dateString}
+	AND org_name='本月总计划'
+  </select>
+  
+  <!-- 得到指定月所有的区域数据(区域名称,区域负责人,区域月计划,区域上月咨询师人数) -->
+  <select id="getAllDistrictData" resultType="hashmap" parameterType="string">
+  	SELECT district_name,district_principal,sum(month_plan) district_month_plan,
+			sum(counselor_num_last_month) counselor_num_last_month,count(id) district_org_num
+	FROM f_moneymgr_org_data
+	WHERE record_date=#{dateString}
+		AND district_name != ''
+		AND org_name != '合计'
+	GROUP BY district_name
+  </select>
+
+  <!-- 查询所有区域 -->
+  <select id="findAllAreaName" resultType="hashmap" >
+	SELECT DISTINCT org.district_name districtName
+    FROM f_moneymgr_org_accumu_perfromance_page page
+	INNER JOIN f_moneymgr_org_data org ON org.org_name = page.org_name
+	WHERE page.record_date=#{dateString}
+	AND org.district_name  != ""
+  </select>
+
+  <!-- 查询所有区域下的机构 -->
+  <select id="findOrgNameByArea" resultType="hashmap" parameterType="hashmap">
+    SELECT org_name orgName
+    FROM f_moneymgr_org_data
+    WHERE org_name IN (SELECT DISTINCT org_name
+	FROM f_moneymgr_org_accumu_perfromance_page WHERE record_date=#{dateString})
+	AND district_name = #{areaString, jdbcType=VARCHAR}
+	AND record_date= CONCAT(SUBSTR(#{dateString},1,LOCATE('-',#{dateString},6)),'01')
+  </select>
+
+  <!-- 查询所有的 区域和机构 -->
+  <select id="findAllAreaOrgName" resultType="hashmap" parameterType="hashmap">
+    SELECT org_name orgName, district_name districtName
+    FROM f_moneymgr_org_data
+    WHERE org_name IN (SELECT DISTINCT org_name
+    FROM f_moneymgr_org_accumu_perfromance_page WHERE record_date = #{dateString})
+  </select>
+	<!-- 查询差值 -->
+	<select id="getDiffOfCountAndDistinctOrgNumByDate" resultType="hashmap" parameterType="Date">
+	  	SELECT district_num-district_total_num district_total_diff,org_num_diff
+		FROM
+			(
+				SELECT COUNT(DISTINCT district_name) district_num
+				FROM f_moneymgr_org_data
+				WHERE record_date=#{date,jdbcType=DATE}
+				AND district_name IS NOT NULL
+				AND district_name!=''
+			) a
+		JOIN (
+				SELECT COUNT(district_name) district_total_num
+				FROM f_moneymgr_org_data
+				WHERE record_date=#{date,jdbcType=DATE}
+				AND org_name='合计'
+			) b
+		JOIN (
+				SELECT COUNT(org_name)-COUNT(DISTINCT org_name) org_num_diff
+				FROM f_moneymgr_org_data
+				WHERE record_date=#{date,jdbcType=DATE}
+				AND org_name!='合计'
+				AND org_name!='本月总计划'
+			) c
+
+	</select>
+</mapper>

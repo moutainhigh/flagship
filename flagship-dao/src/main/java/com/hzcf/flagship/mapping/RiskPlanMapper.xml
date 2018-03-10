@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskPlan" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="parent_org_no" property="parentOrgNo" jdbcType="VARCHAR" />
+    <result column="parent_org_name" property="parentOrgName" jdbcType="VARCHAR" />
+    <result column="cm1_rate" property="cm1Rate" jdbcType="DECIMAL" />
+    <result column="m2_pressure_rate" property="m2PressureRate" jdbcType="DECIMAL" />
+    <result column="m3_pressure_rate" property="m3PressureRate" jdbcType="DECIMAL" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, org_no, org_name, parent_org_no, parent_org_name, cm1_rate, m2_pressure_rate, 
+    m3_pressure_rate, creator, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_plan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_plan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskPlanExample" >
+    delete from f_risk_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskPlan" >
+    insert into f_risk_plan (id, record_date, org_no, 
+      org_name, parent_org_no, parent_org_name, 
+      cm1_rate, m2_pressure_rate, m3_pressure_rate, 
+      creator, create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{orgNo,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{parentOrgNo,jdbcType=VARCHAR}, #{parentOrgName,jdbcType=VARCHAR}, 
+      #{cm1Rate,jdbcType=DECIMAL}, #{m2PressureRate,jdbcType=DECIMAL}, #{m3PressureRate,jdbcType=DECIMAL}, 
+      #{creator,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskPlan" >
+    insert into f_risk_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="parentOrgNo != null" >
+        parent_org_no,
+      </if>
+      <if test="parentOrgName != null" >
+        parent_org_name,
+      </if>
+      <if test="cm1Rate != null" >
+        cm1_rate,
+      </if>
+      <if test="m2PressureRate != null" >
+        m2_pressure_rate,
+      </if>
+      <if test="m3PressureRate != null" >
+        m3_pressure_rate,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgNo != null" >
+        #{parentOrgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgName != null" >
+        #{parentOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="cm1Rate != null" >
+        #{cm1Rate,jdbcType=DECIMAL},
+      </if>
+      <if test="m2PressureRate != null" >
+        #{m2PressureRate,jdbcType=DECIMAL},
+      </if>
+      <if test="m3PressureRate != null" >
+        #{m3PressureRate,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskPlanExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_plan
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentOrgNo != null" >
+        parent_org_no = #{record.parentOrgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentOrgName != null" >
+        parent_org_name = #{record.parentOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cm1Rate != null" >
+        cm1_rate = #{record.cm1Rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.m2PressureRate != null" >
+        m2_pressure_rate = #{record.m2PressureRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.m3PressureRate != null" >
+        m3_pressure_rate = #{record.m3PressureRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_plan
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      parent_org_no = #{record.parentOrgNo,jdbcType=VARCHAR},
+      parent_org_name = #{record.parentOrgName,jdbcType=VARCHAR},
+      cm1_rate = #{record.cm1Rate,jdbcType=DECIMAL},
+      m2_pressure_rate = #{record.m2PressureRate,jdbcType=DECIMAL},
+      m3_pressure_rate = #{record.m3PressureRate,jdbcType=DECIMAL},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskPlan" >
+    update f_risk_plan
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgNo != null" >
+        parent_org_no = #{parentOrgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgName != null" >
+        parent_org_name = #{parentOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="cm1Rate != null" >
+        cm1_rate = #{cm1Rate,jdbcType=DECIMAL},
+      </if>
+      <if test="m2PressureRate != null" >
+        m2_pressure_rate = #{m2PressureRate,jdbcType=DECIMAL},
+      </if>
+      <if test="m3PressureRate != null" >
+        m3_pressure_rate = #{m3PressureRate,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskPlan" >
+    update f_risk_plan
+    set record_date = #{recordDate,jdbcType=DATE},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      parent_org_no = #{parentOrgNo,jdbcType=VARCHAR},
+      parent_org_name = #{parentOrgName,jdbcType=VARCHAR},
+      cm1_rate = #{cm1Rate,jdbcType=DECIMAL},
+      m2_pressure_rate = #{m2PressureRate,jdbcType=DECIMAL},
+      m3_pressure_rate = #{m3PressureRate,jdbcType=DECIMAL},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 风控目标列表 -->
+   <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		DATE_FORMAT(record_date, '%Y%年%c%月') monthDate,
+		DATE_FORMAT(create_time, '%Y%-%c%-%d') upDateTime
+	FROM
+		f_risk_plan
+	GROUP BY
+		monthDate
+	ORDER BY record_date DESC
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--风控目标列表 总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+	SELECT
+		COUNT(DISTINCT record_date)
+	FROM
+		f_risk_plan
+  </select>
+	<!--  批量导入风控目标数据 -->
+	  <insert id="insertRiskPlan" parameterType="java.util.List">
+		  insert into f_risk_plan (record_date, org_no, org_name, 
+	      parent_org_no, parent_org_name, cm1_rate, 
+	      m2_pressure_rate, m3_pressure_rate, 
+	      creator, create_time) values
+		<foreach collection="list" item="item" index="index" separator=",">
+		 (
+		  #{item.recordDate,jdbcType=DATE},
+		  #{item.orgNo,jdbcType=VARCHAR},#{item.orgName,jdbcType=VARCHAR},
+		  #{item.parentOrgNo,jdbcType=VARCHAR},#{item.parentOrgName,jdbcType=VARCHAR},
+		  #{item.cm1Rate,jdbcType=DECIMAL},#{item.m2PressureRate,jdbcType=DECIMAL},#{item.m3PressureRate,jdbcType=DECIMAL},
+	      #{item.creator,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}
+	      )
+		</foreach>
+	</insert>  
+	<!-- 查找下一个月的目标时间 -->
+	<select id="selectNextRecord" resultType="date">
+		SELECT
+			DATE_ADD(record_date,INTERVAL 1 MONTH) nextRecord
+		FROM
+			f_risk_plan
+		ORDER BY record_date DESC
+	LIMIT 1
+	</select>
+	<!-- 按月查找风控目标列表 -->
+	<select id="findOrgListByDate" parameterType="String" resultType="map">
+		SELECT
+			org_no orgNo,
+			org_name orgName,
+			parent_org_no parentNo,
+			parent_org_name parentName
+		FROM
+			f_risk_plan
+		WHERE
+			record_date =#{date}
+	</select>
+	<!-- 按时间删除风控目标表 -->
+  <delete id="deleteByRecordDate" parameterType="String" >
+    delete from f_risk_plan
+   	WHERE record_date = #{date}
+  </delete>
+  
+  <select id="findPlanByMonthAndOrgNo" parameterType="hashmap" resultMap="BaseResultMap">
+  	SELECT
+		cm1_rate cm1Rate
+	FROM
+		f_risk_plan
+	WHERE
+		org_no =#{orgNo}
+	AND record_date = CONCAT(
+	DATE_FORMAT(
+		STR_TO_DATE(#{month}, '%Y%c'),
+		'%Y-%c-'
+	),
+	'01'
+	)
+	ORDER BY create_time DESC LIMIT 1
+  </select>
+</mapper>
+  

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinanceMonthPerformanceMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinanceMonthPerformance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="month_performance" property="monthPerformance" jdbcType="DECIMAL" />
+    <result column="year_performance" property="yearPerformance" jdbcType="DECIMAL" />
+    <result column="apply_actual_quantity" property="applyActualQuantity" jdbcType="INTEGER" />
+    <result column="loan_actual_quantity" property="loanActualQuantity" jdbcType="INTEGER" />
+    <result column="approval_rate" property="approvalRate" jdbcType="DECIMAL" />
+    <result column="approval_average" property="approvalAverage" jdbcType="DECIMAL" />
+    <result column="contract_money" property="contractMoney" jdbcType="DECIMAL" />
+    <result column="service_charge_rate" property="serviceChargeRate" jdbcType="DECIMAL" />
+    <result column="arbitration_charge_rate" property="arbitrationChargeRate" jdbcType="DECIMAL" />
+    <result column="insurance_rate" property="insuranceRate" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, month_performance, year_performance, apply_actual_quantity, loan_actual_quantity, 
+    approval_rate, approval_average, contract_money, service_charge_rate, arbitration_charge_rate, 
+    insurance_rate, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinanceMonthPerformanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_month_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_month_performance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_month_performance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinanceMonthPerformanceExample" >
+    delete from f_finance_month_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinanceMonthPerformance" >
+    insert into f_finance_month_performance (id, record_date, month_performance, 
+      year_performance, apply_actual_quantity, loan_actual_quantity, 
+      approval_rate, approval_average, contract_money, 
+      service_charge_rate, arbitration_charge_rate, 
+      insurance_rate, create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{monthPerformance,jdbcType=DECIMAL}, 
+      #{yearPerformance,jdbcType=DECIMAL}, #{applyActualQuantity,jdbcType=INTEGER}, #{loanActualQuantity,jdbcType=INTEGER}, 
+      #{approvalRate,jdbcType=DECIMAL}, #{approvalAverage,jdbcType=DECIMAL}, #{contractMoney,jdbcType=DECIMAL}, 
+      #{serviceChargeRate,jdbcType=DECIMAL}, #{arbitrationChargeRate,jdbcType=DECIMAL}, 
+      #{insuranceRate,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinanceMonthPerformance" >
+    insert into f_finance_month_performance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="monthPerformance != null" >
+        month_performance,
+      </if>
+      <if test="yearPerformance != null" >
+        year_performance,
+      </if>
+      <if test="applyActualQuantity != null" >
+        apply_actual_quantity,
+      </if>
+      <if test="loanActualQuantity != null" >
+        loan_actual_quantity,
+      </if>
+      <if test="approvalRate != null" >
+        approval_rate,
+      </if>
+      <if test="approvalAverage != null" >
+        approval_average,
+      </if>
+      <if test="contractMoney != null" >
+        contract_money,
+      </if>
+      <if test="serviceChargeRate != null" >
+        service_charge_rate,
+      </if>
+      <if test="arbitrationChargeRate != null" >
+        arbitration_charge_rate,
+      </if>
+      <if test="insuranceRate != null" >
+        insurance_rate,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="monthPerformance != null" >
+        #{monthPerformance,jdbcType=DECIMAL},
+      </if>
+      <if test="yearPerformance != null" >
+        #{yearPerformance,jdbcType=DECIMAL},
+      </if>
+      <if test="applyActualQuantity != null" >
+        #{applyActualQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="loanActualQuantity != null" >
+        #{loanActualQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="approvalRate != null" >
+        #{approvalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalAverage != null" >
+        #{approvalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="contractMoney != null" >
+        #{contractMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceChargeRate != null" >
+        #{serviceChargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="arbitrationChargeRate != null" >
+        #{arbitrationChargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="insuranceRate != null" >
+        #{insuranceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinanceMonthPerformanceExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_month_performance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_month_performance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.monthPerformance != null" >
+        month_performance = #{record.monthPerformance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yearPerformance != null" >
+        year_performance = #{record.yearPerformance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyActualQuantity != null" >
+        apply_actual_quantity = #{record.applyActualQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.loanActualQuantity != null" >
+        loan_actual_quantity = #{record.loanActualQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvalRate != null" >
+        approval_rate = #{record.approvalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.approvalAverage != null" >
+        approval_average = #{record.approvalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contractMoney != null" >
+        contract_money = #{record.contractMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serviceChargeRate != null" >
+        service_charge_rate = #{record.serviceChargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.arbitrationChargeRate != null" >
+        arbitration_charge_rate = #{record.arbitrationChargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.insuranceRate != null" >
+        insurance_rate = #{record.insuranceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_month_performance
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      month_performance = #{record.monthPerformance,jdbcType=DECIMAL},
+      year_performance = #{record.yearPerformance,jdbcType=DECIMAL},
+      apply_actual_quantity = #{record.applyActualQuantity,jdbcType=INTEGER},
+      loan_actual_quantity = #{record.loanActualQuantity,jdbcType=INTEGER},
+      approval_rate = #{record.approvalRate,jdbcType=DECIMAL},
+      approval_average = #{record.approvalAverage,jdbcType=DECIMAL},
+      contract_money = #{record.contractMoney,jdbcType=DECIMAL},
+      service_charge_rate = #{record.serviceChargeRate,jdbcType=DECIMAL},
+      arbitration_charge_rate = #{record.arbitrationChargeRate,jdbcType=DECIMAL},
+      insurance_rate = #{record.insuranceRate,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinanceMonthPerformance" >
+    update f_finance_month_performance
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="monthPerformance != null" >
+        month_performance = #{monthPerformance,jdbcType=DECIMAL},
+      </if>
+      <if test="yearPerformance != null" >
+        year_performance = #{yearPerformance,jdbcType=DECIMAL},
+      </if>
+      <if test="applyActualQuantity != null" >
+        apply_actual_quantity = #{applyActualQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="loanActualQuantity != null" >
+        loan_actual_quantity = #{loanActualQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="approvalRate != null" >
+        approval_rate = #{approvalRate,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalAverage != null" >
+        approval_average = #{approvalAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="contractMoney != null" >
+        contract_money = #{contractMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceChargeRate != null" >
+        service_charge_rate = #{serviceChargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="arbitrationChargeRate != null" >
+        arbitration_charge_rate = #{arbitrationChargeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="insuranceRate != null" >
+        insurance_rate = #{insuranceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinanceMonthPerformance" >
+    update f_finance_month_performance
+    set record_date = #{recordDate,jdbcType=DATE},
+      month_performance = #{monthPerformance,jdbcType=DECIMAL},
+      year_performance = #{yearPerformance,jdbcType=DECIMAL},
+      apply_actual_quantity = #{applyActualQuantity,jdbcType=INTEGER},
+      loan_actual_quantity = #{loanActualQuantity,jdbcType=INTEGER},
+      approval_rate = #{approvalRate,jdbcType=DECIMAL},
+      approval_average = #{approvalAverage,jdbcType=DECIMAL},
+      contract_money = #{contractMoney,jdbcType=DECIMAL},
+      service_charge_rate = #{serviceChargeRate,jdbcType=DECIMAL},
+      arbitration_charge_rate = #{arbitrationChargeRate,jdbcType=DECIMAL},
+      insurance_rate = #{insuranceRate,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 按时间排序 取最新一条数据 -->
+  <select id="getFinceMonthLastOne" resultMap="BaseResultMap">
+	 	SELECT
+		<include refid="Base_Column_List" />
+	FROM
+		f_finance_month_performance
+	ORDER BY
+		record_date DESC;
+</select>
+<select id="getPlanListByYear" parameterType="hashmap" resultMap="BaseResultMap">
+	select * from (
+	SELECT
+		<include refid="Base_Column_List" />
+	FROM
+		f_finance_month_performance
+	WHERE
+		record_date >= (
+			CONCAT(
+				DATE_FORMAT(
+					(
+						SELECT
+							record_date
+						FROM
+							f_finance_month_performance
+						ORDER BY
+							record_date DESC
+						LIMIT 1
+					),
+					'%Y'
+				),
+				'-01-01'
+			)
+		)
+	ORDER BY record_date DESC
+	)
+fm group by record_date
+ORDER BY record_date DESC
+</select>
+<select id="getLastMonthInfo" parameterType="string" resultMap="BaseResultMap">
+	SELECT
+		<include refid="Base_Column_List" />
+	FROM
+		f_finance_month_performance fmp
+	WHERE
+		fmp.record_date = #{firstDayOfLastMonth}
+	ORDER BY
+		create_time  DESC LIMIT 1
+</select>
+<!-- 查找批核率（月） -->
+<select id="selectApprovalRate" resultType="map">
+	SELECT 
+		DATE_FORMAT(record_date, '%Y年%c月') yearDate,
+		DATE_FORMAT(record_date, '%c月') monthDate,
+		approvalRate
+	FROM(
+		SELECT 
+			record_date,
+			CASE WHEN(
+			approval_rate * 100
+			) IS NULL THEN -1
+			ELSE approval_rate * 100 END	approvalRate	
+		FROM 
+		`f_finance_month_performance`
+		ORDER BY record_date DESC LIMIT 12
+		) a 
+	ORDER BY record_date
+</select>
+<!-- 批核件均 （月）-->
+<select id="selectApprovalAvg" resultType="map">
+	SELECT 
+		DATE_FORMAT(record_date, '%Y年%c月') yearDate,
+		DATE_FORMAT(record_date, '%c月') monthDate,
+		approvalAvg
+	FROM (
+		SELECT 
+			record_date,
+			CASE WHEN(
+			approval_average
+			) IS NULL THEN -1
+			ELSE approval_average END	approvalAvg
+		FROM 
+		`f_finance_month_performance`
+		ORDER BY record_date DESC LIMIT 12
+	 ) a
+	ORDER BY record_date
+</select>
+</mapper>

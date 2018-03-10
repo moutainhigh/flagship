@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskLoanM1OverdueMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskLoanM1Overdue" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="overdue_principal_interest" property="overduePrincipalInterest" jdbcType="DECIMAL" />
+    <result column="total_principal_interest" property="totalPrincipalInterest" jdbcType="DECIMAL" />
+    <result column="m1_value" property="m1Value" jdbcType="DECIMAL" />
+    <result column="oberdue_num" property="oberdueNum" jdbcType="INTEGER" />
+    <result column="loan_num" property="loanNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, org_no, product_no, overdue_principal_interest, total_principal_interest, 
+    m1_value, oberdue_num, loan_num, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskLoanM1OverdueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_loan_m1_overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_loan_m1_overdue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_loan_m1_overdue
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskLoanM1OverdueExample" >
+    delete from f_risk_loan_m1_overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskLoanM1Overdue" >
+    insert into f_risk_loan_m1_overdue (id, record_date, org_no, 
+      product_no, overdue_principal_interest, total_principal_interest, 
+      m1_value, oberdue_num, loan_num, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{orgNo,jdbcType=VARCHAR}, 
+      #{productNo,jdbcType=VARCHAR}, #{overduePrincipalInterest,jdbcType=DECIMAL}, #{totalPrincipalInterest,jdbcType=DECIMAL}, 
+      #{m1Value,jdbcType=DECIMAL}, #{oberdueNum,jdbcType=INTEGER}, #{loanNum,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskLoanM1Overdue" >
+    insert into f_risk_loan_m1_overdue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="overduePrincipalInterest != null" >
+        overdue_principal_interest,
+      </if>
+      <if test="totalPrincipalInterest != null" >
+        total_principal_interest,
+      </if>
+      <if test="m1Value != null" >
+        m1_value,
+      </if>
+      <if test="oberdueNum != null" >
+        oberdue_num,
+      </if>
+      <if test="loanNum != null" >
+        loan_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="overduePrincipalInterest != null" >
+        #{overduePrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrincipalInterest != null" >
+        #{totalPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="m1Value != null" >
+        #{m1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="oberdueNum != null" >
+        #{oberdueNum,jdbcType=INTEGER},
+      </if>
+      <if test="loanNum != null" >
+        #{loanNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskLoanM1OverdueExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_loan_m1_overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_loan_m1_overdue
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overduePrincipalInterest != null" >
+        overdue_principal_interest = #{record.overduePrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalPrincipalInterest != null" >
+        total_principal_interest = #{record.totalPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.m1Value != null" >
+        m1_value = #{record.m1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="record.oberdueNum != null" >
+        oberdue_num = #{record.oberdueNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.loanNum != null" >
+        loan_num = #{record.loanNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_loan_m1_overdue
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      overdue_principal_interest = #{record.overduePrincipalInterest,jdbcType=DECIMAL},
+      total_principal_interest = #{record.totalPrincipalInterest,jdbcType=DECIMAL},
+      m1_value = #{record.m1Value,jdbcType=DECIMAL},
+      oberdue_num = #{record.oberdueNum,jdbcType=INTEGER},
+      loan_num = #{record.loanNum,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskLoanM1Overdue" >
+    update f_risk_loan_m1_overdue
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="overduePrincipalInterest != null" >
+        overdue_principal_interest = #{overduePrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrincipalInterest != null" >
+        total_principal_interest = #{totalPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="m1Value != null" >
+        m1_value = #{m1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="oberdueNum != null" >
+        oberdue_num = #{oberdueNum,jdbcType=INTEGER},
+      </if>
+      <if test="loanNum != null" >
+        loan_num = #{loanNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskLoanM1Overdue" >
+    update f_risk_loan_m1_overdue
+    set record_date = #{recordDate,jdbcType=DATE},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      overdue_principal_interest = #{overduePrincipalInterest,jdbcType=DECIMAL},
+      total_principal_interest = #{totalPrincipalInterest,jdbcType=DECIMAL},
+      m1_value = #{m1Value,jdbcType=DECIMAL},
+      oberdue_num = #{oberdueNum,jdbcType=INTEGER},
+      loan_num = #{loanNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 获得某天某个机构的某个产品的m1逾期率和连续六个月放款笔数 -->
+  <select id="getM1ValueByOrgAndProduct" parameterType="hashmap" resultType="hashmap">
+  	SELECT SUM(overdue_principal_interest)/SUM(total_principal_interest) m1_value,sum(loan_num) loan_num
+	FROM f_risk_loan_m1_overdue
+	WHERE record_date=#{date}
+	AND org_no=#{orgNo}
+	AND product_no=#{productNo}
+	LIMIT 1
+  </select>
+  
+  <!-- 获得总记录数和重复数 -->
+  <select id="getTotalCountAndDiffByDate" parameterType="string" resultType="hashmap">
+  	SELECT 
+  		COUNT(id) total,
+  		COUNT(id)-COUNT(DISTINCT org_no,product_no) diff
+	FROM f_risk_loan_m1_overdue
+	WHERE product_no !='991'
+	AND product_no!='11'
+	AND record_date=#{date}
+  </select>
+  
+  <update id="updateEliteSum" parameterType="string">
+  	<![CDATA[ 
+	   	UPDATE f_risk_loan_m1_overdue SET product_no='991'
+		WHERE record_date<=#{date} 
+		AND record_date>DATE_SUB(#{date},INTERVAL 5 DAY)
+		AND product_no IN (
+			SELECT DISTINCT product_no 
+			FROM f_risk_product
+			WHERE product_name LIKE '精英类%'
+			AND product_no !='991'
+		)
+	]]>
+   </update>
+   
+   <update id="updateProvidentFundSum" parameterType="string">
+	   <![CDATA[ 
+		   	UPDATE f_risk_loan_m1_overdue SET product_no='11'
+			WHERE record_date<=#{date} 
+			AND record_date>DATE_SUB(#{date},INTERVAL 5 DAY)
+			AND product_no IN (
+				SELECT DISTINCT product_no 
+				FROM f_risk_product
+				WHERE product_name LIKE '公积金类%'
+				AND product_no !='11'
+			)
+		]]>
+   </update>
+   
+   <!-- 获得一个营业部的编号 -->
+   <select id="getOneOrgAndProduct" parameterType="string" resultType="hashMap">
+   	SELECT org_no org,product_no product
+	FROM f_risk_loan_m1_overdue
+	WHERE record_date=#{date}
+	AND oberdue_num!=0
+	LIMIT 1
+   </select>
+   
+</mapper>

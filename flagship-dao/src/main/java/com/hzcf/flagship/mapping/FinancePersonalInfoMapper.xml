@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.FinancePersonalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.FinancePersonalInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="manage_office" property="manageOffice" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="sales_num" property="salesNum" jdbcType="INTEGER" />
+    <result column="total_emp_num" property="totalEmpNum" jdbcType="INTEGER" />
+    <result column="team_num" property="teamNum" jdbcType="INTEGER" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="month_plan" property="monthPlan" jdbcType="INTEGER" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, manage_office, org_name, sales_num, total_emp_num, team_num, record_date, month_plan, 
+    creator, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.FinancePersonalInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_finance_personal_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_finance_personal_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_finance_personal_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.FinancePersonalInfoExample" >
+    delete from f_finance_personal_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.FinancePersonalInfo" >
+    insert into f_finance_personal_info (id, manage_office, org_name, 
+      sales_num, total_emp_num, team_num, 
+      record_date, month_plan, creator, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{manageOffice,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{salesNum,jdbcType=INTEGER}, #{totalEmpNum,jdbcType=INTEGER}, #{teamNum,jdbcType=INTEGER}, 
+      #{recordDate,jdbcType=DATE}, #{monthPlan,jdbcType=INTEGER}, #{creator,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.FinancePersonalInfo" >
+    insert into f_finance_personal_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="manageOffice != null" >
+        manage_office,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="salesNum != null" >
+        sales_num,
+      </if>
+      <if test="totalEmpNum != null" >
+        total_emp_num,
+      </if>
+      <if test="teamNum != null" >
+        team_num,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="monthPlan != null" >
+        month_plan,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="manageOffice != null" >
+        #{manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesNum != null" >
+        #{salesNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalEmpNum != null" >
+        #{totalEmpNum,jdbcType=INTEGER},
+      </if>
+      <if test="teamNum != null" >
+        #{teamNum,jdbcType=INTEGER},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="monthPlan != null" >
+        #{monthPlan,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.FinancePersonalInfoExample" resultType="java.lang.Integer" >
+    select count(*) from f_finance_personal_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_finance_personal_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.manageOffice != null" >
+        manage_office = #{record.manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesNum != null" >
+        sales_num = #{record.salesNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalEmpNum != null" >
+        total_emp_num = #{record.totalEmpNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.teamNum != null" >
+        team_num = #{record.teamNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.monthPlan != null" >
+        month_plan = #{record.monthPlan,jdbcType=INTEGER},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_finance_personal_info
+    set id = #{record.id,jdbcType=BIGINT},
+      manage_office = #{record.manageOffice,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      sales_num = #{record.salesNum,jdbcType=INTEGER},
+      total_emp_num = #{record.totalEmpNum,jdbcType=INTEGER},
+      team_num = #{record.teamNum,jdbcType=INTEGER},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      month_plan = #{record.monthPlan,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.FinancePersonalInfo" >
+    update f_finance_personal_info
+    <set >
+      <if test="manageOffice != null" >
+        manage_office = #{manageOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesNum != null" >
+        sales_num = #{salesNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalEmpNum != null" >
+        total_emp_num = #{totalEmpNum,jdbcType=INTEGER},
+      </if>
+      <if test="teamNum != null" >
+        team_num = #{teamNum,jdbcType=INTEGER},
+      </if>
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="monthPlan != null" >
+        month_plan = #{monthPlan,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.FinancePersonalInfo" >
+    update f_finance_personal_info
+    set manage_office = #{manageOffice,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      sales_num = #{salesNum,jdbcType=INTEGER},
+      total_emp_num = #{totalEmpNum,jdbcType=INTEGER},
+      team_num = #{teamNum,jdbcType=INTEGER},
+      record_date = #{recordDate,jdbcType=DATE},
+      month_plan = #{monthPlan,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <!-- 批量插入融资人员信息表 数据 -->
+  <insert id="insertFinancePeopleInfo" parameterType="java.util.List">
+	insert into f_finance_personal_info (id, manage_office, org_name, 
+      sales_num, total_emp_num,team_num, record_date, 
+      month_plan, creator, create_time
+      ) values
+	<foreach collection="list" item="item" index="index" separator=",">
+	(#{item.id}, #{item.manageOffice}, #{item.orgName}, 
+      #{item.salesNum}, #{item.totalEmpNum},#{item.teamNum}, #{item.recordDate}, 
+      #{item.monthPlan}, #{item.creator}, #{item.createTime}
+     )
+	</foreach>
+</insert>
+  
+  
+<!-- 设置查询条件 -->
+  <sql id="dynamicPageWhere">
+  	<if test="orgName != null">
+  		and org_name LIKE CONCAT('%',#{orgName},'%') 
+ 	</if>
+ 	<if test="districtName != null">
+  		and manage_office LIKE CONCAT('%',#{districtName},'%') 
+ 	</if>
+	<if test="start_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') >= #{start_time}
+ 		]]>
+ 	</if>
+ 	<if test="end_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') <= #{end_time}
+ 	]]>
+ 	</if>
+  </sql>
+  
+  <!--  融资人员信息表 列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		id,
+		manage_office,
+		org_name,
+		sales_num,
+		team_num,
+		total_emp_num,
+		DATE_FORMAT(record_date, '%Y/%m/%d') record_date,
+		month_plan,
+		creator,
+		create_time
+	FROM
+		f_finance_personal_info
+	WHERE
+		1 = 1
+  <include refid="dynamicPageWhere"/>
+	order by record_date desc ,id desc
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--融资人员信息表 分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_finance_personal_info
+	WHERE 1=1
+	 <include refid="dynamicPageWhere"/>
+  </select>
+  
+  <!-- 查询月计划放款金额 -->
+  <select id="selectTotalMonthPlanByDate" parameterType="hashmap" resultType="int">
+  <![CDATA[
+  	SELECT
+		SUM(month_plan) monthPlan
+	FROM
+		f_finance_personal_info
+	WHERE
+		record_date  >= #{firstDay}
+	AND record_date <= #{lastDay}
+	 ]]>
+   </select>
+   
+  <select id="getMonthPlan" resultMap="BaseResultMap" parameterType="hashmap">
+  <![CDATA[
+	 SELECT
+		 month_plan
+	FROM
+		f_finance_personal_info
+	WHERE
+		record_date >= #{firstDay}
+	AND record_date <= #{lastDay}
+	AND manage_office = '整体'
+	order by create_time desc limit 	1
+	 ]]>
+  </select>
+  
+   <select id="getYearPlan" resultMap="BaseResultMap" parameterType="hashmap">
+	<![CDATA[
+	  SELECT
+			month_plan
+		FROM
+			f_finance_personal_info
+		WHERE
+			record_date >= #{firstDay}
+		AND record_date <= #{lastDay}
+		AND manage_office = '年计划'
+	 ]]>
+  </select>
+
+  <select id="findCountByDays" parameterType="hashmap" resultType="hashmap">
+	  SELECT
+		count(DISTINCT p.manage_office) districtCount ,
+		count(p.org_name) orgNameCount,
+		sum(p.team_num) teamCount ,
+		sum(p.sales_num) salesCount 
+	FROM
+		f_finance_personal_info p
+	WHERE
+		p.manage_office != '整体'
+	AND p.org_name != '合计'
+	AND p.manage_office != '年计划'
+	AND p.record_date = #{recordDate}
+</select>
+  
+  <!-- 月人均进件 -->
+  <select id="SelectAvgMonthPerEntry" resultType="map">
+	SELECT 
+		DATE_FORMAT(record_date, '%Y年%c月') yearDate,
+		DATE_FORMAT(record_date, '%c月') monthDate,
+		avgPerEntry FROM (
+		SELECT
+			m.record_date,
+			ROUND(m.apply_actual_quantity / p.sales_num / (
+				SELECT
+					TIMESTAMPDIFF(
+						DAY,
+						m.record_date,
+						(
+							DATE_add(
+								m.record_date,
+								INTERVAL 1 MONTH
+							)
+						)
+					)
+			) ,2)
+			avgPerEntry
+		FROM
+			`f_finance_personal_info` p
+		JOIN f_finance_month_performance m ON p.record_date = m.record_date
+		AND p.manage_office = '整体'
+		ORDER BY
+			p.record_date DESC
+	LIMIT 12) a ORDER BY record_date
+  </select>
+  <!-- 全员人均产能 -->
+  <select id="selectAllAvgPer" resultType="map">
+	SELECT 
+		DATE_FORMAT(record_date, '%Y年%c月') yearDate,
+		DATE_FORMAT(record_date, '%c月') monthDate,
+		allAvgPerCap
+	FROM(
+			SELECT
+				m.record_date,
+				ROUND(CASE WHEN(
+					m.month_performance * 10000 / p.total_emp_num 
+				) IS NULL THEN -1 ELSE(
+					m.month_performance * 10000 / p.total_emp_num 
+				) END,2)
+				 allAvgPerCap
+			FROM
+				`f_finance_personal_info` p
+			JOIN f_finance_month_performance m ON p.record_date = m.record_date
+			AND p.manage_office = '整体'
+			ORDER BY
+				m.record_date DESC
+			LIMIT 12) a 
+	ORDER BY record_date
+  </select>
+  <!-- 咨询师人均产能 -->
+  <select id="selectSalesAvgPer" resultType="map">
+ 	SELECT 
+	DATE_FORMAT(record_date, '%Y年%c月') yearDate,
+	DATE_FORMAT(record_date, '%c月') monthDate,
+	salesAvgPerCap FROM
+	(
+		SELECT
+			m.record_date,
+			ROUND(CASE WHEN(
+				m.month_performance * 10000 / p.sales_num
+			) IS NULL THEN -1 ELSE(
+				m.month_performance * 10000 / p.sales_num
+			) END,2)
+			 salesAvgPerCap
+		FROM
+			`f_finance_personal_info` p
+		JOIN f_finance_month_performance m ON p.record_date = m.record_date
+		AND p.manage_office = '整体'
+		ORDER BY
+			m.record_date DESC
+		LIMIT 12
+	)  a
+	ORDER BY record_date
+  </select>
+  
+  <select id="financePersonnelSum" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+	count(DISTINCT p.manage_office) districtCount,
+	count(p.org_name) orgNameCount,
+	sum(p.team_num) teamCount,
+	sum(p.sales_num) salesCount
+FROM
+	f_finance_personal_info p
+WHERE
+	p.manage_office != '整体'
+AND p.org_name != '合计'
+AND p.manage_office != '年计划'
+AND p.record_date = #{recordDate} 
+<!--  环比 -->
+UNION ALL
+	SELECT
+		count(DISTINCT p.manage_office) districtCount,
+		count(p.org_name) orgNameCount,
+		sum(p.team_num) teamCount,
+		sum(p.sales_num) salesCount
+	FROM
+		f_finance_personal_info p
+	WHERE
+		p.manage_office != '整体'
+	AND p.org_name != '合计'
+	AND p.manage_office != '年计划'
+	AND p.record_date = DATE_ADD(
+		#{recordDate},
+		INTERVAL - 1 MONTH
+	) 
+	<!--  同比 -->
+	UNION ALL
+		SELECT
+			count(DISTINCT p.manage_office) districtCount,
+			count(p.org_name) orgNameCount,
+			sum(p.team_num) teamCount,
+			sum(p.sales_num) salesCount
+		FROM
+			f_finance_personal_info p
+		WHERE
+			p.manage_office != '整体'
+		AND p.org_name != '合计'
+		AND p.manage_office != '年计划'
+		AND p.record_date = DATE_ADD(
+			#{recordDate},
+			INTERVAL - 1 YEAR
+		)
+  </select>
+  
+  <select id="findTheLatestOne" resultMap="BaseResultMap">
+  	select 
+  	 <include refid="Base_Column_List" />
+  	FROM
+		f_finance_personal_info
+	ORDER BY
+		record_date DESC
+	LIMIT 1
+  </select>
+  
+  <select id="getDiffOfCountAndManageOfficeOrgNumByDate" resultType="hashmap" parameterType="Date">
+  	SELECT diff countDiff,manage_office_num-sum_num manageOfficeDiff  
+  	FROM
+		(
+			SELECT COUNT(*) sum_num
+			FROM f_finance_personal_info
+			WHERE record_date=#{date,jdbcType=DATE}
+			AND org_name='合计'
+		) a 
+	JOIN 
+		( 
+			SELECT 
+				count(*) -COUNT(DISTINCT COALESCE(manage_office,'NULL'),COALESCE(org_name,'NULL')) diff,
+				COUNT(DISTINCT manage_office) manage_office_num  
+			FROM 
+				f_finance_personal_info
+			WHERE 
+				record_date=#{date,jdbcType=DATE}
+			AND manage_office!='年计划'
+		) b
+		 
+  </select>
+</mapper>

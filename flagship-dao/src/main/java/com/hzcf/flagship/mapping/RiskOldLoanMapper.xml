@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskOldLoanMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskOldLoan" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="apply_no" property="applyNo" jdbcType="VARCHAR" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="purpose" property="purpose" jdbcType="VARCHAR" />
+    <result column="initial_repayment_time" property="initialRepaymentTime" jdbcType="DATE" />
+    <result column="periods" property="periods" jdbcType="INTEGER" />
+    <result column="contract_amount" property="contractAmount" jdbcType="DECIMAL" />
+    <result column="loan_amount" property="loanAmount" jdbcType="DECIMAL" />
+    <result column="month_repayment" property="monthRepayment" jdbcType="DECIMAL" />
+    <result column="pay_date" property="payDate" jdbcType="DATE" />
+    <result column="old_org_name" property="oldOrgName" jdbcType="VARCHAR" />
+    <result column="counselor" property="counselor" jdbcType="VARCHAR" />
+    <result column="salesman" property="salesman" jdbcType="VARCHAR" />
+    <result column="contract_end_date" property="contractEndDate" jdbcType="DATE" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="new_org_name" property="newOrgName" jdbcType="VARCHAR" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, apply_no, client_name, contract_no, product_name, product_no, purpose, initial_repayment_time, 
+    periods, contract_amount, loan_amount, month_repayment, pay_date, old_org_name, counselor, 
+    salesman, contract_end_date, district, new_org_name, org_no, creator, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskOldLoanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_old_loan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_old_loan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_old_loan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskOldLoanExample" >
+    delete from f_risk_old_loan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskOldLoan" >
+    insert into f_risk_old_loan (id, apply_no, client_name, 
+      contract_no, product_name, product_no, 
+      purpose, initial_repayment_time, periods, 
+      contract_amount, loan_amount, month_repayment, 
+      pay_date, old_org_name, counselor, 
+      salesman, contract_end_date, district, 
+      new_org_name, org_no, creator, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{applyNo,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, 
+      #{contractNo,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productNo,jdbcType=VARCHAR}, 
+      #{purpose,jdbcType=VARCHAR}, #{initialRepaymentTime,jdbcType=DATE}, #{periods,jdbcType=INTEGER}, 
+      #{contractAmount,jdbcType=DECIMAL}, #{loanAmount,jdbcType=DECIMAL}, #{monthRepayment,jdbcType=DECIMAL}, 
+      #{payDate,jdbcType=DATE}, #{oldOrgName,jdbcType=VARCHAR}, #{counselor,jdbcType=VARCHAR}, 
+      #{salesman,jdbcType=VARCHAR}, #{contractEndDate,jdbcType=DATE}, #{district,jdbcType=VARCHAR}, 
+      #{newOrgName,jdbcType=VARCHAR}, #{orgNo,jdbcType=VARCHAR}, #{creator,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskOldLoan" >
+    insert into f_risk_old_loan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyNo != null" >
+        apply_no,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="contractNo != null" >
+        contract_no,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+      <if test="initialRepaymentTime != null" >
+        initial_repayment_time,
+      </if>
+      <if test="periods != null" >
+        periods,
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount,
+      </if>
+      <if test="loanAmount != null" >
+        loan_amount,
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment,
+      </if>
+      <if test="payDate != null" >
+        pay_date,
+      </if>
+      <if test="oldOrgName != null" >
+        old_org_name,
+      </if>
+      <if test="counselor != null" >
+        counselor,
+      </if>
+      <if test="salesman != null" >
+        salesman,
+      </if>
+      <if test="contractEndDate != null" >
+        contract_end_date,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="newOrgName != null" >
+        new_org_name,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="applyNo != null" >
+        #{applyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="initialRepaymentTime != null" >
+        #{initialRepaymentTime,jdbcType=DATE},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="contractAmount != null" >
+        #{contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanAmount != null" >
+        #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="monthRepayment != null" >
+        #{monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="payDate != null" >
+        #{payDate,jdbcType=DATE},
+      </if>
+      <if test="oldOrgName != null" >
+        #{oldOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="counselor != null" >
+        #{counselor,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="contractEndDate != null" >
+        #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="newOrgName != null" >
+        #{newOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskOldLoanExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_old_loan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_old_loan
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyNo != null" >
+        apply_no = #{record.applyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null" >
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractNo != null" >
+        contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purpose != null" >
+        purpose = #{record.purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initialRepaymentTime != null" >
+        initial_repayment_time = #{record.initialRepaymentTime,jdbcType=DATE},
+      </if>
+      <if test="record.periods != null" >
+        periods = #{record.periods,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractAmount != null" >
+        contract_amount = #{record.contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanAmount != null" >
+        loan_amount = #{record.loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthRepayment != null" >
+        month_repayment = #{record.monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payDate != null" >
+        pay_date = #{record.payDate,jdbcType=DATE},
+      </if>
+      <if test="record.oldOrgName != null" >
+        old_org_name = #{record.oldOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counselor != null" >
+        counselor = #{record.counselor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesman != null" >
+        salesman = #{record.salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractEndDate != null" >
+        contract_end_date = #{record.contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.district != null" >
+        district = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newOrgName != null" >
+        new_org_name = #{record.newOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_old_loan
+    set id = #{record.id,jdbcType=BIGINT},
+      apply_no = #{record.applyNo,jdbcType=VARCHAR},
+      client_name = #{record.clientName,jdbcType=VARCHAR},
+      contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      purpose = #{record.purpose,jdbcType=VARCHAR},
+      initial_repayment_time = #{record.initialRepaymentTime,jdbcType=DATE},
+      periods = #{record.periods,jdbcType=INTEGER},
+      contract_amount = #{record.contractAmount,jdbcType=DECIMAL},
+      loan_amount = #{record.loanAmount,jdbcType=DECIMAL},
+      month_repayment = #{record.monthRepayment,jdbcType=DECIMAL},
+      pay_date = #{record.payDate,jdbcType=DATE},
+      old_org_name = #{record.oldOrgName,jdbcType=VARCHAR},
+      counselor = #{record.counselor,jdbcType=VARCHAR},
+      salesman = #{record.salesman,jdbcType=VARCHAR},
+      contract_end_date = #{record.contractEndDate,jdbcType=DATE},
+      district = #{record.district,jdbcType=VARCHAR},
+      new_org_name = #{record.newOrgName,jdbcType=VARCHAR},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskOldLoan" >
+    update f_risk_old_loan
+    <set >
+      <if test="applyNo != null" >
+        apply_no = #{applyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="initialRepaymentTime != null" >
+        initial_repayment_time = #{initialRepaymentTime,jdbcType=DATE},
+      </if>
+      <if test="periods != null" >
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="contractAmount != null" >
+        contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanAmount != null" >
+        loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="payDate != null" >
+        pay_date = #{payDate,jdbcType=DATE},
+      </if>
+      <if test="oldOrgName != null" >
+        old_org_name = #{oldOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="counselor != null" >
+        counselor = #{counselor,jdbcType=VARCHAR},
+      </if>
+      <if test="salesman != null" >
+        salesman = #{salesman,jdbcType=VARCHAR},
+      </if>
+      <if test="contractEndDate != null" >
+        contract_end_date = #{contractEndDate,jdbcType=DATE},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="newOrgName != null" >
+        new_org_name = #{newOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskOldLoan" >
+    update f_risk_old_loan
+    set apply_no = #{applyNo,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      initial_repayment_time = #{initialRepaymentTime,jdbcType=DATE},
+      periods = #{periods,jdbcType=INTEGER},
+      contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+      pay_date = #{payDate,jdbcType=DATE},
+      old_org_name = #{oldOrgName,jdbcType=VARCHAR},
+      counselor = #{counselor,jdbcType=VARCHAR},
+      salesman = #{salesman,jdbcType=VARCHAR},
+      contract_end_date = #{contractEndDate,jdbcType=DATE},
+      district = #{district,jdbcType=VARCHAR},
+      new_org_name = #{newOrgName,jdbcType=VARCHAR},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 批量插入 老系统 还款表 数据 -->
+  <insert id="insertOldLoan" parameterType="java.util.List">
+     insert into f_risk_old_loan (apply_no, client_name, 
+      contract_no, product_name, product_no, 
+      purpose, initial_repayment_time, periods, 
+      contract_amount, loan_amount, month_repayment, 
+      pay_date, old_org_name, counselor, 
+      salesman, contract_end_date, district, 
+      new_org_name, org_no, creator, 
+      create_time)values
+  <foreach collection="list" item="item" index="index" separator="," >
+ 	 (
+ 	  #{item.applyNo,jdbcType=VARCHAR}, #{item.clientName,jdbcType=VARCHAR}, 
+      #{item.contractNo,jdbcType=VARCHAR}, #{item.productName,jdbcType=VARCHAR}, #{item.productNo,jdbcType=VARCHAR}, 
+      #{item.purpose,jdbcType=VARCHAR}, #{item.initialRepaymentTime,jdbcType=DATE}, #{item.periods,jdbcType=INTEGER}, 
+      #{item.contractAmount,jdbcType=DECIMAL}, #{item.loanAmount,jdbcType=DECIMAL}, #{item.monthRepayment,jdbcType=DECIMAL}, 
+      #{item.payDate,jdbcType=DATE}, #{item.oldOrgName,jdbcType=VARCHAR}, #{item.counselor,jdbcType=VARCHAR}, 
+      #{item.salesman,jdbcType=VARCHAR}, #{item.contractEndDate,jdbcType=DATE}, #{item.district,jdbcType=VARCHAR}, 
+      #{item.newOrgName,jdbcType=VARCHAR}, #{item.orgNo,jdbcType=VARCHAR}, #{item.creator,jdbcType=INTEGER}, 
+      #{item.createTime,jdbcType=TIMESTAMP}
+      )
+  </foreach>
+  </insert>
+  <!-- 设置查询条件 -->
+  <sql id="dynamicPageWhere">
+  	<if test="clientName != null">
+  	and client_name LIKE CONCAT('%',#{clientName},'%') 
+ 	</if>
+ 	<if test="oldOrgName != null">
+ 	  	and old_org_name LIKE CONCAT('%',#{oldOrgName},'%') 
+ 	</if>
+	<if test="start_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(create_time ,'%Y-%m-%d') >= #{start_time}
+ 		]]>
+ 	</if>
+ 	<if test="end_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(create_time ,'%Y-%m-%d') <= #{end_time}
+ 	]]>
+ 	</if>
+  </sql>
+  
+   <!-- 老系统放款表列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		apply_no,
+		client_name,
+		contract_no,
+		product_name,
+		product_no,
+		purpose,
+		DATE_FORMAT(initial_repayment_time,'%Y/%m/%d') initial_repayment_time,
+		periods,
+		contract_amount,
+		loan_amount,
+		month_repayment,
+		DATE_FORMAT(pay_date,'%Y/%m/%d') pay_date,
+		old_org_name,
+		counselor,
+		salesman,
+		DATE_FORMAT(contract_end_date,'%Y/%m/%d') contract_end_date,
+		district,
+		new_org_name,
+		org_no,
+		create_time
+	FROM
+	f_risk_old_loan
+ WHERE
+	1 = 1
+	<include refid="dynamicPageWhere"/>
+	order by create_time desc 
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--老系统放款表分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_risk_old_loan
+	WHERE 1=1
+	<include refid="dynamicPageWhere"/>
+  </select>
+  
+</mapper>

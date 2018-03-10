@@ -1,0 +1,1395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskLoanCm1Mapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskLoanCm1" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="batch" property="batch" jdbcType="VARCHAR" />
+    <result column="payed_num" property="payedNum" jdbcType="INTEGER" />
+    <result column="repayment_num" property="repaymentNum" jdbcType="INTEGER" />
+    <result column="cm1_value" property="cm1Value" jdbcType="DECIMAL" />
+    <result column="payed_money" property="payedMoney" jdbcType="DECIMAL" />
+    <result column="repayment_money" property="repaymentMoney" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, type, org_no, product_no, month, batch, payed_num, repayment_num, 
+    cm1_value, payed_money, repayment_money, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskLoanCm1Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_loan_cm1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_loan_cm1
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_loan_cm1
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskLoanCm1Example" >
+    delete from f_risk_loan_cm1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskLoanCm1" >
+    insert into f_risk_loan_cm1 (id, record_date, type, 
+      org_no, product_no, month, 
+      batch, payed_num, repayment_num, 
+      cm1_value, payed_money, repayment_money, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{type,jdbcType=CHAR}, 
+      #{orgNo,jdbcType=VARCHAR}, #{productNo,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, 
+      #{batch,jdbcType=VARCHAR}, #{payedNum,jdbcType=INTEGER}, #{repaymentNum,jdbcType=INTEGER}, 
+      #{cm1Value,jdbcType=DECIMAL}, #{payedMoney,jdbcType=DECIMAL}, #{repaymentMoney,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskLoanCm1" >
+    insert into f_risk_loan_cm1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="batch != null" >
+        batch,
+      </if>
+      <if test="payedNum != null" >
+        payed_num,
+      </if>
+      <if test="repaymentNum != null" >
+        repayment_num,
+      </if>
+      <if test="cm1Value != null" >
+        cm1_value,
+      </if>
+      <if test="payedMoney != null" >
+        payed_money,
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="payedNum != null" >
+        #{payedNum,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentNum != null" >
+        #{repaymentNum,jdbcType=INTEGER},
+      </if>
+      <if test="cm1Value != null" >
+        #{cm1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="payedMoney != null" >
+        #{payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymentMoney != null" >
+        #{repaymentMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskLoanCm1Example" resultType="java.lang.Integer" >
+    select count(*) from f_risk_loan_cm1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_loan_cm1
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batch != null" >
+        batch = #{record.batch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payedNum != null" >
+        payed_num = #{record.payedNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.repaymentNum != null" >
+        repayment_num = #{record.repaymentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.cm1Value != null" >
+        cm1_value = #{record.cm1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payedMoney != null" >
+        payed_money = #{record.payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.repaymentMoney != null" >
+        repayment_money = #{record.repaymentMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_loan_cm1
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      type = #{record.type,jdbcType=CHAR},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=VARCHAR},
+      batch = #{record.batch,jdbcType=VARCHAR},
+      payed_num = #{record.payedNum,jdbcType=INTEGER},
+      repayment_num = #{record.repaymentNum,jdbcType=INTEGER},
+      cm1_value = #{record.cm1Value,jdbcType=DECIMAL},
+      payed_money = #{record.payedMoney,jdbcType=DECIMAL},
+      repayment_money = #{record.repaymentMoney,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskLoanCm1" >
+    update f_risk_loan_cm1
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="payedNum != null" >
+        payed_num = #{payedNum,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentNum != null" >
+        repayment_num = #{repaymentNum,jdbcType=INTEGER},
+      </if>
+      <if test="cm1Value != null" >
+        cm1_value = #{cm1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="payedMoney != null" >
+        payed_money = #{payedMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money = #{repaymentMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskLoanCm1" >
+    update f_risk_loan_cm1
+    set record_date = #{recordDate,jdbcType=DATE},
+      type = #{type,jdbcType=CHAR},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      batch = #{batch,jdbcType=VARCHAR},
+      payed_num = #{payedNum,jdbcType=INTEGER},
+      repayment_num = #{repaymentNum,jdbcType=INTEGER},
+      cm1_value = #{cm1Value,jdbcType=DECIMAL},
+      payed_money = #{payedMoney,jdbcType=DECIMAL},
+      repayment_money = #{repaymentMoney,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 风控执委首页 -->
+  <select id="firstPageListWithKH" parameterType="hashmap" resultType="java.util.LinkedHashMap">
+  <![CDATA[
+  SELECT
+	t.org_no,t.orgName,
+	IFNULL(CONCAT(ROUND(t.actualValue*100,2),'%'),'--') actualValue,
+	IFNULL(CONCAT(ROUND(t.planValue*100,2),'%'),'--') planValue,
+	#IFNULL(CONCAT(ROUND(((t.planValue-t.actualValue)/(1-t.planValue))*100,2),'%'),'--') lastMonthValue
+	(CASE WHEN (t.planValue-t.actualValue)/(1-t.planValue)<=0
+	THEN "已达标"
+	ELSE	IFNULL(CONCAT(ROUND(((t.planValue-t.actualValue)/(1-t.planValue))*100,2),'%'),'--')
+	END) lastMonthValue
+	
+	FROM(
+		SELECT
+			c.org_no,
+			s.org_name 'orgName',
+			sum(c.payed_money) / sum(c.repayment_money) 'actualValue',
+			p.cm1_rate 'planValue'
+	        
+	FROM
+	     f_risk_loan_cm1 c 
+	LEFT JOIN (
+	SELECT * FROM (
+	  
+	SELECT * from  f_risk_org_struct where  create_time <= DATE_ADD( #{days}, INTERVAL 2 DAY) ORDER BY create_time DESC ) t GROUP BY org_no having rank = 3    
+	
+	) s    ON s.org_no = c.org_no
+	    	left join f_risk_plan p on c.org_no = p.org_no
+			and p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE( #{month},'%Y%c'),'%Y-%c-'),'01')
+			where c.record_date =  #{days}
+			and c.month =  #{month}
+			and c.type =#{type}
+			and rank = 3
+			group by org_no
+	)t  
+	group by t.org_no
+	  
+	  
+	UNION  all
+	
+		select '','总计',
+				IFNULL(CONCAT(ROUND(a.actualValue*100,2),'%'),'--') actualValue,
+				IFNULL(CONCAT(ROUND(a.planValue*100,2),'%'),'--') planValue,
+		#		IFNULL(CONCAT(ROUND(((a.planValue-a.actualValue)/(1-a.planValue))*100,2),'%'),'--') lastMonthValue
+		(CASE WHEN (a.planValue-a.actualValue)/(1-a.planValue)<=0
+			THEN "已达标"
+			ELSE	IFNULL(CONCAT(ROUND(((a.planValue-a.actualValue)/(1-a.planValue))*100,2),'%'),'--')
+			END) lastMonthValue
+		from (
+			SELECT
+				sum(cm1.payed_money)/sum(cm1.repayment_money) actualValue,
+				p.cm1_rate planValue
+			FROM f_risk_loan_cm1 cm1
+			LEFT JOIN(
+				SELECT * 
+				FROM(
+					SELECT org_no,org_name,rank 
+					FROM f_risk_org_struct  
+					WHERE create_time <= DATE_ADD( #{days},INTERVAL 2 DAY) 
+					ORDER BY create_time DESC )t 
+				GROUP BY org_no HAVING rank=3) org  ON cm1.org_no=org.org_no
+			LEFT JOIN f_risk_plan p  on p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE( #{month},'%Y%c'),'%Y-%c-'),'01')
+					AND p.org_no='fengkongglb'
+			where cm1.record_date= #{days} 
+			AND cm1.month =  #{month}
+			AND cm1.type=#{type}
+			and rank = 3
+			) a
+		]]>
+  </select>
+  
+
+  <select id="firstPageListWithSum" parameterType="hashmap" resultType="java.util.LinkedHashMap">
+   <![CDATA[
+SELECT
+		t.org_no,
+		t.orgName,t.actualValue,
+	  IFNULL(CONCAT(ROUND((sum(c2.payed_money) / sum(c2.repayment_money))*100,2),'%'),'--') 'lastMonthValue'
+FROM(
+	  	SELECT
+			c.org_no,
+			s.org_name 'orgName',
+	    IFNULL(CONCAT(ROUND((sum(c.payed_money) / sum(c.repayment_money))*100,2),'%'),'--') 'actualValue'
+	FROM
+   	 f_risk_loan_cm1 c 
+	LEFT JOIN (
+		SELECT * FROM ( 
+		SELECT * from f_risk_org_struct where  create_time <= DATE_ADD(#{days}, INTERVAL 2 DAY) ORDER BY create_time DESC ) t GROUP BY org_no having rank = 3    
+		) s     ON s.org_no = c.org_no
+  where c.record_date =#{days}
+  AND c.month = #{month}
+  AND c.type =#{type}
+  AND rank = 3
+group by org_no
+	) t left join f_risk_loan_cm1 c2 on t.org_no = c2.org_no 
+   AND c2.record_date = #{riskLastMonthDay}
+  AND c2.month =
+  		DATE_FORMAT(DATE_SUB(CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c'),'-01'),INTERVAL 1 MONTH),'%Y%m')
+  AND c2.type=#{type}
+GROUP BY t.org_no
+
+UNION  all
+	select '','总计',AA.*, CC.* from (
+	SELECT
+	IFNULL(CONCAT(ROUND((sum(payed_money)/sum(repayment_money))*100,2),'%'),'--') '实际值总计'
+	FROM f_risk_loan_cm1 cm1
+	left JOIN(
+	SELECT *FROM(
+	SELECT org_no,org_name,rank FROM f_risk_org_struct  WHERE create_time <= DATE_ADD(#{days},INTERVAL 2 DAY) ORDER BY create_time DESC)t GROUP BY org_no HAVING rank=3)
+	org  ON cm1.org_no=org.org_no
+	where cm1.record_date=#{days} 
+	AND cm1.month = #{month}
+	AND cm1.type=#{type}
+	AND rank = 3
+) as AA , 
+(
+SELECT
+ 	IFNULL(CONCAT(ROUND((sum(payed_money)/sum(repayment_money))*100,2),'%'),'--') '上月值总计'
+	FROM f_risk_loan_cm1 cm1
+	left JOIN(
+	SELECT *FROM(
+	SELECT org_no,org_name,rank FROM f_risk_org_struct  WHERE create_time <= DATE_ADD(#{days},INTERVAL 2 DAY) ORDER BY create_time DESC)t GROUP BY org_no HAVING rank=3)
+	org  ON cm1.org_no=org.org_no
+	where cm1.record_date=#{riskLastMonthDay}
+	AND cm1.month = 
+			DATE_FORMAT(DATE_SUB(CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c'),'-01'),INTERVAL 1 MONTH),'%Y%m')
+	AND cm1.type=#{type}
+	AND rank = 3
+	) as CC
+	]]>
+  </select>
+  <!-- 市场管理部cm1回款率详细数据 -->
+  <select id="selectCM1BackRate" parameterType="map" resultType="java.util.LinkedHashMap">
+  <![CDATA[  
+		SELECT 
+			t.orgNo,t.orgName `name`,
+			 IFNULL(ROUND(t.actualVal*100,2),-1) actualVal,
+    	     IFNULL(ROUND(t.planVal*100,2),-1) planVal,
+			 IFNULL(ROUND(((t.planVal-t.actualVal)/(1-t.planVal))*100,2),-1) deviationRate
+		FROM (
+				SELECT
+						c.org_no orgNo,
+						s.org_name orgName,
+						sum(c.payed_money) / sum(c.repayment_money) actualVal,
+						p.cm1_rate planVal	
+				FROM f_risk_loan_cm1 c 
+				LEFT JOIN (
+					SELECT * FROM ( 
+									SELECT * 
+									from  `f_risk_org_struct` 
+									WHERE  create_time <= DATE_ADD(#{recordDate}, INTERVAL 2 DAY) 
+									ORDER BY create_time DESC ) t 
+					GROUP BY org_no
+				) s  ON s.org_no = c.org_no
+				LEFT JOIN f_risk_plan p on c.org_no = p.org_no  AND p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+				WHERE c.record_date = #{recordDate}
+				AND c.month = #{month}
+				AND c.type =2
+				AND rank=3
+				GROUP BY orgNo) t
+	
+
+
+		UNION ALL
+		SELECT '' orgNo,'总计' `name`,
+				
+     		 IFNULL(ROUND(actualVal*100,2),-1) actualVal,
+      		IFNULL(ROUND(planVal*100,2),-1) planVal,
+			IFNULL(ROUND(((planVal-actualVal)/(1-planVal))*100,2),-1) deviationRate
+		FROM (				
+        SELECT
+					sum(cm1.payed_money) / sum(cm1.repayment_money) actualVal,
+					p.cm1_rate planVal
+        FROM f_risk_loan_cm1 cm1
+        LEFT JOIN(
+						SELECT * FROM(
+							SELECT org_no,org_name,rank 
+							FROM f_risk_org_struct  
+							WHERE create_time <= DATE_ADD(#{recordDate},INTERVAL 2 DAY) 
+							ORDER BY create_time DESC)t 
+				GROUP BY org_no 
+				) org  ON cm1.org_no=org.org_no
+	
+				LEFT JOIN f_risk_plan p ON p.org_no='fengkongglb' AND p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+				
+        WHERE cm1.record_date=#{recordDate}
+        AND cm1.month = #{month}
+        AND cm1.type=2
+        AND rank = 3
+			)a
+		  ]]>
+  </select>
+  
+<!--   各产品C-M1回款率 -->
+  <select id="getRoundData" resultType="java.util.LinkedHashMap" parameterType="hashmap">
+	select
+		DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'), '%c月')  'month',
+		IFNULL(ROUND((p.cm1_rate)*100,2),-1) 'planValue',
+		IFNULL(ROUND((sum(cm1.payed_money)/sum(cm1.repayment_money)*100),2),-1)  'cm1Sum'
+	from f_risk_loan_cm1 cm1 
+	left join f_risk_plan p on cm1.org_no = p.org_no
+		and p.record_date =  CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+		where cm1.record_date= #{days}
+		and cm1.type = '2'
+		and cm1.org_no =#{orgNo}
+		and cm1.month =#{month}
+  </select>
+   <select id="selectAreaCM1ByOrgNos" parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+	  <![CDATA[  
+	 	 CALL get_org_product_cm1(#{recordDate},#{orgNos},#{type},#{month})
+	  		  ]]>
+	</select>
+<!--   各批次C-M1回款率 -->	 
+	<select id="selectbusinessCM1BatchByOrgNos" parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+	  <![CDATA[  
+	 	 CALL get_org_batch_cm1(#{recordDate},#{orgNos},#{type},#{month})
+	  		  ]]>
+	</select>
+	 
+   <select id="getRiskAfterRoundData" parameterType="hashmap" resultType="hashmap">
+   select
+	A.*,B.*
+	from(
+		select
+ 			IFNULL(CONCAT(ROUND((SUM( cm1.payed_money) / sum( cm1.repayment_money))*100,2),'%'),'--') 'actualValue' 
+		from (
+				SELECT
+					org_no,
+  					rank
+				FROM
+				(
+					SELECT
+						org_no,
+     					 rank
+				FROM
+					f_risk_org_struct
+		WHERE
+			 <![CDATA[   create_time <= DATE_ADD(#{days}, INTERVAL 2 DAY) ]]>
+		ORDER BY create_time DESC
+		) t
+		GROUP BY org_no HAVING 	rank = 3
+  )o left join f_risk_loan_cm1  cm1 on  cm1.org_no = o.org_no
+		where cm1.type = 3 
+		and cm1.record_date = #{days}
+		and cm1.month = #{month}
+	) as A,
+	(
+		select 
+    	case when (
+		select IFNULL(CONCAT(ROUND(cm1_rate*100,2),'%'),'--') 
+		from f_risk_plan where record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01') and  org_no = 'fengkongdh' 
+		) IS NULL THEN -1 ELSE(
+		select
+		IFNULL(CONCAT(ROUND(cm1_rate*100,2),'%'),'--') 
+		from f_risk_plan where record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01') and  org_no = 'fengkongdh' 		
+		) end 'planValue'
+	) as B
+   </select>
+ 
+ <select id="getAfterCm1List"  parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+ 		<![CDATA[  
+	 	 CALL get_loan_after_batch_cm1(#{days},#{month})
+	 	 	  ]]>
+ </select>
+  <select id="findRoundData"  resultType="hashmap" parameterType="hashmap">
+  	 <![CDATA[  
+  	select
+		IFNULL(DATE_FORMAT(#{days},'%c月'),'--') 'month',
+		IFNULL(CONCAT(ROUND((p.cm1_rate)*100,2),'%'),'--') 'planValue',
+		IFNULL(CONCAT(ROUND((sum(cm1.payed_money)/sum(cm1.repayment_money))*100,2),'%'),'--')  'cm1Sum'
+	from f_risk_loan_cm1 cm1 
+	left join f_risk_plan p on cm1.org_no = p.org_no
+		and p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+		where cm1.record_date= #{days}
+		and cm1.type = '2'
+		and cm1.org_no = #{orgNo}
+		and cm1.month =#{month}
+		]]>
+  </select>
+  <select id="findRecordList" resultType="hashmap" parameterType="hashmap">
+   <![CDATA[  
+  	select 
+		DISTINCT  CONCAT(DATE_FORMAT(record_date,'%Y-%m'),'-26')  record_date 
+	from f_risk_loan_cm1  
+	where record_date < CONCAT(DATE_FORMAT(#{days},'%Y-%m'),'-1')
+	AND type =2 
+	AND org_no = #{orgNo}
+	order by record_date desc 
+	limit 5
+	]]>
+  </select>
+  <select id="findMonthData" resultType="hashmap" parameterType="hashmap">
+	 <![CDATA[  
+	select
+		IFNULL(DATE_FORMAT(#{record_date},'%c月'),'--') 'month',
+		IFNULL(CONCAT(ROUND((p.cm1_rate)*100,2),'%'),'--') 'planValue',
+		IFNULL(CONCAT(ROUND((sum(cm1.payed_money)/sum(cm1.repayment_money))*100,2),'%'),'--')  'cm1Sum'
+from f_risk_loan_cm1 cm1 
+left join f_risk_plan p on cm1.org_no = p.org_no
+	and p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE( DATE_FORMAT(#{record_date},'%Y%m'),'%Y%c'),'%Y-%c-'),'01')
+	where cm1.record_date= #{record_date}
+	and cm1.type = '2'
+	and cm1.org_no = #{orgNo}
+	and cm1.month = DATE_FORMAT(#{record_date},'%Y%m')
+	]]>
+  </select>
+  
+  <!-- 询CM1回款率表中某日各项记录数 -->
+  <select id="getDetailRecordsByDate" resultType="hashmap" parameterType="string">
+	SELECT * FROM(
+		SELECT COUNT(id) '事业部总计'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='1'
+		AND o.rank=3
+		AND record_date=#{date} ) sz
+	JOIN(
+		SELECT COUNT(id) '大区总计'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='1'
+		AND o.rank=4
+		AND record_date=#{date}) dz
+	JOIN (
+		SELECT COUNT(id) '营业部总计'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='1'
+		AND o.rank=5
+		AND record_date=#{date}) yz
+	JOIN (
+		SELECT COUNT(id) '事业部考核'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='2'
+		AND o.rank=3
+		AND record_date=#{date}) sk
+	JOIN (
+		SELECT COUNT(id) '大区考核'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='2'
+		AND o.rank=4
+		AND record_date=#{date}) dk
+	JOIN (
+		SELECT COUNT(id) '营业部考核'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='2'
+		AND o.rank=5
+		AND record_date=#{date}) yk
+	JOIN (
+		SELECT COUNT(id) '事业部贷后'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='3'
+		AND o.rank=3
+		AND record_date=#{date}) sd
+	JOIN (
+		SELECT COUNT(id) '大区贷后'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+	
+		WHERE type='3'
+		AND o.rank=4
+		AND record_date=#{date}) dd
+	JOIN (
+		SELECT COUNT(id) '营业部贷后'
+		FROM f_risk_loan_cm1 cm1
+		LEFT JOIN (
+			SELECT DISTINCT(org_no) org_no, rank
+			FROM f_risk_org_struct
+		) o ON o.org_no=cm1.org_no
+		WHERE type='3'
+		AND o.rank=5
+		AND record_date=#{date}) yd
+  </select>
+  
+  <!-- 查询重复记录数 -->
+  <select id="getRepetitionNumByDate" resultType="hashmap" parameterType="string">
+  	SELECT COUNT(id)-COUNT(DISTINCT type,org_no,product_no,`month`,batch) diff
+	FROM f_risk_loan_cm1
+	WHERE product_no !='991'
+	AND product_no!='11'
+	AND record_date=#{date}
+  </select>
+ <!--  查询大区的累计C-M1回款率 -->
+  <select id="selectAreaCM1BackRate" parameterType="map" resultType="java.util.LinkedHashMap">
+	  SELECT
+		IFNULL(ROUND(SUM(payed_money)/SUM(repayment_money)*100,2),-1) cm1Val,
+		IFNULL(ROUND((p.cm1_rate )*100,2),-1) planVal
+	FROM
+		 f_risk_loan_cm1 cm1
+	LEFT JOIN f_risk_plan p ON cm1.org_no=p.org_no
+	AND p.record_date= CONCAT(SUBSTR(STR_TO_DATE(#{month},'%Y%m'),1,8),'01')
+	WHERE cm1.record_date=#{recordDate} AND cm1.type='2' AND cm1.org_no=#{orgNo} 
+	AND cm1.month=#{month};
+  </select>
+<!--   查询大区下各产品累计C-M1回款率 -->
+  <select id="selectAreaCM1ByProductName" parameterType="map" resultType="java.util.LinkedHashMap">
+	SELECT
+		IFNULL(p.product_name,'--') productName,
+		IFNULL(ROUND(SUM(cm1.payed_money)/SUM(cm1.repayment_money)*100,2),-1) cm1Val
+	FROM
+		f_risk_loan_cm1 cm1
+	JOIN
+		f_risk_product p ON cm1.product_no=p.product_no
+	WHERE cm1.record_date=#{recordDate} AND cm1.type=2 
+	AND cm1.org_no=#{orgNo} AND cm1.month=#{month}
+	GROUP BY cm1.product_no;
+  </select>
+  <!-- 风控贷后整体下钻接口 分产品按批次查询 -->
+   <select id="selectAfterLoanAll" parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+	  <![CDATA[  
+	 	 CALL get_product_batch_cm1(#{recordDate},#{month},#{type})
+	  		  ]]>
+   </select>
+   
+   <select id="findCM1ByRecordDateAndOrgNo" parameterType="hashmap" resultType="DECIMAL">
+   	SELECT
+		sum(payed_money)/sum(repayment_money) 'actualValue'
+	FROM f_risk_loan_cm1 
+		where record_date=#{recordDate}
+		AND month =#{month}
+		AND org_no = #{orgNo}
+		AND type='2'
+   </select>
+   
+   <select id="findOrgNoRanking" parameterType="hashmap" resultType="java.lang.String" >
+  	select f_get_belong_bu_ranking(#{orgNo},#{recordDate},#{month}) from DUAL 
+   </select>
+<!--    查找月度C-M1 -->
+    <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+		SELECT
+			c.org_no orgNo,
+			DATE_FORMAT(c.record_date,'%Y-%m') recordDate,
+			s.org_name orgName,
+			IFNULL(CONCAT(ROUND((SUM(c.payed_money)/SUM(c.repayment_money))*100,2),'%'),'--') actualVal,
+			IFNULL(CONCAT(ROUND(p.cm1_rate*100,2),'%'),'--') planVal				
+		FROM
+		    f_risk_loan_cm1 c 
+		LEFT JOIN (
+			SELECT org_no,org_name,rank  from  f_asset_org_struct  
+		) s  ON s.org_no = c.org_no
+		LEFT JOIN f_risk_plan p on c.org_no = p.org_no 
+		AND p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE( #{month},'%Y%c'),'%Y-%c-'),'01')
+		WHERE c.record_date = #{day}
+		AND c.month = #{month}
+		AND c.type =2
+		AND rank=3
+		<include refid="dynamicPageWhere"/> 
+  </select>
+  
+   <sql id="dynamicPageWhere">
+  	<choose>
+	    <when test="orgNo != null">
+	       AND c.org_no=#{orgNo}
+	    </when>
+	    <otherwise>
+	      GROUP BY orgNo
+	    </otherwise>
+	</choose>
+  </sql>
+<!--   获取年份  -->
+   <select id="getYears" resultType="map" >
+	SELECT
+		DISTINCT DATE_FORMAT(record_date,'%Y') years
+	FROM
+		f_risk_loan_cm1
+	WHERE record_date LIKE '%-26%'
+	AND <![CDATA[record_date<DATE_FORMAT(NOW(),'%Y-%m-01')]]>
+	AND type=2 ORDER BY record_date DESC;
+  </select>
+  <!--   根据年获取月份  -->
+   <select id="getMonths" resultType="map" parameterType="String" >
+	SELECT
+		DISTINCT DATE_FORMAT(record_date,'%c月') months
+	FROM
+		f_risk_loan_cm1
+	WHERE record_date LIKE CONCAT(#{years},'%','26')
+	AND <![CDATA[record_date<DATE_FORMAT(NOW(),'%Y-%m-01')]]>
+	ORDER BY record_date DESC;
+  </select>
+  <!-- 获取事业部名称 -->
+   <select id="getBusinessName" resultType="map" >
+	SELECT
+		orga.org_no orgNo,orga.org_name orgName
+	FROM
+		f_risk_org_struct orgs
+	LEFT JOIN f_asset_org_struct orga ON orgs.org_no=orga.org_no
+	WHERE orga.rank=3 
+	GROUP BY orga.org_no
+  </select>
+  
+   <!-- 单日 CM1查看 -->
+   <select id="findEveryDayCm1View" parameterType="hashmap" resultType="hashmap">
+	 <![CDATA[  
+		SELECT
+		      DATE_FORMAT(c.record_date,'%Y-%m-%d')record_date,
+		 	 c.org_no,
+			 c.month,
+			 s.org_name 'orgName',
+        	 IFNULL(CONCAT(ROUND((p.cm1_rate )*100,2),'%'),'--') 'planValue'  ,
+    	    IFNULL(CONCAT(ROUND((sum(c.payed_money) / sum(c.repayment_money))*100,2),'%'),'--') 'actualValue'  
+		FROM
+			f_asset_org_struct s
+			left  join  f_risk_loan_cm1 c  on s.org_no = c.org_no
+			LEFT JOIN f_risk_plan p ON c.org_no = p.org_no
+			AND p.record_date = CONCAT(DATE_FORMAT(#{start_time},'%Y-%c-'),'01')
+			where c.type = '2'
+			AND c.month = DATE_FORMAT( #{start_time},'%Y%c')
+			AND c.record_date >= #{start_time}
+			AND c.record_date <= #{end_time}
+			AND s.rank = 3
+ 		GROUP BY c.record_date,c.org_no
+	]]>
+	<if test="orgNo != null">
+		having org_no = #{orgNo}
+	</if>
+	order by c.record_date desc
+    <if test="(startIndex != null and startIndex != '' ) and (pageSize != null and pageSize != '' )">
+        limit #{startIndex},#{pageSize}
+    </if>
+   </select>
+    <!-- 单日 CM1查看 总条数 -->
+   <select id="findEveryDayCm1ViewCount" resultType="hashmap" parameterType="hashmap">
+   	 <![CDATA[  
+	   	SELECT
+		     s.id
+		FROM
+		f_asset_org_struct s
+		left  join  f_risk_loan_cm1 c  on s.org_no = c.org_no
+		LEFT JOIN f_risk_plan p ON c.org_no = p.org_no
+		AND p.record_date = CONCAT(DATE_FORMAT(#{start_time},'%Y-%c-'),'01')
+		where c.type = '2'
+		AND c.month = DATE_FORMAT( #{start_time},'%Y%c')
+		AND c.record_date >= #{start_time}
+		AND c.record_date <= #{end_time}
+		AND s.rank = 3
+	 GROUP BY c.record_date,c.org_no
+ ]]>
+ 	<if test="orgNo != null">
+		having org_no = #{orgNo}
+	</if>
+   </select>
+   
+   <update id="updateEliteSum" parameterType="string">
+   	<![CDATA[  
+	   	UPDATE f_risk_loan_cm1 SET product_no='991'
+		WHERE record_date<=#{date} 
+		AND record_date>DATE_SUB(#{date},INTERVAL 5 DAY)
+		AND product_no IN (
+			SELECT DISTINCT product_no 
+			FROM f_risk_product
+			WHERE product_name LIKE '精英类%'
+			AND product_no !='991'
+		)
+	]]>
+   </update>
+   
+   <update id="updateProvidentFundSum" parameterType="string">
+   	<![CDATA[ 
+	   	UPDATE f_risk_loan_cm1 SET product_no='11'
+		WHERE record_date<=#{date} 
+		AND record_date>DATE_SUB(#{date},INTERVAL 5 DAY)
+		AND product_no IN (
+			SELECT DISTINCT product_no 
+			FROM f_risk_product
+			WHERE product_name LIKE '公积金类%'
+			AND product_no !='11'
+		)
+	]]>
+   </update>
+    <!--  查找风控分中心首页累计C-M1回款率 -->
+  <select id="selectbranchCenterTotalRate" parameterType="map" resultType="map">
+		SELECT
+		DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'), '%c月')  'month',
+			IFNULL(ROUND((SUM(cm1.payed_money)/SUM(cm1.repayment_money))*100,2),-1) cm1Val
+		FROM
+			f_risk_loan_cm1 cm1
+		JOIN (SELECT
+	    org_no,
+	    subcenter_no
+	FROM
+	    (SELECT
+	            org_no,
+	            subcenter_no
+	        FROM
+	            (
+	                SELECT
+	                    org_no,
+	                    subcenter_no,
+	                    create_time
+	                FROM
+	                   f_risk_org_data
+	                ORDER BY
+	                    create_time DESC
+	            ) a
+	        JOIN (
+	            SELECT
+	                create_time_first,
+	                org_no2
+	            FROM
+	                (
+	                    SELECT
+	                        create_time create_time_first,
+	                        org_no org_no2
+	                    FROM
+	                       f_risk_org_data
+	                    ORDER BY
+	                        create_time
+	                ) f
+	            GROUP BY
+	                org_no2
+	        ) c ON a.org_no = c.org_no2
+	        WHERE
+	           <![CDATA[    create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY) ]]>
+	        OR create_time = create_time_first
+	        ORDER BY
+	            create_time DESC
+	    ) m
+	GROUP BY  org_no) org
+		ON org.org_no=cm1.org_no AND org.subcenter_no=#{orgNo}
+		AND cm1.record_date=#{recordDate}
+		AND cm1.type=2 AND cm1.month=#{month};
+  </select>
+  <!--  查找风控分中心首页C-M1目标值-->
+  <select id="selectbranchCenterPlanRate" parameterType="map" resultType="map">
+	SELECT 
+		IFNULL(ROUND((cm1_rate )*100,2),-1) planVal 
+	FROM f_risk_plan 
+	WHERE org_no=#{orgNo}
+	AND record_date=CONCAT(SUBSTR(STR_TO_DATE(#{month},'%Y%m'),1,8),'01')
+  </select>
+<!--   查找分中心各产品累计C-M1回款率  -->
+   <select id="selectbranchCenterCM1ByProductName" parameterType="map" resultType="java.util.LinkedHashMap">
+	SELECT
+		IFNULL(p.product_name,'--') productName,
+		IFNULL(ROUND((SUM(cm1.payed_money)/SUM(repayment_money))*100,2),-1) cm1Val
+	FROM
+		f_risk_loan_cm1 cm1
+	JOIN  (SELECT
+	    org_no,
+	    subcenter_no
+	FROM
+	    (SELECT
+	            org_no,
+	            subcenter_no
+	        FROM
+	            (SELECT
+	                    org_no,
+	                    subcenter_no,
+	                    create_time
+	                FROM
+	                   f_risk_org_data
+	                ORDER BY
+	                    create_time DESC
+	            ) a
+	        JOIN (
+	            SELECT
+	                create_time_first,
+	                org_no2
+	            FROM
+	                (
+	                    SELECT
+	                        create_time create_time_first,
+	                        org_no org_no2
+	                    FROM
+	                       f_risk_org_data
+	                    ORDER BY
+	                        create_time
+	                ) f
+	            GROUP BY
+	                org_no2
+	        ) c ON a.org_no = c.org_no2
+	        WHERE
+	          <![CDATA[   create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)]]>
+	        OR create_time = create_time_first
+	        ORDER BY
+	            create_time DESC
+	    ) m
+	GROUP BY  org_no) org 
+	ON org.org_no=cm1.org_no AND org.subcenter_no=#{orgNo}
+	AND cm1.record_date=#{recordDate}
+	AND cm1.type=2 AND cm1.month=#{month}
+	LEFT JOIN (SELECT
+	    product_no,
+	    product_name
+	FROM
+	    (SELECT
+	            product_no,
+	            product_name
+	        FROM
+	            (SELECT
+	                    product_no,
+	                    product_name,
+	                    create_time
+	                FROM
+	                    f_risk_product
+	                ORDER BY
+	                    create_time DESC
+	            ) a
+	        JOIN (
+	            SELECT
+	                create_time_first,
+	                product_no2
+	            FROM
+	                (SELECT
+	                        create_time create_time_first,
+	                        product_no product_no2
+	                    FROM
+	                        f_risk_product
+	                    ORDER BY
+	                        create_time
+	                ) f
+	            GROUP BY
+	                product_no2
+	        ) c ON a.product_no = c.product_no2
+	        WHERE
+	            <![CDATA[create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)]]>
+	        OR create_time = create_time_first
+	        ORDER BY
+	            create_time DESC
+	    ) m
+	GROUP BY
+	    product_no) p ON cm1.product_no=p.product_no
+		GROUP BY cm1.product_no
+  </select>
+  
+  <select id="getZwBatchCm1"  parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+ 		<![CDATA[  
+	 	 CALL get_zw_batch_cm1(#{days},#{month})
+	 	 	  ]]>
+ </select>
+ 
+ <select id="getCm1DailyList" parameterType="map" resultType="java.util.LinkedHashMap">
+ 	<![CDATA[  
+ 		SELECT org_name ,
+ 			#{recordDate} date,
+ 			 CASE #{type}
+			WHEN '1' THEN '整体'
+			WHEN '2' THEN '6期前'
+			WHEN '3' THEN '6期后'
+			END AS type,
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '30', payed_money, 0))/MAX(IF(batch= '30', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_30',
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '10', payed_money, 0))/MAX(IF(batch= '10', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_10',
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '15', payed_money, 0))/MAX(IF(batch= '15', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_15',
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '20', payed_money, 0))/MAX(IF(batch= '20', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_20', 
+			IFNULL(CONCAT(CONVERT(SUM(payed_money)/SUM(repayment_money)*100,decimal(10,2)) ,'%'),'--') 'cm1_value' 
+		FROM (
+				SELECT cm1.org_no, o.org_name,
+					(CASE batch WHEN 's' THEN 's'
+					ELSE DATE_FORMAT(batch,'%e')
+					END) batch,
+					SUM(payed_money) payed_money,
+					SUM(repayment_money) repayment_money
+				FROM
+					f_risk_loan_cm1 cm1
+		
+				LEFT JOIN (
+					SELECT m.org_no,
+						(CASE 
+							WHEN s.org_short_name is null THEN m.org_name
+							WHEN s.org_short_name='' THEN m.org_name
+							ELSE s.org_short_name 
+							END) org_name,
+						m.rank,
+						m.parent_no,
+						m.create_time
+					FROM
+						(
+							SELECT org_no, org_name, rank, parent_no, create_time
+							FROM
+								(
+									SELECT org_no, org_name, rank, parent_no, create_time
+									FROM f_risk_org_struct
+									ORDER BY create_time DESC
+								) a
+							JOIN (
+								SELECT create_time_first, org_no2
+								FROM
+									(
+										SELECT create_time create_time_first, org_no org_no2
+										FROM f_risk_org_struct
+										ORDER BY create_time
+									) f
+								GROUP BY
+									org_no2
+							) c ON a.org_no = c.org_no2
+							WHERE
+								create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+							OR create_time = create_time_first
+							ORDER BY
+								create_time DESC
+						) m
+				LEFT JOIN 
+					(
+							SELECT org_no, org_short_name
+							FROM
+								(
+									SELECT org_no, org_short_name
+									FROM
+										(
+											SELECT org_no, org_short_name, create_time
+											FROM f_risk_org_data
+											ORDER BY create_time DESC
+										) a
+									JOIN (
+										SELECT create_time_first, org_no2
+										FROM
+											(
+												SELECT create_time create_time_first, org_no org_no2
+												FROM f_risk_org_data
+												ORDER BY create_time
+											) f
+										GROUP BY
+											org_no2
+									) c ON a.org_no = c.org_no2
+									WHERE
+										create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+									OR create_time = create_time_first
+									ORDER BY
+										create_time DESC
+								) m
+							GROUP BY
+								org_no
+				)	s ON m.org_no=s.org_no
+				GROUP BY
+					m.org_no
+				) o ON cm1.org_no = o.org_no
+				WHERE record_date=#{recordDate} 
+				AND cm1.org_no IN
+		]]>
+			<foreach collection="orgs" item="item" index="index" open="(" close=")" separator=",">
+		       #{item}
+		   </foreach>
+				AND cm1.month=#{month}
+				AND cm1.type=#{type} 
+				GROUP BY
+					cm1.org_no,
+					cm1.batch
+		) a GROUP BY org_no
+		
+		LIMIT #{startIndex},#{pageSize}
+ </select>
+ 
+ <!-- 查询cm1日总计数据条数 -->
+ <select id="getCm1Count" parameterType="map" resultType="long">
+ 	SELECT COUNT(DISTINCT org_no) totalRecords
+	FROM f_risk_loan_cm1
+	WHERE record_date=#{recordDate} 
+	AND type=#{type} 
+	AND month=#{month}
+	AND org_no IN
+	<foreach collection="orgs" item="item" index="index" open="(" close=")" separator=",">
+		       #{item}
+   </foreach>
+ </select>
+ 
+ <select id="getMonthList"  resultType="map">
+ 	SELECT DATE_FORMAT(record_date,'%Y-%m-%d') recordDate,DATE_FORMAT(record_date,'%Y年%m月') dateString
+	FROM(
+		SELECT DISTINCT(record_date) record_date
+		FROM f_risk_loan_cm1
+		WHERE DAY(record_date)=26
+		ORDER BY record_date
+	) a
+ </select>
+ 
+ <!-- 获得cm1月数据列表 -->
+ <select id="getCm1MonthList" parameterType="map" resultType="java.util.LinkedHashMap">
+ 	<![CDATA[  
+ 		SELECT org_name ,
+ 			DATE_FORMAT(#{recordDate},'%Y-%m') date,
+ 			 CASE #{type}
+			WHEN '1' THEN '整体'
+			WHEN '2' THEN '6期前'
+			WHEN '3' THEN '6期后'
+			END AS type,
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '30', payed_money, 0))/MAX(IF(batch= '30', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_30',
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '10', payed_money, 0))/MAX(IF(batch= '10', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_10',
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '15', payed_money, 0))/MAX(IF(batch= '15', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_15',
+			IFNULL(CONCAT(CONVERT(MAX(IF(batch= '20', payed_money, 0))/MAX(IF(batch= '20', repayment_money, 0))*100,decimal(10,2)) ,'%'),'--') AS 'batch_20', 
+			IFNULL(CONCAT(CONVERT(SUM(payed_money)/SUM(repayment_money)*100,decimal(10,2)) ,'%'),'--') 'cm1_value' 
+		FROM (
+				SELECT cm1.org_no, o.org_name,
+					(CASE batch WHEN 's' THEN 's'
+					ELSE DATE_FORMAT(batch,'%e')
+					END) batch,
+					SUM(payed_money) payed_money,
+					SUM(repayment_money) repayment_money
+				FROM
+					f_risk_loan_cm1 cm1
+		
+				LEFT JOIN (
+					SELECT m.org_no,
+						(CASE 
+							WHEN s.org_short_name is null THEN m.org_name
+							WHEN s.org_short_name='' THEN m.org_name
+							ELSE s.org_short_name 
+							END) org_name,
+						m.rank,
+						m.parent_no,
+						m.create_time
+					FROM
+						(
+							SELECT org_no, org_name, rank, parent_no, create_time
+							FROM
+								(
+									SELECT org_no, org_name, rank, parent_no, create_time
+									FROM f_risk_org_struct
+									ORDER BY create_time DESC
+								) a
+							JOIN (
+								SELECT create_time_first, org_no2
+								FROM
+									(
+										SELECT create_time create_time_first, org_no org_no2
+										FROM f_risk_org_struct
+										ORDER BY create_time
+									) f
+								GROUP BY
+									org_no2
+							) c ON a.org_no = c.org_no2
+							WHERE
+								create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+							OR create_time = create_time_first
+							ORDER BY
+								create_time DESC
+						) m
+				LEFT JOIN 
+					(
+							SELECT org_no, org_short_name
+							FROM
+								(
+									SELECT org_no, org_short_name
+									FROM
+										(
+											SELECT org_no, org_short_name, create_time
+											FROM f_risk_org_data
+											ORDER BY create_time DESC
+										) a
+									JOIN (
+										SELECT create_time_first, org_no2
+										FROM
+											(
+												SELECT create_time create_time_first, org_no org_no2
+												FROM f_risk_org_data
+												ORDER BY create_time
+											) f
+										GROUP BY
+											org_no2
+									) c ON a.org_no = c.org_no2
+									WHERE
+										create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+									OR create_time = create_time_first
+									ORDER BY
+										create_time DESC
+								) m
+							GROUP BY
+								org_no
+				)	s ON m.org_no=s.org_no
+				GROUP BY
+					m.org_no
+				) o ON cm1.org_no = o.org_no
+				WHERE record_date=#{recordDate} 
+				AND cm1.org_no IN
+		]]>
+			<foreach collection="orgs" item="item" index="index" open="(" close=")" separator=",">
+		       #{item}
+		   </foreach>
+				AND cm1.month=#{month}
+				AND cm1.type=#{type} 
+				GROUP BY
+					cm1.org_no,
+					cm1.batch
+		) a GROUP BY org_no
+		
+		LIMIT #{startIndex},#{pageSize}
+ </select>
+  
+  
+  <select id="getMonthChartListData" resultType="java.util.LinkedHashMap" parameterType="hashmap">
+ 	
+ 	
+ 	 SELECT
+		DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'), '%c月')  'month',
+		IFNULL(ROUND((sum(payed_money)/sum(repayment_money))*100,2),-1) realValue,
+	  	<if test="paramsCode == null">
+	  		IFNULL(ROUND(p.cm1_rate*100,2),-1) planValue
+	  	</if>
+	  	<if test="paramsCode != null">
+	  		IFNULL(ROUND(p.cm1_rate*100,2),-1) planValue,
+	  		IFNULL(ROUND(((p.cm1_rate-(sum(payed_money)/sum(repayment_money)))/(1-p.cm1_rate))*100,2),-9999) deviationRate
+	  	</if>
+	  	<![CDATA[  
+	FROM f_risk_loan_cm1 cm1
+	left JOIN(
+	SELECT *FROM(
+	SELECT org_no,org_name,rank FROM f_risk_org_struct  WHERE create_time <= DATE_ADD(#{days},INTERVAL 2 DAY) ORDER BY create_time DESC)t GROUP BY org_no HAVING rank=3)
+	org  ON cm1.org_no=org.org_no
+ 	LEFT JOIN f_risk_plan p  on p.record_date =  CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+					AND p.org_no=#{orgNo}
+	where cm1.record_date= #{days}
+	AND cm1.month = #{month}
+	AND cm1.type= #{type}
+	AND rank = 3
+	 ]]>
+  </select>
+  
+  <select id="getRiskMonthStartDate" resultType="String">
+	SELECT
+		DATE_FORMAT(record_date,'%Y年%c月') startMonth
+	FROM
+		f_risk_loan_cm1
+	WHERE
+		DATE_FORMAT(record_date, '%d') = '26'
+	ORDER BY record_date 
+	LIMIT 1;
+  </select>
+   <select id="getTableListCm1" parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+	  <![CDATA[
+	 	 CALL get_org_month_cm1(#{startDate},#{endDate},#{orgNos},#{type},#{dataType})
+	  		  ]]>
+	</select>
+	
+	  <select id="getSubcenterTableListCm1" parameterType="map" statementType="CALLABLE" resultType="java.util.LinkedHashMap">
+	  <![CDATA[
+	 	 CALL get_subcenter_month_cm1(#{startDate},#{endDate},#{dataType})
+	  		  ]]>
+	</select>
+	
+</mapper>

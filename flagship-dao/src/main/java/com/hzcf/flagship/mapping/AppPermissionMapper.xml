@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.AppPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.AppPermission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="no" property="no" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="operation" property="operation" jdbcType="VARCHAR" />
+    <result column="parent_no" property="parentNo" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="sorting" property="sorting" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, no, name, operation, parent_no, rank, sorting, status, creator_id, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.AppPermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_app_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_app_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from f_app_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.AppPermissionExample" >
+    delete from f_app_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.AppPermission" >
+    insert into f_app_permission (id, no, name, 
+      operation, parent_no, rank, 
+      sorting, status, creator_id, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{operation,jdbcType=VARCHAR}, #{parentNo,jdbcType=VARCHAR}, #{rank,jdbcType=INTEGER}, 
+      #{sorting,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{creatorId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.AppPermission" >
+    insert into f_app_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="operation != null" >
+        operation,
+      </if>
+      <if test="parentNo != null" >
+        parent_no,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="sorting != null" >
+        sorting,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="no != null" >
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="parentNo != null" >
+        #{parentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="sorting != null" >
+        #{sorting,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.AppPermissionExample" resultType="java.lang.Integer" >
+    select count(*) from f_app_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_app_permission
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operation != null" >
+        operation = #{record.operation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentNo != null" >
+        parent_no = #{record.parentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null" >
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.sorting != null" >
+        sorting = #{record.sorting,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_app_permission
+    set id = #{record.id,jdbcType=INTEGER},
+      no = #{record.no,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      operation = #{record.operation,jdbcType=VARCHAR},
+      parent_no = #{record.parentNo,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=INTEGER},
+      sorting = #{record.sorting,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=CHAR},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.AppPermission" >
+    update f_app_permission
+    <set >
+      <if test="no != null" >
+        no = #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        operation = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="parentNo != null" >
+        parent_no = #{parentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="sorting != null" >
+        sorting = #{sorting,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.AppPermission" >
+    update f_app_permission
+    set no = #{no,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      parent_no = #{parentNo,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=INTEGER},
+      sorting = #{sorting,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findAllRetMapNoPage" resultType="hashmap" parameterType="hashmap">
+	SELECT 
+	  id,
+	  name    
+	FROM
+  		f_app_permission 
+  	where status='1'
+  </select>
+  
+  <select id="selectAllPermissionById" resultMap="BaseResultMap" parameterType="int">
+	SELECT
+		CASE
+			WHEN (a.no='fengkongzw') THEN CONCAT('风控-1-',a.no,';',a.name)
+			WHEN (a.no='fengkongglb') THEN CONCAT('风控-2-',a.no,';',a.name) 
+			WHEN (a.no='fengkongdh') THEN CONCAT('风控-3-',a.no,';',a.name) 
+			WHEN (a.rank=3) THEN CONCAT('风控-4-',a.no,';',a.name)
+			WHEN (a.rank=4) THEN CONCAT('风控-5-',a.no,';',a.name)
+			WHEN (a.rank=6) THEN CONCAT('风控-6-',a.no,';',a.name)
+		ELSE a.name END name
+	FROM
+		f_app_permission a
+	JOIN 
+		f_app_user_permission_relation b 
+	ON 
+		a.id = b.permission_id
+	AND b.user_id = #{userId,jdbcType=INTEGER}
+	AND a.status=1
+	ORDER BY sorting
+  </select>
+  
+  
+  <select id="selectPermissionById" resultMap="BaseResultMap" parameterType="int">
+	SELECT
+		a.name
+	FROM
+		f_app_permission a
+	JOIN 
+		f_app_user_permission_relation b 
+	ON 
+		a.id = b.permission_id AND b.user_id = #{userId,jdbcType=INTEGER}
+	WHERE a.rank=1
+  </select>
+  
+  <select id="findPermissionByUserId" parameterType="string" resultMap="BaseResultMap">
+ 	SELECT
+		ap.name name
+	FROM
+		f_app_permission ap
+	JOIN f_app_user_permission_relation au ON ap.id = au.permission_id
+	WHERE
+		au.user_id = #{userId}
+ 	</select>
+ 	
+ 	<!-- 查询权限信息用于后台新增用户页面显示下拉列表 -->
+ 	<select id="findPermissionList" resultType="hashmap">
+ 	SELECT
+		*
+	FROM
+		(
+			SELECT
+				id,
+				no,
+				name,
+				operation,
+				parent_no,
+				rank,
+				status,
+				creator_id,
+				create_time
+			FROM
+				f_app_permission
+			where status = 1
+			ORDER BY
+				create_time DESC
+		) a
+	GROUP BY NO
+ 	</select>
+ 	
+ 	<select id="getSortingByRank" parameterType="int" resultType="int">
+	  	SELECT sorting
+		FROM f_app_permission
+		WHERE rank=#{rank}
+		ORDER BY sorting DESC
+		LIMIT 1
+  
+  	</select>
+</mapper>

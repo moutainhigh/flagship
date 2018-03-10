@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskOrgStructMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskOrgStruct" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="parent_no" property="parentNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, org_no, org_name, rank, parent_no, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskOrgStructExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_org_struct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_org_struct
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_org_struct
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskOrgStructExample" >
+    delete from f_risk_org_struct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskOrgStruct" >
+    insert into f_risk_org_struct (id, org_no, org_name, 
+      rank, parent_no, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{orgNo,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{rank,jdbcType=INTEGER}, #{parentNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskOrgStruct" >
+    insert into f_risk_org_struct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="parentNo != null" >
+        parent_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="parentNo != null" >
+        #{parentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskOrgStructExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_org_struct
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_org_struct
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null" >
+        rank = #{record.rank,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentNo != null" >
+        parent_no = #{record.parentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_org_struct
+    set id = #{record.id,jdbcType=BIGINT},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=INTEGER},
+      parent_no = #{record.parentNo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskOrgStruct" >
+    update f_risk_org_struct
+    <set >
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="parentNo != null" >
+        parent_no = #{parentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskOrgStruct" >
+    update f_risk_org_struct
+    set org_no = #{orgNo,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=INTEGER},
+      parent_no = #{parentNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findOrgList"  resultType="map" >
+		SELECT 
+			orgNo,orgName,parentNo,parentName
+		FROM( SELECT
+				f.org_no orgNo,
+				f.org_name orgName,
+				f.parent_no parentNo,
+				t.org_name parentName
+			FROM
+				( SELECT
+						*
+					FROM
+						( SELECT
+								*
+							FROM
+								`f_risk_org_struct`
+							ORDER BY
+								create_time DESC
+						) t
+					GROUP BY
+						org_no
+					HAVING
+						rank IS NOT NULL
+				) f
+			LEFT JOIN (SELECT
+						*
+						FROM
+						( SELECT
+								*
+							FROM
+								`f_risk_org_struct`
+							ORDER BY
+								create_time DESC
+						) t
+					GROUP BY
+						org_no
+					HAVING
+						rank IS NOT NULL) t ON f.parent_no = t.org_no
+		 ORDER BY f.rank) t
+	UNION ALL 
+		SELECT orgNo,orgName,parentNo,parentName
+		FROM(
+
+				SELECT
+					orgNo,orgName,parentNo,parentName,status
+				FROM(SELECT
+							subcenter_no orgNo,
+							create_time,
+							name orgName,
+							'fengkongglb' parentNo,
+							'市场风险管理部' parentName,
+							status
+						FROM
+							f_risk_subcenter
+					
+				ORDER BY create_time DESC) r
+				GROUP BY r.orgNo
+				HAVING status=1
+		) s
+ </select>
+
+  <select id="findOrgStructTree" resultType="hashmap">
+ 	 SELECT
+	*
+	FROM
+		(
+			SELECT
+				org_no,
+				org_name,
+				rank,
+				parent_no,
+				create_time
+			FROM
+				f_risk_org_struct
+			ORDER BY
+				create_time DESC
+		) a
+	GROUP BY
+	org_no
+  </select>
+  <select id="findChildListByOrgNo" parameterType="hashmap"  resultType="hashmap" >
+  	SELECT
+		*
+	FROM
+		(
+			SELECT
+			s2.org_no,
+			s2.org_name,
+			s1.org_name parent_name,
+			s2.rank,
+			s2.parent_no,
+			s2.create_time,
+			orgData.org_short_name,
+			orgData.principal_name,
+			orgData.principal_no,
+			ifnull(orgData.subcenter_no,'') as subcenter_no,
+			ifnull(orgData.name,'') as subcenter_name,
+			orgData.credit_manager_no  credit_manager_no,
+			orgData.credit_manager_name  credit_manager_name,
+			orgData.is_principal_detail  is_principal_detail,
+			orgData.is_credit_manager_detail  is_credit_manager_detail,
+			orgData.principal_send_aging  principal_send_aging,
+			orgData.manager_send_aging  manager_send_aging
+		FROM
+			f_risk_org_struct s1
+		JOIN f_risk_org_struct s2 ON s1.org_no = s2.parent_no
+		LEFT JOIN (
+			SELECT
+				`data`.org_short_name,
+				`data`.principal_name,
+				`data`.principal_no,
+				`data`.org_no,
+				`data`.subcenter_no,
+				 case when sub.short_name is null or sub.short_name=''  then sub.name
+                 else sub.short_name
+				end as name,
+				data.credit_manager_no,
+				data.credit_manager_name,
+				data.is_principal_detail,
+				data.is_credit_manager_detail,
+				`data`.principal_send_aging,
+				`data`.manager_send_aging
+			FROM (
+					SELECT * FROM (
+							SELECT
+								org_short_name,
+								principal_name,
+								principal_no,
+								org_no,
+								subcenter_no,
+								credit_manager_no,
+								credit_manager_name,
+								is_principal_detail,
+								is_credit_manager_detail,
+								principal_send_aging,
+								manager_send_aging
+							FROM f_risk_org_data
+							ORDER BY create_time DESC
+						) a
+					GROUP BY a.org_no
+				) DATA
+			LEFT JOIN (
+				SELECT * FROM (
+						SELECT
+							subcenter_no,
+							NAME,
+							STATUS,
+						    short_name
+						FROM f_risk_subcenter
+						ORDER BY create_time DESC
+					) rul
+				GROUP BY rul.subcenter_no
+				HAVING rul. STATUS = 1
+			) sub ON DATA .subcenter_no = sub.subcenter_no
+		) orgData ON s2.org_no = orgData.org_no
+		ORDER BY
+			s2.create_time DESC
+	) a
+GROUP BY
+	org_no
+HAVING
+ find_in_set(parent_no, get_childList_by_orgNo(#{org_no}))
+ and rank = 5
+ limit #{startIndex},#{pageSize}
+  </select>
+  
+  <select id="findDetailByOrgNo" parameterType="hashmap"  resultType="hashmap" >
+  	SELECT
+		*
+	FROM
+		(
+			SELECT
+				s2.org_no,
+				s2.org_name,
+				s1.org_name parent_name,
+				s2.rank,
+				s2.parent_no,
+				s2.create_time,
+				orgData.org_short_name,
+				orgData.principal_name,
+				orgData.principal_no,
+				ifnull(orgData.subcenter_no,'') as subcenter_no,
+				ifnull(orgData.name,'') as subcenter_name,
+				orgData.credit_manager_no credit_manager_no,
+				orgData.credit_manager_name  credit_manager_name,
+				orgData.is_principal_detail  is_principal_detail,
+				orgData.is_credit_manager_detail  is_credit_manager_detail,
+				orgData.principal_send_aging  principal_send_aging,
+				orgData.manager_send_aging  manager_send_aging
+			FROM
+				f_risk_org_struct s1
+			JOIN f_risk_org_struct s2 ON s1.org_no = s2.parent_no
+			LEFT JOIN (
+				SELECT
+				`data`.org_short_name,
+				`data`.principal_name,
+				`data`.principal_no,
+				`data`.org_no,
+				`data`.subcenter_no,
+				 case when sub.short_name is null or sub.short_name = ''   then sub.name
+				 else sub.short_name
+				 end as name,
+				 data.credit_manager_no,
+				 data.credit_manager_name,
+				 data.is_principal_detail,
+				data.is_credit_manager_detail,
+				`data`.principal_send_aging,
+				`data`.manager_send_aging
+				FROM (
+						SELECT * FROM (
+								SELECT
+									org_short_name,
+									principal_name,
+									principal_no,
+									org_no,
+									subcenter_no,
+									credit_manager_no,
+									credit_manager_name,
+									is_principal_detail,
+									is_credit_manager_detail,
+									principal_send_aging,
+									manager_send_aging
+								FROM f_risk_org_data
+								ORDER BY create_time DESC
+							) a
+						GROUP BY a.org_no
+					) DATA
+				LEFT JOIN (
+					SELECT * FROM (
+							SELECT
+								subcenter_no,
+								NAME,
+								STATUS,
+								short_name
+							FROM f_risk_subcenter
+							ORDER BY create_time DESC
+						) rul
+					GROUP BY rul.subcenter_no
+					HAVING rul. STATUS = 1
+				) sub ON DATA .subcenter_no = sub.subcenter_no
+			) orgData ON s2.org_no = orgData.org_no
+			ORDER BY
+				s2.create_time DESC
+		) a
+	GROUP BY
+		org_no
+HAVING
+ org_no =#{org_no}
+  </select>
+  <!-- 查询所有营业部 -->
+  <select id="findAllBusinessOrg" parameterType="hashMap" resultType="hashMap" >
+  	SELECT 
+	cm1.org_no,cm1.product_no,SUM(cm1.repayment_num) repayment_num,
+	SUM(cm1.payed_money)/SUM(cm1.repayment_money) cm1_value
+	FROM
+		f_risk_loan_cm1 cm1
+	JOIN (
+		SELECT DISTINCT
+			(org_no)
+		FROM
+			f_risk_org_struct
+		WHERE
+			rank = 5
+	) o ON cm1.org_no = o.org_no
+	WHERE record_date=#{date}
+	AND type='2'
+	AND month=#{month}
+	GROUP BY cm1.org_no,cm1.product_no
+  </select>
+  
+  <!-- 查询机构表中的新机构(权限表中没有) -->
+  <select id="findNewOrgs"  resultType="hashMap">
+  	SELECT
+		org_no,
+		org_name,
+		rank,
+		parent_no
+	FROM
+		(
+			SELECT
+				org_no,
+				org_name,
+				rank,
+				parent_no
+			FROM
+				f_risk_org_struct
+			WHERE
+				org_no NOT IN (
+					SELECT
+						NO
+					FROM
+						f_app_permission
+				)
+			ORDER BY
+				create_time DESC
+		) a
+	WHERE rank != 5
+	GROUP BY
+		org_no
+  
+  </select>
+  
+  <!-- 查询组织机构表中有改动的记录 -->
+  <select id="findUpdateOrgs" resultType="hashMap">
+  	SELECT
+		p.id,
+		o2.org_no,
+		o2.org_name,
+		o2.rank,
+		o2.parent_no
+	FROM
+		(
+			SELECT
+				o.org_no,
+				o.org_name,
+				o.rank,
+				o.parent_no
+			FROM
+				(
+					SELECT
+						org_no,
+						org_name,
+						rank,
+						parent_no
+					FROM
+						f_risk_org_struct
+					WHERE rank!=3
+					ORDER BY
+						create_time DESC
+				) o
+			GROUP BY
+				o.org_no
+		) o2
+	JOIN f_app_permission p ON o2.org_no = p.`no`
+	AND (
+		o2.org_name != p.`name`
+		OR o2.parent_no != p.parent_no
+		OR o2.rank != p.rank
+	)
+	GROUP BY
+		o2.org_no
+  
+  </select>
+  
+  <!-- 查询CM1表中有但机构表中没有的机构 -->
+  <select id="findCm1NotexistOrgs" resultType="hashMap">
+  	SELECT DISTINCT
+	(org_no)
+	FROM
+		f_risk_loan_cm1
+	WHERE
+		org_no NOT IN (
+			SELECT DISTINCT
+				(org_no)
+			FROM
+				f_risk_org_struct
+		)
+  </select>
+  
+  <!-- 查询M1逾期率表中有但机构表中没有的机构 -->
+  <select id="findM1OverdueNotexistOrgs" resultType="hashMap">
+  	SELECT DISTINCT
+		(org_no)
+	FROM
+		f_risk_loan_m1_overdue
+	WHERE
+		org_no NOT IN (
+			SELECT DISTINCT
+				(org_no)
+			FROM
+				f_risk_org_struct
+		)
+
+  </select>
+  
+  <!-- 查询下级的orgnos -->
+     <select id="selectNewOrgNos" parameterType="map" statementType="CALLABLE" resultType="String">
+	  <![CDATA[  
+	 	 CALL get_child_list(#{orgNo},#{rank})
+	  		  ]]>
+	</select>
+	
+	<!-- 根据等级查询机构编号 -->
+	<select id="selectOrgNoByRank" resultType="map" parameterType="map">
+		SELECT
+			DISTINCT org.orgNo,org.orgName
+		FROM
+			f_risk_loan_cm1 cm1
+		JOIN (SELECT 
+					org.orgNo,org.orgName
+				FROM(
+					SELECT 
+							org_no orgNo,org_name orgName
+						FROM
+							f_risk_org_struct
+						WHERE
+							rank =#{rank}
+				ORDER BY create_time DESC
+				) org
+				GROUP BY orgNo) org 
+		ON cm1.org_no=org.orgNo AND cm1.record_date=#{day} 
+		<if test="type != null">
+			AND type=#{type}
+		</if>
+		<if test="limit != null">
+			limit 1
+		</if>
+  </select>
+  
+  <!-- 根据机构名称精确查找机构编号 -->
+  <select id="getOrgNoByName" parameterType="map" resultType="String">
+  <![CDATA[  
+  	SELECT m.org_no,m.org_name,org_short_name
+	FROM
+		(
+			SELECT org_no, org_name, rank, parent_no, create_time
+			FROM
+				(
+					SELECT org_no, org_name, rank, parent_no, create_time
+					FROM f_risk_org_struct
+					ORDER BY create_time DESC
+				) a
+			JOIN (
+				SELECT create_time_first, org_no2
+				FROM
+					(
+						SELECT create_time create_time_first, org_no org_no2
+						FROM f_risk_org_struct
+						ORDER BY create_time
+					) f
+				GROUP BY
+					org_no2
+			) c ON a.org_no = c.org_no2
+			WHERE
+				create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+			OR create_time = create_time_first
+			ORDER BY
+				create_time DESC
+		) m
+	LEFT JOIN 
+		(
+				SELECT org_no, org_short_name
+				FROM
+					(
+						SELECT org_no, org_short_name
+						FROM
+							(
+								SELECT org_no, org_short_name, create_time
+								FROM f_risk_org_data
+								ORDER BY create_time DESC
+							) a
+						JOIN (
+							SELECT create_time_first, org_no2
+							FROM
+								(
+									SELECT create_time create_time_first, org_no org_no2
+									FROM f_risk_org_data
+									ORDER BY create_time
+								) f
+							GROUP BY
+								org_no2
+						) c ON a.org_no = c.org_no2
+						WHERE
+							create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+						OR create_time = create_time_first
+						ORDER BY
+							create_time DESC
+					) m
+				GROUP BY
+					org_no
+	)	s ON m.org_no=s.org_no
+	
+	GROUP BY
+		m.org_no
+	HAVING org_name=#{orgName} || org_short_name=#{orgName}
+	LIMIT 1
+	]]>
+  </select>
+  
+  <select id="getOrgDataByOrgNo" parameterType="String" resultType="map">
+  	SELECT *
+	FROM (
+		SELECT *
+		FROM f_risk_org_struct
+		ORDER BY create_time DESC
+	)o
+	GROUP BY org_no
+	HAVING org_no = #{orgNO}
+  </select>
+</mapper>

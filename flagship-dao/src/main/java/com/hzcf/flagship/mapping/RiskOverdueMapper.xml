@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskOverdueMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskOverdue" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="team_manager" property="teamManager" jdbcType="VARCHAR" />
+    <result column="client_manager" property="clientManager" jdbcType="VARCHAR" />
+    <result column="beginning_period_aging" property="beginningPeriodAging" jdbcType="INTEGER" />
+    <result column="first_repayment_date" property="firstRepaymentDate" jdbcType="DATE" />
+    <result column="beginning_period_final" property="beginningPeriodFinal" jdbcType="DECIMAL" />
+    <result column="now_principal_interest" property="nowPrincipalInterest" jdbcType="DECIMAL" />
+    <result column="batch" property="batch" jdbcType="VARCHAR" />
+    <result column="overdue_principal_interest" property="overduePrincipalInterest" jdbcType="DECIMAL" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="periods" property="periods" jdbcType="INTEGER" />
+    <result column="hand_amount" property="handAmount" jdbcType="DECIMAL" />
+    <result column="month_repayment" property="monthRepayment" jdbcType="DECIMAL" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="overdue_date" property="overdueDate" jdbcType="VARCHAR" />
+    <result column="now_aging" property="nowAging" jdbcType="INTEGER" />
+    <result column="is_report" property="isReport" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, type, contract_no, client_name, org_no, team_manager, client_manager, 
+    beginning_period_aging, first_repayment_date, beginning_period_final, now_principal_interest, 
+    batch, overdue_principal_interest, product_no, periods, hand_amount, month_repayment, 
+    mobile, overdue_date, now_aging, is_report, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskOverdueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_overdue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_overdue
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskOverdueExample" >
+    delete from f_risk_overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskOverdue" >
+    insert into f_risk_overdue (id, record_date, type, 
+      contract_no, client_name, org_no, 
+      team_manager, client_manager, beginning_period_aging, 
+      first_repayment_date, beginning_period_final, 
+      now_principal_interest, batch, overdue_principal_interest, 
+      product_no, periods, hand_amount, 
+      month_repayment, mobile, overdue_date, 
+      now_aging, is_report, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{type,jdbcType=CHAR}, 
+      #{contractNo,jdbcType=VARCHAR}, #{clientName,jdbcType=VARCHAR}, #{orgNo,jdbcType=VARCHAR}, 
+      #{teamManager,jdbcType=VARCHAR}, #{clientManager,jdbcType=VARCHAR}, #{beginningPeriodAging,jdbcType=INTEGER}, 
+      #{firstRepaymentDate,jdbcType=DATE}, #{beginningPeriodFinal,jdbcType=DECIMAL}, 
+      #{nowPrincipalInterest,jdbcType=DECIMAL}, #{batch,jdbcType=VARCHAR}, #{overduePrincipalInterest,jdbcType=DECIMAL}, 
+      #{productNo,jdbcType=VARCHAR}, #{periods,jdbcType=INTEGER}, #{handAmount,jdbcType=DECIMAL}, 
+      #{monthRepayment,jdbcType=DECIMAL}, #{mobile,jdbcType=VARCHAR}, #{overdueDate,jdbcType=VARCHAR}, 
+      #{nowAging,jdbcType=INTEGER}, #{isReport,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskOverdue" >
+    insert into f_risk_overdue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="contractNo != null" >
+        contract_no,
+      </if>
+      <if test="clientName != null" >
+        client_name,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="teamManager != null" >
+        team_manager,
+      </if>
+      <if test="clientManager != null" >
+        client_manager,
+      </if>
+      <if test="beginningPeriodAging != null" >
+        beginning_period_aging,
+      </if>
+      <if test="firstRepaymentDate != null" >
+        first_repayment_date,
+      </if>
+      <if test="beginningPeriodFinal != null" >
+        beginning_period_final,
+      </if>
+      <if test="nowPrincipalInterest != null" >
+        now_principal_interest,
+      </if>
+      <if test="batch != null" >
+        batch,
+      </if>
+      <if test="overduePrincipalInterest != null" >
+        overdue_principal_interest,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="periods != null" >
+        periods,
+      </if>
+      <if test="handAmount != null" >
+        hand_amount,
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="overdueDate != null" >
+        overdue_date,
+      </if>
+      <if test="nowAging != null" >
+        now_aging,
+      </if>
+      <if test="isReport != null" >
+        is_report,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="teamManager != null" >
+        #{teamManager,jdbcType=VARCHAR},
+      </if>
+      <if test="clientManager != null" >
+        #{clientManager,jdbcType=VARCHAR},
+      </if>
+      <if test="beginningPeriodAging != null" >
+        #{beginningPeriodAging,jdbcType=INTEGER},
+      </if>
+      <if test="firstRepaymentDate != null" >
+        #{firstRepaymentDate,jdbcType=DATE},
+      </if>
+      <if test="beginningPeriodFinal != null" >
+        #{beginningPeriodFinal,jdbcType=DECIMAL},
+      </if>
+      <if test="nowPrincipalInterest != null" >
+        #{nowPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="overduePrincipalInterest != null" >
+        #{overduePrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="handAmount != null" >
+        #{handAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="monthRepayment != null" >
+        #{monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueDate != null" >
+        #{overdueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAging != null" >
+        #{nowAging,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null" >
+        #{isReport,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskOverdueExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_overdue
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.contractNo != null" >
+        contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientName != null" >
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teamManager != null" >
+        team_manager = #{record.teamManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientManager != null" >
+        client_manager = #{record.clientManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginningPeriodAging != null" >
+        beginning_period_aging = #{record.beginningPeriodAging,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstRepaymentDate != null" >
+        first_repayment_date = #{record.firstRepaymentDate,jdbcType=DATE},
+      </if>
+      <if test="record.beginningPeriodFinal != null" >
+        beginning_period_final = #{record.beginningPeriodFinal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nowPrincipalInterest != null" >
+        now_principal_interest = #{record.nowPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.batch != null" >
+        batch = #{record.batch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overduePrincipalInterest != null" >
+        overdue_principal_interest = #{record.overduePrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.periods != null" >
+        periods = #{record.periods,jdbcType=INTEGER},
+      </if>
+      <if test="record.handAmount != null" >
+        hand_amount = #{record.handAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthRepayment != null" >
+        month_repayment = #{record.monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueDate != null" >
+        overdue_date = #{record.overdueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nowAging != null" >
+        now_aging = #{record.nowAging,jdbcType=INTEGER},
+      </if>
+      <if test="record.isReport != null" >
+        is_report = #{record.isReport,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_overdue
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      type = #{record.type,jdbcType=CHAR},
+      contract_no = #{record.contractNo,jdbcType=VARCHAR},
+      client_name = #{record.clientName,jdbcType=VARCHAR},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      team_manager = #{record.teamManager,jdbcType=VARCHAR},
+      client_manager = #{record.clientManager,jdbcType=VARCHAR},
+      beginning_period_aging = #{record.beginningPeriodAging,jdbcType=INTEGER},
+      first_repayment_date = #{record.firstRepaymentDate,jdbcType=DATE},
+      beginning_period_final = #{record.beginningPeriodFinal,jdbcType=DECIMAL},
+      now_principal_interest = #{record.nowPrincipalInterest,jdbcType=DECIMAL},
+      batch = #{record.batch,jdbcType=VARCHAR},
+      overdue_principal_interest = #{record.overduePrincipalInterest,jdbcType=DECIMAL},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      periods = #{record.periods,jdbcType=INTEGER},
+      hand_amount = #{record.handAmount,jdbcType=DECIMAL},
+      month_repayment = #{record.monthRepayment,jdbcType=DECIMAL},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      overdue_date = #{record.overdueDate,jdbcType=VARCHAR},
+      now_aging = #{record.nowAging,jdbcType=INTEGER},
+      is_report = #{record.isReport,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskOverdue" >
+    update f_risk_overdue
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientName != null" >
+        client_name = #{clientName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="teamManager != null" >
+        team_manager = #{teamManager,jdbcType=VARCHAR},
+      </if>
+      <if test="clientManager != null" >
+        client_manager = #{clientManager,jdbcType=VARCHAR},
+      </if>
+      <if test="beginningPeriodAging != null" >
+        beginning_period_aging = #{beginningPeriodAging,jdbcType=INTEGER},
+      </if>
+      <if test="firstRepaymentDate != null" >
+        first_repayment_date = #{firstRepaymentDate,jdbcType=DATE},
+      </if>
+      <if test="beginningPeriodFinal != null" >
+        beginning_period_final = #{beginningPeriodFinal,jdbcType=DECIMAL},
+      </if>
+      <if test="nowPrincipalInterest != null" >
+        now_principal_interest = #{nowPrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="overduePrincipalInterest != null" >
+        overdue_principal_interest = #{overduePrincipalInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="periods != null" >
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="handAmount != null" >
+        hand_amount = #{handAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueDate != null" >
+        overdue_date = #{overdueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nowAging != null" >
+        now_aging = #{nowAging,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null" >
+        is_report = #{isReport,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskOverdue" >
+    update f_risk_overdue
+    set record_date = #{recordDate,jdbcType=DATE},
+      type = #{type,jdbcType=CHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      client_name = #{clientName,jdbcType=VARCHAR},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      team_manager = #{teamManager,jdbcType=VARCHAR},
+      client_manager = #{clientManager,jdbcType=VARCHAR},
+      beginning_period_aging = #{beginningPeriodAging,jdbcType=INTEGER},
+      first_repayment_date = #{firstRepaymentDate,jdbcType=DATE},
+      beginning_period_final = #{beginningPeriodFinal,jdbcType=DECIMAL},
+      now_principal_interest = #{nowPrincipalInterest,jdbcType=DECIMAL},
+      batch = #{batch,jdbcType=VARCHAR},
+      overdue_principal_interest = #{overduePrincipalInterest,jdbcType=DECIMAL},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      periods = #{periods,jdbcType=INTEGER},
+      hand_amount = #{handAmount,jdbcType=DECIMAL},
+      month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      overdue_date = #{overdueDate,jdbcType=VARCHAR},
+      now_aging = #{nowAging,jdbcType=INTEGER},
+      is_report = #{isReport,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 查询营业部逾期明细 -->
+  <select id="findDetailDataByOrgNoAndDate" resultType="java.util.LinkedHashMap" parameterType="hashmap">
+	  <![CDATA[ 
+			select 
+				IFNULL(contract_no,'') '合同编号',
+				IFNULL(client_name,'') '客户姓名',
+				case when
+				data.org_short_name is null  or org_short_name = '' then data.org_name
+				else  data.org_short_name
+				end as '营业部',
+				IFNULL(team_manager,'') '团队经理',
+				IFNULL(client_manager,'') '客户经理',
+				IFNULL(batch,'') '批次',
+			    IFNULL(pro.product_name,'') '产品类型',
+                IFNULL(periods,'') '分期',
+				IFNULL(hand_amount,'') '到手额',
+				IFNULL(month_repayment,'') '月还款额',
+				IFNULL(first_repayment_date,'') '第一次还款日期',
+				IFNULL(overdue_date,'') '逾期所属日期',
+				IFNULL(overdue_principal_interest,'') '逾期本息',
+				IFNULL(beginning_period_final,'') '期初剩余本息',
+				IFNULL(now_principal_interest,'') '实时剩余本息',
+				IFNULL(beginning_period_aging,'') '期初账龄',
+				IFNULL(now_aging,'') '实时账龄',
+				 CASE WHEN mobile is null THEN '' else CONCAT(LEFT(mobile,3), '****' ,RIGHT(mobile,4)) end as  '手机号码',
+				 IFNULL(is_report,'') '是否报备'
+			from f_risk_overdue due
+	left join 
+		(
+				SELECT
+				struct.org_no,
+				struct.org_name,
+				orgData.org_short_name
+			from 
+			(
+			 	select 
+					org_no,
+					org_name
+			 from(
+				 select org_no,org_name from f_risk_org_struct where org_no =#{orgNo} order by create_time desc
+			 ) a GROUP BY org_no
+      
+) struct
+left join 
+			(
+				SELECT
+					org_no,
+				  	org_short_name
+				from (
+						select org_no,org_short_name from f_risk_org_data where org_no = #{orgNo} ORDER BY create_time desc
+				) b GROUP BY org_no 
+			) orgData on struct.org_no = orgData.org_no
+	) data on `data`.org_no = due.org_no
+	left join 
+		(
+			SELECT
+		  		product_no,
+				product_name
+    from(
+			  select product_no,product_name from  f_risk_product ORDER BY create_time desc
+		) p group by product_no
+	) pro on  pro.product_no =due.product_no
+	where  due.record_date =#{recordDate}
+	and due.org_no =#{orgNo}
+	and type ='2'
+	and beginning_period_aging   = 0
+]]>
+  </select>
+  
+  <!-- 查询营业部某款产品的逾期明细 -->
+  <select id="findOrgOverdueDetail" resultType="java.util.LinkedHashMap" parameterType="hashmap">
+  	<![CDATA[ 
+  	SELECT contract_no contractNo,IFNULL(client_manager,'--') clientManager,client_name clientName,p.product_name product
+	FROM f_risk_overdue o
+	JOIN (
+			SELECT product_no, product_name
+			FROM
+				(
+						SELECT product_no, product_name
+						FROM
+							(
+								SELECT product_no, product_name, create_time
+								FROM f_risk_product
+								ORDER BY create_time DESC
+							) a
+						JOIN (
+								SELECT create_time_first, product_no2
+								FROM
+									(
+										SELECT create_time create_time_first, product_no product_no2
+										FROM f_risk_product
+										ORDER BY create_time
+									) f
+								GROUP BY product_no2
+						) c ON a.product_no = c.product_no2
+						WHERE create_time < DATE_ADD(#{date}, INTERVAL 2 DAY)
+						OR create_time = create_time_first
+						ORDER BY create_time DESC
+				) m
+			GROUP BY product_no
+	) p ON o.product_no=p.product_no
+	WHERE record_date=#{date}
+	AND org_no=#{orgNo}
+	AND o.product_no=#{productNo}
+	AND type='2'
+	AND now_aging!=1
+	]]>
+  </select>
+  
+   <!-- 查询重复数据-->
+  <select id="getCountOfTotalAndDiff" resultType="hashMap" parameterType="string">
+  	SELECT COUNT(id) total,COUNT(id)-COUNT(DISTINCT contract_no) diff
+	FROM f_risk_overdue
+	WHERE record_date=#{date}
+  </select>
+  
+  <!-- 将所有精英类(1.69,1.89等)产品聚合成精英类(product_no=991) -->
+  <update id="updateEliteSum" parameterType="string">
+  <![CDATA[ 
+  	UPDATE f_risk_overdue SET product_no='991'
+	WHERE record_date<=#{date} 
+	AND record_date>DATE_SUB(#{date},INTERVAL 5 DAY)
+	AND product_no IN(
+		SELECT DISTINCT product_no 
+		FROM f_risk_product
+		WHERE product_name LIKE '精英类%'
+		AND product_no !='991'
+	)
+	]]>
+  </update>
+  
+  <!-- 将所有公积金类(2.39)产品聚合成公积金类(product_no=11) -->
+  <update id="updateProvidentFundSum" parameterType="string">
+   <![CDATA[
+  	UPDATE f_risk_overdue SET product_no='11'
+	WHERE record_date<=#{date} 
+	AND record_date>DATE_SUB(#{date},INTERVAL 5 DAY)
+	AND product_no IN (
+		SELECT DISTINCT product_no 
+		FROM f_risk_product
+		WHERE product_name LIKE '公积金类%'
+		AND product_no !='11'
+	)
+	]]>
+  </update>
+  
+ <select id="findOverdueOrgNOByRecordDate" parameterType="hashmap" resultType="hashmap">
+	 SELECT
+		DISTINCT org_no
+	FROM
+		f_risk_overdue
+	WHERE
+		record_date =#{recordDate}
+	<!-- AND 
+		beginning_period_aging=0 -->
+	AND 
+		type='2'
+ </select>
+ <!-- 营业部C-M1逾期合同明细 -->
+ <select id="orgCM1OverdueDetail" parameterType="hashmap" resultType="java.util.LinkedHashMap">
+ SELECT 
+	contract_no 合同编号,
+	IFNULL(client_manager,'--') 客户经理,
+	client_name 客户姓名,
+	IFNULL(DATE_FORMAT(batch,'%c-%e'),'--') 批次,
+	IFNULL(CONCAT(overdue_principal_interest,''),'--') 逾期本息,
+	IFNULL(CONCAT(month_repayment,''),'--') 月还款额,
+	IFNULL(CONCAT(beginning_period_final,''),'--') 期初剩余本息,
+	IFNULL(CONCAT(first_repayment_date,''),'--') 第一次还款日期
+FROM f_risk_overdue
+	WHERE record_date=#{record_date}
+	AND type='2'
+	AND org_no=#{org_no}
+	AND beginning_period_aging=0
+	AND product_no=#{productNo}
+ 
+ </select>
+ 
+ 
+ 
+ <!-- 获得某营业部产品C-M1逾期列表  -->
+  <select id="getOrgCM1OverdueList" parameterType="hashmap" resultType="hashmap">
+  	<![CDATA[  
+	 	SELECT p.*,
+			CONCAT(IFNULL(o.overdue_num,0),'')  overdue_num,
+			CONCAT(IFNULL(overdue_principal_interest,0),'') overdue_principal_interest,
+			CONCAT(IFNULL(beginning_period_final,0),'') beginning_period_final
+		
+		FROM (
+			SELECT product_no, product_name
+			FROM
+				(
+					SELECT product_no, product_name
+					FROM
+						(
+							SELECT product_no, product_name, create_time
+							FROM f_risk_product
+							ORDER BY create_time DESC
+						) a
+					JOIN (
+						SELECT create_time_first, product_no2
+						FROM
+							(
+								SELECT create_time create_time_first, product_no product_no2
+								FROM f_risk_product
+								ORDER BY create_time
+							) f
+						GROUP BY product_no2
+					) c ON a.product_no = c.product_no2
+					WHERE create_time < DATE_ADD(#{days}, INTERVAL 2 DAY)
+						OR create_time = create_time_first
+					ORDER BY create_time DESC
+				) m
+			WHERE product_no IN (
+				SELECT DISTINCT(product_no)
+				FROM f_risk_overdue
+				WHERE record_date=#{days}
+				AND type='2'
+			)
+			GROUP BY product_no
+		)p
+			LEFT JOIN (
+				SELECT product_no,
+					COUNT(id)  overdue_num,
+					SUM(overdue_principal_interest) overdue_principal_interest,
+					SUM(beginning_period_final) beginning_period_final
+				FROM f_risk_overdue
+				WHERE record_date=#{days}
+				AND type='2'
+				AND beginning_period_aging=0
+				AND org_no=#{orgNo}
+				GROUP BY product_no
+		) o ON o.product_no=p.product_no
+		
+		UNION ALL
+		
+		SELECT '','总计',
+			CONCAT(IFNULL(COUNT(id),0),'')  overdue_num,
+			CONCAT(IFNULL(SUM(overdue_principal_interest),0),'') overdue_principal_interest,
+			CONCAT(IFNULL(SUM(beginning_period_final),0),'') beginning_period_final
+		FROM f_risk_overdue
+		WHERE record_date=#{days}
+		AND type='2'
+		AND beginning_period_aging=0
+		AND org_no=#{orgNo}
+	  ]]>
+	  </select>
+</mapper>

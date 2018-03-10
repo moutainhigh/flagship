@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.AssetPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.AssetPlan" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+    <result column="business_name" property="businessName" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="plan_value" property="planValue" jdbcType="DECIMAL" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, org_no, org_name, business_no, business_name, year, month, plan_value, creator, 
+    create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.AssetPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_asset_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_asset_plan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_asset_plan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.AssetPlanExample" >
+    delete from f_asset_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.AssetPlan" >
+    insert into f_asset_plan (id, org_no, org_name, 
+      business_no, business_name, year, 
+      month, plan_value, creator, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{orgNo,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{businessNo,jdbcType=VARCHAR}, #{businessName,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{month,jdbcType=VARCHAR}, #{planValue,jdbcType=DECIMAL}, #{creator,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.AssetPlan" >
+    insert into f_asset_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="businessNo != null" >
+        business_no,
+      </if>
+      <if test="businessName != null" >
+        business_name,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="planValue != null" >
+        plan_value,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNo != null" >
+        #{businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null" >
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="planValue != null" >
+        #{planValue,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.AssetPlanExample" resultType="java.lang.Integer" >
+    select count(*) from f_asset_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_asset_plan
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessNo != null" >
+        business_no = #{record.businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessName != null" >
+        business_name = #{record.businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planValue != null" >
+        plan_value = #{record.planValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_asset_plan
+    set id = #{record.id,jdbcType=BIGINT},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      business_no = #{record.businessNo,jdbcType=VARCHAR},
+      business_name = #{record.businessName,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=VARCHAR},
+      plan_value = #{record.planValue,jdbcType=DECIMAL},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.AssetPlan" >
+    update f_asset_plan
+    <set >
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNo != null" >
+        business_no = #{businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null" >
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="planValue != null" >
+        plan_value = #{planValue,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.AssetPlan" >
+    update f_asset_plan
+    set org_no = #{orgNo,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      business_no = #{businessNo,jdbcType=VARCHAR},
+      business_name = #{businessName,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      plan_value = #{planValue,jdbcType=DECIMAL},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAssetPlanList" parameterType="map" resultType="java.util.LinkedHashMap">
+      SELECT
+          p.org_no,
+          p.org_name,
+          p.business_no,
+          p.business_name,
+          p.year,
+          MAX(CASE  p.month WHEN '年度总目标' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '年度总目标',
+          MAX(CASE  p.month WHEN '1月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '1月',
+          MAX(CASE  p.month WHEN '2月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '2月',
+          MAX(CASE  p.month WHEN '3月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '3月',
+          MAX(CASE  p.month WHEN '4月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '4月',
+          MAX(CASE  p.month WHEN '5月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '5月',
+          MAX(CASE  p.month WHEN '6月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '6月',
+          MAX(CASE  p.month WHEN '7月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '7月',
+          MAX(CASE  p.month WHEN '8月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '8月',
+          MAX(CASE  p.month WHEN '9月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '9月',
+          MAX(CASE  p.month WHEN '10月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '10月',
+          MAX(CASE  p.month WHEN '11月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '11月',
+          MAX(CASE  p.month WHEN '12月' THEN IFNULL(p.plan_value,'--') ELSE '--' END ) '12月'
+      from
+          f_asset_plan p
+      where 1=1
+      <if test="orgNo != null and orgNo != ''" >
+        and p.org_no = #{orgNo}
+      </if>
+      <if test="businessNo != null and businessNo != ''" >
+        and p.business_no = #{businessNo}
+      </if>
+      <if test="year != null and year != ''" >
+        and p.year = #{year}
+      </if>
+      group by p.org_no,p.business_no,p.year
+      LIMIT #{startIndex},#{pageSize}
+  </select>
+
+  <select id="selectAssetPlanListCount" resultType="java.lang.Long" parameterType="hashmap">
+      SELECT
+          count(1)
+      FROM
+          (
+              SELECT
+                  count(1)
+              FROM
+                  f_asset_plan p
+              WHERE
+                  1 = 1
+              <if test="orgNo != null and orgNo != ''" >
+                and p.org_no = #{orgNo}
+              </if>
+              <if test="businessNo != null and businessNo != ''" >
+                and p.business_no = #{businessNo}
+              </if>
+              <if test="year != null and year != ''" >
+                and p.year = #{year}
+              </if>
+              group by p.org_no,p.business_no,p.year
+          ) a
+  </select>
+
+  <select id="selectUsefulYear" resultType="map" >
+    SELECT DISTINCT year,year yearDesc FROM `f_asset_plan`
+</select>
+
+  <!--  批量导入业绩目标数据 -->
+    <insert id="insertAssetPlanBatch" parameterType="java.util.List">
+      insert into f_asset_plan (
+      org_no,
+      org_name,
+      business_no,
+      business_name,
+      year,
+      month,
+      plan_value,
+      creator,
+      create_time
+      )
+      values
+      <foreach collection="list" item="item" index="index" separator=",">
+        (
+        #{item.orgNo,jdbcType=VARCHAR},
+        #{item.orgName,jdbcType=VARCHAR},
+        #{item.businessNo,jdbcType=VARCHAR},
+        #{item.businessName,jdbcType=VARCHAR},
+        #{item.year,jdbcType=VARCHAR},
+        #{item.month,jdbcType=VARCHAR},
+        #{item.planValue,jdbcType=DECIMAL},
+        #{item.creator,jdbcType=INTEGER},
+        #{item.createTime,jdbcType=TIMESTAMP}
+        )
+      </foreach>
+    </insert>
+
+    <!-- 注意：如果deleteList为null，会报错 -->
+    <delete id="deleteAssetPlanBatch" parameterType="java.util.List">
+        DELETE FROM f_asset_plan
+        WHERE
+            1 = 1
+        AND org_no IN (<foreach collection="list" item="item" separator=",">#{item.orgNo,jdbcType=VARCHAR}</foreach>)
+        AND business_no IN (<foreach collection="list" item="item" separator=",">#{item.businessNo,jdbcType=VARCHAR}</foreach>)
+        AND YEAR IN (<foreach collection="list" item="item" separator=",">#{item.year,jdbcType=VARCHAR}</foreach>)
+    </delete>
+</mapper>

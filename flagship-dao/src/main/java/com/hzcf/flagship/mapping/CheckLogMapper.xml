@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.CheckLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.CheckLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hzcf.flagship.model.CheckLog" extends="BaseResultMap" >
+    <result column="result_detail" property="resultDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, record_date, type, sort, name, result, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    result_detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ssm_check_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ssm_check_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.CheckLog" >
+    insert into ssm_check_log (id, record_date, type, 
+      sort, name, result, 
+      create_time, result_detail)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{type,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{resultDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.CheckLog" >
+    insert into ssm_check_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="resultDetail != null" >
+        result_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resultDetail != null" >
+        #{resultDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.CheckLog" >
+    update ssm_check_log
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resultDetail != null" >
+        result_detail = #{resultDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hzcf.flagship.model.CheckLog" >
+    update ssm_check_log
+    set record_date = #{recordDate,jdbcType=DATE},
+      type = #{type,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      result_detail = #{resultDetail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.CheckLog" >
+    update ssm_check_log
+    set record_date = #{recordDate,jdbcType=DATE},
+      type = #{type,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getSort" resultMap="ResultMapWithBLOBs">
+  	SELECT
+		<include refid="Base_Column_List" />
+	FROM
+		ssm_check_log
+	WHERE
+		record_date = DATE_FORMAT(now(), '%Y-%m-%d')
+		order by create_time desc 
+	limit 1;
+  </select>
+
+  <select id="findLogList" resultType="hashmap">
+  	SELECT
+		record_date,
+		type,
+		name,
+		result,
+		result_detail,
+		DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s') create_time
+	FROM
+		ssm_check_log
+	WHERE
+		record_date = DATE_FORMAT(now(), '%Y-%m-%d')
+	and sort = (
+			SELECT
+				sort
+			FROM
+				ssm_check_log
+			WHERE
+				record_date = DATE_FORMAT(now(), '%Y-%m-%d')
+			ORDER BY
+				sort DESC
+			LIMIT 1
+			)
+</select>
+  
+   <sql id="dynamicPageWhere">
+ 	<if test="type != null">
+  		and type = #{type}
+ 	</if>
+ 	<if test="times != null">
+  		and sort = #{times}
+ 	</if>
+ 	<if test="result != null">
+  		and result = #{result}
+ 	</if> 
+ 	<if test='dateFlag=="1"'>  
+ 		and record_date = #{date}
+ 	</if>
+ 	<if test='dateFlag=="2"'>  
+ 		and record_date BETWEEN #{beginDate} AND #{endDate}
+ 	</if>
+  </sql>
+  
+   <sql id="dynamicPageOrder">
+  	<choose>
+	    <when test="sort != null">
+	       record_date DESC, ${sort}
+	    </when>
+	    <otherwise>
+	       record_date DESC, sort DESC
+	    </otherwise>
+	</choose>
+  </sql>
+  <!-- 查询列表 -->
+   <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+	  	SELECT
+			DATE_FORMAT(record_date,'%Y-%m-%d') date,
+			type,
+			IFNULL(sort,1) sort,
+			name,
+			result,
+			result_detail detail
+		FROM
+			ssm_check_log
+		WHERE
+			1=1
+	<include refid="dynamicPageWhere"/> 
+	ORDER BY
+		<include refid="dynamicPageOrder"/> 
+	<if test="limit != null"> 
+ 		limit #{startIndex},#{pageSize}
+ 	</if>
+  </select>
+  <!-- 查询总计 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(u.id) FROM
+	  ssm_check_log u  
+	WHERE 1=1
+	<include refid="dynamicPageWhere"/>
+  </select>
+  <!-- 查询接口类型 -->
+  <select id="findAllType" resultType="map" >
+	SELECT 
+		DISTINCT(type)
+	FROM
+		ssm_check_log
+  </select>
+  <!-- 查询结果类型 -->
+  <select id="findAllResult" resultType="map" >
+	SELECT 
+		DISTINCT(result)
+	FROM
+		ssm_check_log
+  </select>
+  <!-- 查询结果次数 -->
+  <select id="findAllSort" resultType="map" parameterType="hashmap">
+	SELECT 
+		DISTINCT(IFNULL(sort,1)) times
+	FROM
+		ssm_check_log
+		WHERE
+			1=1
+	<include refid="dynamicPageWhere"/> 
+  </select>
+</mapper>

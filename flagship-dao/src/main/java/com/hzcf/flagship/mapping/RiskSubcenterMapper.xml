@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskSubcenterMapper">
+    <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskSubcenter">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="subcenter_no" property="subcenterNo" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
+        <result column="manager_name" property="managerName" jdbcType="VARCHAR"/>
+        <result column="manager_no" property="managerNo" jdbcType="VARCHAR"/>
+        <result column="credit_manager_name" property="creditManagerName" jdbcType="VARCHAR"/>
+        <result column="credit_manager_no" property="creditManagerNo" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="creator" property="creator" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+        id, subcenter_no, name, short_name, manager_name, manager_no, credit_manager_name,
+        credit_manager_no, status, creator, create_time
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskSubcenterExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from f_risk_subcenter
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from f_risk_subcenter
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        update f_risk_subcenter set status = '0'
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskSubcenterExample">
+        delete from f_risk_subcenter
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.hzcf.flagship.model.RiskSubcenter">
+        insert into f_risk_subcenter (id, subcenter_no, name,
+          short_name, manager_name, manager_no,
+          credit_manager_name, credit_manager_no, status,
+          creator, create_time)
+        values (#{id,jdbcType=BIGINT}, #{subcenterNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+          #{shortName,jdbcType=VARCHAR}, #{managerName,jdbcType=VARCHAR}, #{managerNo,jdbcType=VARCHAR},
+          #{creditManagerName,jdbcType=VARCHAR}, #{creditManagerNo,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+          #{creator,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskSubcenter">
+        insert into f_risk_subcenter
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="subcenterNo != null">
+                subcenter_no,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="shortName != null">
+                short_name,
+            </if>
+            <if test="managerName != null">
+                manager_name,
+            </if>
+            <if test="managerNo != null">
+                manager_no,
+            </if>
+            <if test="creditManagerName != null">
+                credit_manager_name,
+            </if>
+            <if test="creditManagerNo != null">
+                credit_manager_no,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="subcenterNo != null">
+                #{subcenterNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerName != null">
+                #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerNo != null">
+                #{managerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="creditManagerName != null">
+                #{creditManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="creditManagerNo != null">
+                #{creditManagerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskSubcenterExample"
+            resultType="java.lang.Integer">
+        select count(*) from f_risk_subcenter
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update f_risk_subcenter
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.subcenterNo != null">
+                subcenter_no = #{record.subcenterNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shortName != null">
+                short_name = #{record.shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.managerName != null">
+                manager_name = #{record.managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.managerNo != null">
+                manager_no = #{record.managerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creditManagerName != null">
+                credit_manager_name = #{record.creditManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creditManagerNo != null">
+                credit_manager_no = #{record.creditManagerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=CHAR},
+            </if>
+            <if test="record.creator != null">
+                creator = #{record.creator,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map">
+        update f_risk_subcenter
+        set id = #{record.id,jdbcType=BIGINT},
+        subcenter_no = #{record.subcenterNo,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
+        short_name = #{record.shortName,jdbcType=VARCHAR},
+        manager_name = #{record.managerName,jdbcType=VARCHAR},
+        manager_no = #{record.managerNo,jdbcType=VARCHAR},
+        credit_manager_name = #{record.creditManagerName,jdbcType=VARCHAR},
+        credit_manager_no = #{record.creditManagerNo,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=CHAR},
+        creator = #{record.creator,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskSubcenter">
+        update f_risk_subcenter
+        <set>
+            <if test="subcenterNo != null">
+                subcenter_no = #{subcenterNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                short_name = #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerName != null">
+                manager_name = #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerNo != null">
+                manager_no = #{managerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="creditManagerName != null">
+                credit_manager_name = #{creditManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="creditManagerNo != null">
+                credit_manager_no = #{creditManagerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskSubcenter">
+        update f_risk_subcenter
+        set subcenter_no = #{subcenterNo,jdbcType=VARCHAR},
+          name = #{name,jdbcType=VARCHAR},
+          short_name = #{shortName,jdbcType=VARCHAR},
+          manager_name = #{managerName,jdbcType=VARCHAR},
+          manager_no = #{managerNo,jdbcType=VARCHAR},
+          credit_manager_name = #{creditManagerName,jdbcType=VARCHAR},
+          credit_manager_no = #{creditManagerNo,jdbcType=VARCHAR},
+          status = #{status,jdbcType=CHAR},
+          creator = #{creator,jdbcType=INTEGER},
+          create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="subcenterList" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+            rul.id,
+            rul.subcenter_no,
+            rul.name,
+            rul.short_name,
+            rul.manager_name,
+            rul.status
+        FROM
+            (
+                SELECT
+                    id,
+                    subcenter_no,
+                    name,
+                    short_name,
+                    manager_name,
+                    `status`
+                FROM
+                    f_risk_subcenter
+                ORDER BY
+                    create_time DESC
+            ) rul
+        GROUP BY
+            rul.subcenter_no
+        HAVING
+            rul.status = '1'
+        ORDER BY
+            rul.id
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="subcenterListCount" parameterType="map" resultType="java.lang.Long">
+        SELECT
+            rul.`status`
+        FROM
+            (
+                SELECT
+                    subcenter_no,
+                    `status`
+                FROM
+                    f_risk_subcenter
+                ORDER BY
+                    create_time DESC
+            ) rul
+        GROUP BY
+            rul.subcenter_no
+        HAVING
+            rul.`status` = '1'
+    </select>
+    
+   <!-- 查询分中心表中的新分中心(权限表中没有) -->
+  <select id="findNewSubcente"  resultType="hashMap">
+  	SELECT subcenter_no,`name`,`status`
+	FROM (
+		SELECT subcenter_no,`name`,`status`
+		FROM f_risk_subcenter
+		WHERE subcenter_no NOT IN(
+			SELECT
+				`no`
+			FROM
+				f_app_permission
+				)
+		
+		ORDER BY create_time DESC
+	) s
+
+	GROUP BY subcenter_no
+	HAVING `status`!='0'
+  </select>
+  
+  <!-- 查询分中心表中的修改记录(与权限表中的名称不一致) -->
+  <select id="findUpdateSubcente"  resultType="hashMap">
+  	SELECT p.id,s2.name,s2.status
+	FROM (
+			SELECT subcenter_no,name,status FROM(
+					SELECT subcenter_no,name,status
+					FROM f_risk_subcenter
+					ORDER BY create_time DESC
+					) s
+			GROUP BY subcenter_no
+	
+	) s2 JOIN f_app_permission p ON p.`no`=s2.subcenter_no 
+			AND (p.`name`!=s2.name OR s2.`status`='0')
+
+  </select>
+  
+    <!-- 查询最新的分中心数据 -->
+    <select id="selectForDistinct" resultMap="BaseResultMap">
+    	select *
+		from (
+			SELECT 
+			subcenter_no,
+			name,
+			create_time,
+			status
+			from f_risk_subcenter
+			order by create_time desc
+		) rul 
+		group by rul.subcenter_no
+		 having rul.status = 1
+		order by rul.name
+    </select>
+    <!-- 查询分中心cm1List -->
+    <select id="findSubcenterCm1List" parameterType="hashmap" resultType="hashmap">
+     <![CDATA[
+    
+	SELECT
+		cm.subcenter_no orgNo,
+		cm.`name` name,
+		IFNULL(ROUND(cm.actualVal*100,2),-1) actualVal,
+		IFNULL(ROUND(p.cm1_rate*100,2),-1) planVal,
+		IFNULL(ROUND(((p.cm1_rate - cm.actualVal)/(1-p.cm1_rate))*100,2),-1) deviationRate
+	FROM (
+		SELECT 
+		sc.`name`,
+		sc.subcenter_no,
+		SUM(cm1.payed_money)/SUM(cm1.repayment_money) actualVal
+	FROM f_risk_loan_cm1 cm1
+			JOIN (
+
+		SELECT
+				org_no,
+				subcenter_no,
+				org_short_name,
+				create_time
+		FROM
+				(
+						SELECT
+								 org_no,
+					org_short_name,
+					subcenter_no,
+					create_time
+						FROM
+								(
+										SELECT
+												 org_no,
+							org_short_name,
+												create_time,
+							subcenter_no
+										FROM
+												f_risk_org_data
+										ORDER BY
+												create_time DESC
+								) a
+						JOIN (
+								SELECT
+										create_time_first,
+									 org_no2
+								FROM
+										(
+												SELECT
+														create_time create_time_first,
+														org_no org_no2
+												FROM
+														f_risk_org_data
+												ORDER BY
+														create_time
+										) f
+								GROUP BY
+										org_no2
+						) c ON a.org_no = c.org_no2
+						WHERE
+								create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+						OR create_time = create_time_first
+						ORDER BY
+								create_time DESC
+				) m
+		GROUP BY
+			 org_no
+) s ON cm1.org_no=s.org_no
+			JOIN (
+					select
+					s.subcenter_no,
+					s.name,
+					s.manager_name,
+					s.status
+					from(
+						SELECT
+						subcenter_no,
+						name,
+						manager_name,
+						status
+				FROM
+					(
+					SELECT
+						subcenter_no,
+						name,
+							manager_name,
+							status
+					FROM
+						(
+							SELECT
+								subcenter_no,
+								IFNULL(short_name,name) name,
+								create_time,
+										manager_name,
+										status
+							FROM
+								f_risk_subcenter
+									
+							ORDER BY
+								create_time DESC
+						) a
+					JOIN (
+						SELECT
+							create_time_first,
+							subcenter_no2
+						FROM
+							(
+								SELECT
+									create_time create_time_first,
+									subcenter_no subcenter_no2
+								FROM
+									f_risk_subcenter
+								ORDER BY
+									create_time
+							) f
+						GROUP BY
+							subcenter_no2
+					) c ON a.subcenter_no = c.subcenter_no2
+					WHERE
+						create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+					OR create_time = create_time_first
+					ORDER BY
+						create_time DESC
+				 ) m
+				)s
+			group by s.subcenter_no
+			 having s.status  = 1
+
+) sc ON s.subcenter_no=sc.subcenter_no 
+	WHERE
+	cm1.record_date=#{recordDate}
+	AND cm1.`month`=#{month}
+	AND cm1.type='2'
+	GROUP BY sc.subcenter_no) cm
+LEFT JOIN f_risk_plan p  on cm.subcenter_no = p.org_no 
+AND p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+    
+    ]]>
+    </select>
+    <!-- 查询分中心cm1Sum -->
+    <select id="findSubcenterCm1ListSum" parameterType="hashmap" resultType="hashmap">
+     <![CDATA[ 
+     SELECT
+		 IFNULL(sum(c.payed_money) / sum(c.repayment_money),-1)  'actualValueSum'
+	FROM(
+	    select
+	    s.subcenter_no,
+	    s.name,
+	    s.manager_name,
+	    s.status
+	    from(
+	    SELECT
+		subcenter_no,
+		name,
+		manager_name,
+		status
+	FROM
+		(
+			SELECT
+				subcenter_no,
+				name,
+	   		manager_name,
+	   		status
+			FROM
+				(
+					SELECT
+						subcenter_no,
+						name,
+						create_time,
+	        	 manager_name,
+	        	 status
+					FROM
+						f_risk_subcenter
+						
+					ORDER BY
+						create_time DESC
+				) a
+			JOIN (
+				SELECT
+					create_time_first,
+					subcenter_no2
+				FROM
+					(
+						SELECT
+							create_time create_time_first,
+							subcenter_no subcenter_no2
+						FROM
+							f_risk_subcenter
+						ORDER BY
+							create_time
+					) f
+				GROUP BY
+					subcenter_no2
+			) c ON a.subcenter_no = c.subcenter_no2
+			WHERE
+				create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+			OR create_time = create_time_first
+			ORDER BY
+				create_time DESC
+		) m
+	    )s
+	group by s.subcenter_no
+	having s.status  = 1
+	) s2
+	left join (
+
+SELECT
+    	org_no,
+		subcenter_no,
+    	org_short_name,
+		create_time
+FROM
+    (
+        SELECT
+             org_no,
+						org_short_name,
+						subcenter_no,
+					create_time
+        FROM
+            (
+                SELECT
+                     org_no,
+					org_short_name,
+                    create_time,
+				   subcenter_no
+                FROM
+                    f_risk_org_data
+                ORDER BY
+                    create_time DESC
+            ) a
+        JOIN (
+            SELECT
+                create_time_first,
+               org_no2
+            FROM
+                (
+                    SELECT
+                        create_time create_time_first,
+                        org_no org_no2
+                    FROM
+                        f_risk_org_data
+                    ORDER BY
+                        create_time
+                ) f
+            GROUP BY
+                org_no2
+        ) c ON a.org_no = c.org_no2
+        WHERE
+            create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+        OR create_time = create_time_first
+        ORDER BY
+            create_time DESC
+    ) m
+GROUP BY
+   org_no
+) d on  s2.subcenter_no = d.subcenter_no
+	left join f_risk_loan_cm1 c on d.org_no = c.org_no
+	where c.month =#{month}
+	And c.record_date = #{recordDate}
+	AND c.type = '2'
+	]]>
+    </select>
+    
+    <select id="findSubcenterCm1Plan" parameterType="hashmap" resultType="hashmap">
+		 <![CDATA[ 
+		select 
+		 IFNULL(p.cm1_rate,-1) 'plan'
+	   from f_risk_plan p 
+		where p.record_date = CONCAT(DATE_FORMAT(STR_TO_DATE(#{month},'%Y%c'),'%Y-%c-'),'01')
+		and p.org_no = 'fengkongglb'
+		]]>
+    </select>
+</mapper>

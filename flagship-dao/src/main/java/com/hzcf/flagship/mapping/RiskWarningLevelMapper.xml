@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskWarningLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskWarningLevel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="org_no" property="orgNo" jdbcType="VARCHAR" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="warning_level" property="warningLevel" jdbcType="VARCHAR" />
+    <result column="cm1_value" property="cm1Value" jdbcType="DECIMAL" />
+    <result column="m1_value" property="m1Value" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, org_no, product_no, type, warning_level, cm1_value, m1_value, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskWarningLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_warning_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_warning_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_warning_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskWarningLevelExample" >
+    delete from f_risk_warning_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskWarningLevel" >
+    insert into f_risk_warning_level (id, record_date, org_no, 
+      product_no, type, warning_level, 
+      cm1_value, m1_value, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{orgNo,jdbcType=VARCHAR}, 
+      #{productNo,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{warningLevel,jdbcType=VARCHAR}, 
+      #{cm1Value,jdbcType=DECIMAL}, #{m1Value,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskWarningLevel" >
+    insert into f_risk_warning_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="warningLevel != null" >
+        warning_level,
+      </if>
+      <if test="cm1Value != null" >
+        cm1_value,
+      </if>
+      <if test="m1Value != null" >
+        m1_value,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="warningLevel != null" >
+        #{warningLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="cm1Value != null" >
+        #{cm1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="m1Value != null" >
+        #{m1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskWarningLevelExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_warning_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_warning_level
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.orgNo != null" >
+        org_no = #{record.orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.warningLevel != null" >
+        warning_level = #{record.warningLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cm1Value != null" >
+        cm1_value = #{record.cm1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="record.m1Value != null" >
+        m1_value = #{record.m1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_warning_level
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      org_no = #{record.orgNo,jdbcType=VARCHAR},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=CHAR},
+      warning_level = #{record.warningLevel,jdbcType=VARCHAR},
+      cm1_value = #{record.cm1Value,jdbcType=DECIMAL},
+      m1_value = #{record.m1Value,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskWarningLevel" >
+    update f_risk_warning_level
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="warningLevel != null" >
+        warning_level = #{warningLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="cm1Value != null" >
+        cm1_value = #{cm1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="m1Value != null" >
+        m1_value = #{m1Value,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskWarningLevel" >
+    update f_risk_warning_level
+    set record_date = #{recordDate,jdbcType=DATE},
+      org_no = #{orgNo,jdbcType=VARCHAR},
+      product_no = #{productNo,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      warning_level = #{warningLevel,jdbcType=VARCHAR},
+      cm1_value = #{cm1Value,jdbcType=DECIMAL},
+      m1_value = #{m1Value,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+<!--   预警营业部数量 -->
+  <select id="selectWarningLeve" parameterType="map" resultType="java.util.LinkedHashMap" >
+	 <![CDATA[  	
+		SELECT 
+				productNo,productName,
+				CONCAT(oneWarning,'') oneWarning,
+				CONCAT(twoWarning,'') twoWarning,
+				CONCAT(threeWarning,'') threeWarning
+		FROM (
+				SELECT      
+						product_no productNo,
+						product_name productName,
+						MAX(CASE a.warning_level WHEN '一级预警' THEN a.num ELSE 0 END ) oneWarning,
+						MAX(CASE a.warning_level WHEN '二级预警' THEN a.num ELSE 0 END ) twoWarning,
+						MAX(CASE a.warning_level WHEN '三级预警' THEN a.num ELSE 0 END ) threeWarning
+				FROM(
+						SELECT b.product_no,b.product_name,num,warning_level FROM(
+			
+							SELECT m.product_no,m.product_name,COUNT(*) num,w.warning_level
+							FROM f_risk_warning_level w
+							JOIN (
+									SELECT product_no,product_name
+									FROM (
+										SELECT * 
+										FROM f_risk_product
+										ORDER BY create_time DESC
+									)c
+									GROUP BY product_no
+					
+							) m ON w.product_no=m.product_no
+							AND org_no in(
+									SELECT DISTINCT(org_no) FROM f_risk_org_struct WHERE parent_no IN (
+												SELECT DISTINCT(org_no) FROM f_risk_org_struct WHERE parent_no=#{orgNo})
+									
+							)
+							WHERE record_date=#{recordDate}
+							GROUP BY w.product_no,w.warning_level
+						) a
+				RIGHT JOIN (
+						SELECT DISTINCT(cm.product_no),p.product_name
+						FROM f_risk_loan_cm1 cm
+						LEFT JOIN(
+											SELECT
+									product_no,
+									product_name
+								FROM
+									(
+										SELECT
+											product_no,
+											product_name
+										FROM
+											(
+												SELECT
+													product_no,
+													product_name,
+													create_time
+												FROM
+													f_risk_product
+												ORDER BY
+													create_time DESC
+											) a
+										JOIN (
+											SELECT
+												create_time_first,
+												product_no2
+											FROM
+												(
+													SELECT
+														create_time create_time_first,
+														product_no product_no2
+													FROM
+														f_risk_product
+													ORDER BY
+														create_time
+												) f
+											GROUP BY
+												product_no2
+										) c ON a.product_no = c.product_no2
+										WHERE
+											create_time < DATE_ADD(#{recordDate}, INTERVAL 2 DAY)
+										OR create_time = create_time_first
+										ORDER BY
+											create_time DESC
+									) m
+								GROUP BY
+									product_no
+				) p ON cm.product_no=p.product_no
+			
+				WHERE record_date=#{recordDate}
+			
+			) b ON a.product_no=b.product_no
+							) a
+		GROUP BY product_name
+		
+		) wl
+		ORDER BY cast(`threeWarning` as SIGNED INTEGER) DESC,
+						cast(`twoWarning` as SIGNED INTEGER) DESC,
+						cast(`oneWarning` as SIGNED INTEGER) DESC
+		 ]]>
+		
+  </select>
+  <!-- 获得某日,某机构,某产品的预警级别 -->
+  <select id="getWarningLevelByOrgAndProduct" parameterType="hashMap" resultType="hashMap">
+  	SELECT type,warning_level,cm1_value,m1_value 
+	FROM f_risk_warning_level
+	WHERE record_date=#{date}
+	AND org_no=#{orgNo}
+	AND product_no=#{productNo}
+	LIMIT 1
+  </select>
+  <!-- 获得某营业部 产品 预期笔数 预警状态  -->
+  <select id="riskRegionToOrgPage" parameterType="hashmap" resultType="hashmap">
+ 	SELECT 
+ 			d.product_no,
+			d.product_name,
+			CONCAT(IFNULL(ROUND(SUM(oberdue_num),0),'--'),'') oberdue_num,
+			IFNULL(w.warning_level,'--') warning_level,
+			IFNULL(CONCAT(ROUND((SUM(m1.overdue_principal_interest)/SUM(m1.total_principal_interest))*100,2),'%'),'--') 'm1_value'
+	FROM f_risk_loan_m1_overdue m1
+
+	JOIN (
+			SELECT product_no,product_name
+			FROM (
+							SELECT * 
+							FROM f_risk_product
+							ORDER BY create_time DESC
+			)c
+			GROUP BY product_no
+	
+	) d ON m1.product_no=d.product_no
+	LEFT JOIN f_risk_warning_level w ON 
+			m1.org_no=w.org_no 
+		AND m1.product_no=w.product_no 	
+		AND w.org_no=#{orgNo}
+		AND w.record_date=#{days}
+		
+	WHERE 
+	 m1.org_no=#{orgNo}
+	AND m1.record_date=#{days}
+	GROUP BY m1.product_no
+	UNION
+	SELECT
+	 	'',
+		 '总计', 
+		CONCAT(IFNULL(ROUND(SUM(oberdue_num),0),'--'),''),	
+			'--',
+			IFNULL(CONCAT(ROUND((SUM(overdue_principal_interest) / SUM(total_principal_interest))*100,2),'%'),'--')
+	FROM f_risk_loan_m1_overdue
+	WHERE record_date=#{days}
+	AND org_no=#{orgNo}
+  </select>
+  
+  <delete id="deleteByDate" parameterType="string">
+  	DELETE 
+	FROM f_risk_warning_level 
+	WHERE record_date=#{date}
+  </delete>
+  
+	<!-- 查询具体事业部下预警营业部明细列表 -->
+	<select id="getWarningOrgsDetail" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT p.product_name product,o.org_name orgName,
+				IFNULL(CONCAT(ROUND(w.cm1_value*100,2),'%'),'--') cm1Value,
+				IFNULL(CONCAT(ROUND(w.m1_value*100,2),'%'),'--') m1Value
+			FROM f_risk_warning_level w
+			JOIN(
+				SELECT product_no, product_name
+				FROM
+					(
+							SELECT product_no, product_name
+							FROM
+								(
+									SELECT product_no, product_name, create_time
+									FROM f_risk_product
+									ORDER BY create_time DESC
+								) a
+							JOIN (
+									SELECT create_time_first, product_no2
+									FROM
+										(
+											SELECT create_time create_time_first, product_no product_no2
+											FROM f_risk_product
+											ORDER BY create_time
+										) f
+									GROUP BY product_no2
+							) c ON a.product_no = c.product_no2
+							WHERE create_time < DATE_ADD(#{date}, INTERVAL 2 DAY)
+							OR create_time = create_time_first
+							ORDER BY create_time DESC
+					) m
+				GROUP BY product_no 
+			)p ON  p.product_no=w.product_no 
+			JOIN
+				(
+					SELECT
+						m.org_no,
+						(CASE 
+							WHEN s.org_short_name is null THEN m.org_name
+							WHEN s.org_short_name='' THEN m.org_name
+							ELSE s.org_short_name 
+							END) org_name
+					FROM
+						(
+							SELECT
+								org_no, org_name, rank, parent_no, create_time
+							FROM
+								(
+									SELECT org_no, org_name, rank, parent_no, create_time
+									FROM f_risk_org_struct
+									ORDER BY create_time DESC
+								) a
+							JOIN 
+								(
+									SELECT create_time_first, org_no2
+									FROM
+										(
+											SELECT create_time create_time_first, org_no org_no2
+											FROM f_risk_org_struct
+											ORDER BY create_time
+										) f
+									GROUP BY org_no2
+								) c ON a.org_no = c.org_no2
+							WHERE
+								create_time < DATE_ADD(#{date}, INTERVAL 2 DAY)
+							OR create_time = create_time_first
+							ORDER BY
+								create_time DESC
+						) m
+					LEFT JOIN 
+						(
+							SELECT org_no, org_short_name
+							FROM
+								(
+									SELECT org_no, org_short_name
+									FROM
+										(
+											SELECT org_no, org_short_name, create_time
+											FROM f_risk_org_data
+											ORDER BY create_time DESC
+										) a
+									JOIN (
+										SELECT create_time_first, org_no2
+										FROM
+											(
+												SELECT create_time create_time_first, org_no org_no2
+												FROM f_risk_org_data
+												ORDER BY create_time
+											) f
+										GROUP BY 	org_no2
+									) c ON a.org_no = c.org_no2
+									WHERE
+										create_time < DATE_ADD(#{date}, INTERVAL 2 DAY)
+									OR create_time = create_time_first
+									ORDER BY
+										create_time DESC
+								) m
+							GROUP BY org_no
+					)	s ON m.org_no=s.org_no
+					GROUP BY m.org_no
+				)o ON w.org_no=o.org_no
+			WHERE w.record_date=#{date}
+			AND w.org_no IN(
+				SELECT org_no
+					FROM(
+							SELECT org_no
+							FROM f_risk_org_struct
+							WHERE parent_no IN(
+									SELECT DISTINCT org_no
+									FROM f_risk_org_struct
+									WHERE parent_no=#{orgNo}
+								)
+							AND create_time < DATE_ADD(#{date}, INTERVAL 2 DAY)
+							ORDER BY create_time DESC
+					)b
+					GROUP BY org_no
+			)
+			AND w.product_no=#{productNo}
+			AND w.warning_level=#{warningLevel}
+			
+		 ]]>
+	 </select>
+	 
+	 <!-- 查询一个存在预警的营业部 -->
+	 <select id="getOneWarningOrg" parameterType="string" resultType="hashMap">
+	 	SELECT o3.org_no orgNo,product_no productNo,warning_level warningLevel
+		FROM f_risk_warning_level w
+		JOIN f_risk_org_struct o ON w.org_no=o.org_no
+		JOIN f_risk_org_struct o2 ON o.parent_no=o2.org_no
+		JOIN f_risk_org_struct o3 ON o2.parent_no=o3.org_no
+		WHERE record_date=#{date}
+		LIMIT 1
+	 </select>
+</mapper>

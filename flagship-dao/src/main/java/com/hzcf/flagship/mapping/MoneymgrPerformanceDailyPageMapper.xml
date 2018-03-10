@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.MoneymgrPerformanceDailyPageMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.MoneymgrPerformanceDailyPage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="performance_value" property="performanceValue" jdbcType="INTEGER" />
+    <result column="complete_rate" property="completeRate" jdbcType="INTEGER" />
+    <result column="denges_min_line" property="dengesMinLine" jdbcType="INTEGER" />
+    <result column="denges_warning_line" property="dengesWarningLine" jdbcType="INTEGER" />
+    <result column="denges_well_line" property="dengesWellLine" jdbcType="INTEGER" />
+    <result column="denges_max_line" property="dengesMaxLine" jdbcType="INTEGER" />
+    <result column="month_plan" property="monthPlan" jdbcType="INTEGER" />
+    <result column="date_schedule" property="dateSchedule" jdbcType="INTEGER" />
+    <result column="accumu_performance" property="accumuPerformance" jdbcType="INTEGER" />
+    <result column="accumu_complete_rate" property="accumuCompleteRate" jdbcType="INTEGER" />
+    <result column="accumu_min_line" property="accumuMinLine" jdbcType="INTEGER" />
+    <result column="accumu_warning_line" property="accumuWarningLine" jdbcType="INTEGER" />
+    <result column="accumu_well_line" property="accumuWellLine" jdbcType="INTEGER" />
+    <result column="accumu_max_line" property="accumuMaxLine" jdbcType="INTEGER" />
+    <result column="avg_accumu_performance" property="avgAccumuPerformance" jdbcType="INTEGER" />
+    <result column="daily_plan" property="dailyPlan" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, performance_value, complete_rate, denges_min_line, denges_warning_line, 
+    denges_well_line, denges_max_line, month_plan, date_schedule, accumu_performance, 
+    accumu_complete_rate, accumu_min_line, accumu_warning_line, accumu_well_line, accumu_max_line, 
+    avg_accumu_performance, daily_plan
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_moneymgr_performance_daily_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_moneymgr_performance_daily_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_moneymgr_performance_daily_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPageExample" >
+    delete from f_moneymgr_performance_daily_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPage" >
+    insert into f_moneymgr_performance_daily_page (id, record_date, performance_value, 
+      complete_rate, denges_min_line, denges_warning_line, 
+      denges_well_line, denges_max_line, month_plan, 
+      date_schedule, accumu_performance, accumu_complete_rate, 
+      accumu_min_line, accumu_warning_line, accumu_well_line, 
+      accumu_max_line, avg_accumu_performance, daily_plan
+      )
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{performanceValue,jdbcType=INTEGER}, 
+      #{completeRate,jdbcType=INTEGER}, #{dengesMinLine,jdbcType=INTEGER}, #{dengesWarningLine,jdbcType=INTEGER}, 
+      #{dengesWellLine,jdbcType=INTEGER}, #{dengesMaxLine,jdbcType=INTEGER}, #{monthPlan,jdbcType=INTEGER}, 
+      #{dateSchedule,jdbcType=INTEGER}, #{accumuPerformance,jdbcType=INTEGER}, #{accumuCompleteRate,jdbcType=INTEGER}, 
+      #{accumuMinLine,jdbcType=INTEGER}, #{accumuWarningLine,jdbcType=INTEGER}, #{accumuWellLine,jdbcType=INTEGER}, 
+      #{accumuMaxLine,jdbcType=INTEGER}, #{avgAccumuPerformance,jdbcType=INTEGER}, #{dailyPlan,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPage" >
+    insert into f_moneymgr_performance_daily_page
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="performanceValue != null" >
+        performance_value,
+      </if>
+      <if test="completeRate != null" >
+        complete_rate,
+      </if>
+      <if test="dengesMinLine != null" >
+        denges_min_line,
+      </if>
+      <if test="dengesWarningLine != null" >
+        denges_warning_line,
+      </if>
+      <if test="dengesWellLine != null" >
+        denges_well_line,
+      </if>
+      <if test="dengesMaxLine != null" >
+        denges_max_line,
+      </if>
+      <if test="monthPlan != null" >
+        month_plan,
+      </if>
+      <if test="dateSchedule != null" >
+        date_schedule,
+      </if>
+      <if test="accumuPerformance != null" >
+        accumu_performance,
+      </if>
+      <if test="accumuCompleteRate != null" >
+        accumu_complete_rate,
+      </if>
+      <if test="accumuMinLine != null" >
+        accumu_min_line,
+      </if>
+      <if test="accumuWarningLine != null" >
+        accumu_warning_line,
+      </if>
+      <if test="accumuWellLine != null" >
+        accumu_well_line,
+      </if>
+      <if test="accumuMaxLine != null" >
+        accumu_max_line,
+      </if>
+      <if test="avgAccumuPerformance != null" >
+        avg_accumu_performance,
+      </if>
+      <if test="dailyPlan != null" >
+        daily_plan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="performanceValue != null" >
+        #{performanceValue,jdbcType=INTEGER},
+      </if>
+      <if test="completeRate != null" >
+        #{completeRate,jdbcType=INTEGER},
+      </if>
+      <if test="dengesMinLine != null" >
+        #{dengesMinLine,jdbcType=INTEGER},
+      </if>
+      <if test="dengesWarningLine != null" >
+        #{dengesWarningLine,jdbcType=INTEGER},
+      </if>
+      <if test="dengesWellLine != null" >
+        #{dengesWellLine,jdbcType=INTEGER},
+      </if>
+      <if test="dengesMaxLine != null" >
+        #{dengesMaxLine,jdbcType=INTEGER},
+      </if>
+      <if test="monthPlan != null" >
+        #{monthPlan,jdbcType=INTEGER},
+      </if>
+      <if test="dateSchedule != null" >
+        #{dateSchedule,jdbcType=INTEGER},
+      </if>
+      <if test="accumuPerformance != null" >
+        #{accumuPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="accumuCompleteRate != null" >
+        #{accumuCompleteRate,jdbcType=INTEGER},
+      </if>
+      <if test="accumuMinLine != null" >
+        #{accumuMinLine,jdbcType=INTEGER},
+      </if>
+      <if test="accumuWarningLine != null" >
+        #{accumuWarningLine,jdbcType=INTEGER},
+      </if>
+      <if test="accumuWellLine != null" >
+        #{accumuWellLine,jdbcType=INTEGER},
+      </if>
+      <if test="accumuMaxLine != null" >
+        #{accumuMaxLine,jdbcType=INTEGER},
+      </if>
+      <if test="avgAccumuPerformance != null" >
+        #{avgAccumuPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="dailyPlan != null" >
+        #{dailyPlan,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPageExample" resultType="java.lang.Integer" >
+    select count(*) from f_moneymgr_performance_daily_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_moneymgr_performance_daily_page
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.performanceValue != null" >
+        performance_value = #{record.performanceValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.completeRate != null" >
+        complete_rate = #{record.completeRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.dengesMinLine != null" >
+        denges_min_line = #{record.dengesMinLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.dengesWarningLine != null" >
+        denges_warning_line = #{record.dengesWarningLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.dengesWellLine != null" >
+        denges_well_line = #{record.dengesWellLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.dengesMaxLine != null" >
+        denges_max_line = #{record.dengesMaxLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthPlan != null" >
+        month_plan = #{record.monthPlan,jdbcType=INTEGER},
+      </if>
+      <if test="record.dateSchedule != null" >
+        date_schedule = #{record.dateSchedule,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuPerformance != null" >
+        accumu_performance = #{record.accumuPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuCompleteRate != null" >
+        accumu_complete_rate = #{record.accumuCompleteRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuMinLine != null" >
+        accumu_min_line = #{record.accumuMinLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuWarningLine != null" >
+        accumu_warning_line = #{record.accumuWarningLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuWellLine != null" >
+        accumu_well_line = #{record.accumuWellLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.accumuMaxLine != null" >
+        accumu_max_line = #{record.accumuMaxLine,jdbcType=INTEGER},
+      </if>
+      <if test="record.avgAccumuPerformance != null" >
+        avg_accumu_performance = #{record.avgAccumuPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="record.dailyPlan != null" >
+        daily_plan = #{record.dailyPlan,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_moneymgr_performance_daily_page
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      performance_value = #{record.performanceValue,jdbcType=INTEGER},
+      complete_rate = #{record.completeRate,jdbcType=INTEGER},
+      denges_min_line = #{record.dengesMinLine,jdbcType=INTEGER},
+      denges_warning_line = #{record.dengesWarningLine,jdbcType=INTEGER},
+      denges_well_line = #{record.dengesWellLine,jdbcType=INTEGER},
+      denges_max_line = #{record.dengesMaxLine,jdbcType=INTEGER},
+      month_plan = #{record.monthPlan,jdbcType=INTEGER},
+      date_schedule = #{record.dateSchedule,jdbcType=INTEGER},
+      accumu_performance = #{record.accumuPerformance,jdbcType=INTEGER},
+      accumu_complete_rate = #{record.accumuCompleteRate,jdbcType=INTEGER},
+      accumu_min_line = #{record.accumuMinLine,jdbcType=INTEGER},
+      accumu_warning_line = #{record.accumuWarningLine,jdbcType=INTEGER},
+      accumu_well_line = #{record.accumuWellLine,jdbcType=INTEGER},
+      accumu_max_line = #{record.accumuMaxLine,jdbcType=INTEGER},
+      avg_accumu_performance = #{record.avgAccumuPerformance,jdbcType=INTEGER},
+      daily_plan = #{record.dailyPlan,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPage" >
+    update f_moneymgr_performance_daily_page
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="performanceValue != null" >
+        performance_value = #{performanceValue,jdbcType=INTEGER},
+      </if>
+      <if test="completeRate != null" >
+        complete_rate = #{completeRate,jdbcType=INTEGER},
+      </if>
+      <if test="dengesMinLine != null" >
+        denges_min_line = #{dengesMinLine,jdbcType=INTEGER},
+      </if>
+      <if test="dengesWarningLine != null" >
+        denges_warning_line = #{dengesWarningLine,jdbcType=INTEGER},
+      </if>
+      <if test="dengesWellLine != null" >
+        denges_well_line = #{dengesWellLine,jdbcType=INTEGER},
+      </if>
+      <if test="dengesMaxLine != null" >
+        denges_max_line = #{dengesMaxLine,jdbcType=INTEGER},
+      </if>
+      <if test="monthPlan != null" >
+        month_plan = #{monthPlan,jdbcType=INTEGER},
+      </if>
+      <if test="dateSchedule != null" >
+        date_schedule = #{dateSchedule,jdbcType=INTEGER},
+      </if>
+      <if test="accumuPerformance != null" >
+        accumu_performance = #{accumuPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="accumuCompleteRate != null" >
+        accumu_complete_rate = #{accumuCompleteRate,jdbcType=INTEGER},
+      </if>
+      <if test="accumuMinLine != null" >
+        accumu_min_line = #{accumuMinLine,jdbcType=INTEGER},
+      </if>
+      <if test="accumuWarningLine != null" >
+        accumu_warning_line = #{accumuWarningLine,jdbcType=INTEGER},
+      </if>
+      <if test="accumuWellLine != null" >
+        accumu_well_line = #{accumuWellLine,jdbcType=INTEGER},
+      </if>
+      <if test="accumuMaxLine != null" >
+        accumu_max_line = #{accumuMaxLine,jdbcType=INTEGER},
+      </if>
+      <if test="avgAccumuPerformance != null" >
+        avg_accumu_performance = #{avgAccumuPerformance,jdbcType=INTEGER},
+      </if>
+      <if test="dailyPlan != null" >
+        daily_plan = #{dailyPlan,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.MoneymgrPerformanceDailyPage" >
+    update f_moneymgr_performance_daily_page
+    set record_date = #{recordDate,jdbcType=DATE},
+      performance_value = #{performanceValue,jdbcType=INTEGER},
+      complete_rate = #{completeRate,jdbcType=INTEGER},
+      denges_min_line = #{dengesMinLine,jdbcType=INTEGER},
+      denges_warning_line = #{dengesWarningLine,jdbcType=INTEGER},
+      denges_well_line = #{dengesWellLine,jdbcType=INTEGER},
+      denges_max_line = #{dengesMaxLine,jdbcType=INTEGER},
+      month_plan = #{monthPlan,jdbcType=INTEGER},
+      date_schedule = #{dateSchedule,jdbcType=INTEGER},
+      accumu_performance = #{accumuPerformance,jdbcType=INTEGER},
+      accumu_complete_rate = #{accumuCompleteRate,jdbcType=INTEGER},
+      accumu_min_line = #{accumuMinLine,jdbcType=INTEGER},
+      accumu_warning_line = #{accumuWarningLine,jdbcType=INTEGER},
+      accumu_well_line = #{accumuWellLine,jdbcType=INTEGER},
+      accumu_max_line = #{accumuMaxLine,jdbcType=INTEGER},
+      avg_accumu_performance = #{avgAccumuPerformance,jdbcType=INTEGER},
+      daily_plan = #{dailyPlan,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <insert id="insertDailyPerformancePages" parameterType="java.util.List">
+  	insert into f_moneymgr_performance_daily_page (record_date,performance_value,
+  	complete_rate,denges_min_line,denges_warning_line,
+  	denges_well_line,denges_max_line,month_plan,date_schedule,
+  	accumu_performance,accumu_complete_rate,accumu_min_line,
+  	accumu_warning_line,accumu_well_line,accumu_max_line,
+  	avg_accumu_performance,daily_plan) values
+  	<foreach collection="list" item="item" index="index" separator=",">
+  	(	#{item.recordDate,jdbcType=DATE},
+  		#{item.performanceValue,jdbcType=INTEGER},
+  		#{item.completeRate,jdbcType=INTEGER},
+  		#{item.dengesMinLine,jdbcType=INTEGER},
+  		#{item.dengesWarningLine,jdbcType=INTEGER},
+  		#{item.dengesWellLine,jdbcType=INTEGER},
+  		#{item.dengesMaxLine,jdbcType=INTEGER},
+  		#{item.monthPlan,jdbcType=INTEGER},
+  		#{item.dateSchedule,jdbcType=INTEGER},
+  		#{item.accumuPerformance,jdbcType=INTEGER},
+  		#{item.accumuCompleteRate,jdbcType=INTEGER},
+  		#{item.accumuMinLine,jdbcType=INTEGER},
+  		#{item.accumuWarningLine,jdbcType=INTEGER},
+  		#{item.accumuWellLine,jdbcType=INTEGER},
+  		#{item.accumuMaxLine,jdbcType=INTEGER},
+  		#{item.avgAccumuPerformance,jdbcType=INTEGER},
+  		#{item.dailyPlan,jdbcType=INTEGER}
+  	)
+  	</foreach>
+  </insert>
+	<!--    查询当月累计业绩和计划达成率 -->
+  <select id="getAccumuPerformanceAndAccumuCompleteRate" parameterType="String" resultType="map">
+	SELECT 
+	accumuPerformance, 	ROUND(b.accumu_performance * 100 / month_plan,2) accumuCompleteRate
+	FROM(
+	SELECT 
+		ROUND(accumu_performance/(
+			SELECT 
+			org_num
+			FROM	f_moneymgr_efficiency_page
+			WHERE record_date =#{dateString}
+		),2) accumuPerformance, record_date
+		FROM f_moneymgr_performance_daily_page
+		WHERE record_date = #{dateString}
+	) a
+	JOIN f_moneymgr_performance_daily_page b
+	ON a.record_date = b.record_date
+	AND a.record_date = #{dateString}
+  </select>
+</mapper>

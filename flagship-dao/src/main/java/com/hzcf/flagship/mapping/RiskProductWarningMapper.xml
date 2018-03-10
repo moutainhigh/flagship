@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.RiskProductWarningMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.RiskProductWarning" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="product_no" property="productNo" jdbcType="VARCHAR" />
+    <result column="warning_value" property="warningValue" jdbcType="DECIMAL" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, product_no, warning_value, creator, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.RiskProductWarningExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_risk_product_warning
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_risk_product_warning
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_risk_product_warning
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.RiskProductWarningExample" >
+    delete from f_risk_product_warning
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.RiskProductWarning" >
+    insert into f_risk_product_warning (id, product_no, warning_value, 
+      creator, create_time)
+    values (#{id,jdbcType=BIGINT}, #{productNo,jdbcType=VARCHAR}, #{warningValue,jdbcType=DECIMAL}, 
+      #{creator,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <!-- 新增产品预警 -->
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.RiskProductWarning" >
+    insert into f_risk_product_warning
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productNo != null" >
+        product_no,
+      </if>
+      <if test="warningValue != null" >
+        warning_value,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productNo != null" >
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="warningValue != null" >
+        #{warningValue,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.RiskProductWarningExample" resultType="java.lang.Integer" >
+    select count(*) from f_risk_product_warning
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_risk_product_warning
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.productNo != null" >
+        product_no = #{record.productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warningValue != null" >
+        warning_value = #{record.warningValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_risk_product_warning
+    set id = #{record.id,jdbcType=BIGINT},
+      product_no = #{record.productNo,jdbcType=VARCHAR},
+      warning_value = #{record.warningValue,jdbcType=DECIMAL},
+      creator = #{record.creator,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.RiskProductWarning" >
+    update f_risk_product_warning
+    <set >
+      <if test="productNo != null" >
+        product_no = #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="warningValue != null" >
+        warning_value = #{warningValue,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.RiskProductWarning" >
+    update f_risk_product_warning
+    set product_no = #{productNo,jdbcType=VARCHAR},
+      warning_value = #{warningValue,jdbcType=DECIMAL},
+      creator = #{creator,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 产品预警列表 -->
+   <select id="selectPorductWarList" resultType="map" >
+		SELECT
+			p.product_name productName,
+			w.warning_value*100 warningValue
+		FROM
+			(
+				SELECT
+					*
+				FROM
+					(
+						SELECT
+							*
+						FROM
+							`f_risk_product_warning`
+						ORDER BY
+							create_time DESC
+					) t
+				GROUP BY
+					product_no
+			) w
+		RIGHT JOIN (
+			SELECT
+				*
+			FROM
+				(
+					SELECT
+						*
+					FROM
+						f_risk_product
+					ORDER BY
+						create_time DESC
+				) t2
+			GROUP BY
+				product_no
+		) p ON w.product_no = p.product_no
+  </select>
+  
+  <!-- 获得某款产品某个日期的预警指标 -->
+  <select id="getWarningIndexByProductAndDate" parameterType="hashmap" resultType="hashmap" >
+  	<![CDATA[
+  	SELECT
+	w.product_no,warning_value
+	FROM
+		f_risk_product_warning w
+	JOIN (
+		SELECT
+			create_time create_time_first,
+			product_no product_no2
+		FROM
+			f_risk_product_warning
+		WHERE
+			product_no = #{productNo}
+		ORDER BY
+			create_time
+		LIMIT 1
+	) f ON w.product_no = f.product_no2
+	WHERE
+		w.create_time < DATE_ADD(#{date}, INTERVAL 1 DAY)
+	OR create_time = create_time_first
+	AND w.product_no = #{orgNo}
+	ORDER BY
+		w.create_time DESC
+	LIMIT 1
+]]>
+  </select>
+  
+  <!-- 查询某天所有产品的预警值 -->
+  <select id="getWarningIndexByDate" parameterType="date" resultType="hashMap">
+  <![CDATA[
+  	SELECT
+	product_no,
+	warning_value
+	FROM
+		(
+			SELECT
+				product_no,
+				warning_value
+			FROM
+				(
+					SELECT
+						product_no,
+						warning_value,
+						create_time
+					FROM
+						f_risk_product_warning
+					ORDER BY
+						create_time DESC
+				) a
+			JOIN (
+				SELECT
+					create_time_first,
+					product_no2
+				FROM
+					(
+						SELECT
+							create_time create_time_first,
+							product_no product_no2
+						FROM
+							f_risk_product_warning
+						ORDER BY
+							create_time
+					) f
+				GROUP BY
+					product_no2
+			) c ON a.product_no = c.product_no2
+			WHERE
+				create_time < DATE_ADD(#{date}, INTERVAL 2 DAY)
+			OR create_time = create_time_first
+			ORDER BY
+				create_time DESC
+		) m
+	GROUP BY
+		product_no
+		]]>
+  </select>
+  
+</mapper>

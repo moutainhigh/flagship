@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.MoneymgrRosterMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.MoneymgrRoster" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employee_no" property="employeeNo" jdbcType="VARCHAR" />
+    <result column="referral_code" property="referralCode" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="employee_name" property="employeeName" jdbcType="VARCHAR" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_principal" property="orgPrincipal" jdbcType="VARCHAR" />
+    <result column="level4_department" property="level4Department" jdbcType="VARCHAR" />
+    <result column="level4_principal" property="level4Principal" jdbcType="VARCHAR" />
+    <result column="level5_department" property="level5Department" jdbcType="VARCHAR" />
+    <result column="level5_principal" property="level5Principal" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="position_type" property="positionType" jdbcType="VARCHAR" />
+    <result column="entry_date" property="entryDate" jdbcType="DATE" />
+    <result column="is_positive" property="isPositive" jdbcType="CHAR" />
+    <result column="positive_date" property="positiveDate" jdbcType="DATE" />
+    <result column="dimission_date" property="dimissionDate" jdbcType="DATE" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, employee_no, referral_code, id_card, employee_name, district_name, org_name, 
+    org_principal, level4_department, level4_principal, level5_department, level5_principal, 
+    position, position_type, entry_date, is_positive, positive_date, dimission_date, 
+    creator_id, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.MoneymgrRosterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_moneymgr_roster
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_moneymgr_roster
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_moneymgr_roster
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.MoneymgrRosterExample" >
+    delete from f_moneymgr_roster
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.MoneymgrRoster" >
+    insert into f_moneymgr_roster (id, employee_no, referral_code, 
+      id_card, employee_name, district_name, 
+      org_name, org_principal, level4_department, 
+      level4_principal, level5_department, level5_principal, 
+      position, position_type, entry_date, 
+      is_positive, positive_date, dimission_date, 
+      creator_id, create_time)
+    values (#{id,jdbcType=BIGINT}, #{employeeNo,jdbcType=VARCHAR}, #{referralCode,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{employeeName,jdbcType=VARCHAR}, #{districtName,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgPrincipal,jdbcType=VARCHAR}, #{level4Department,jdbcType=VARCHAR}, 
+      #{level4Principal,jdbcType=VARCHAR}, #{level5Department,jdbcType=VARCHAR}, #{level5Principal,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{positionType,jdbcType=VARCHAR}, #{entryDate,jdbcType=DATE}, 
+      #{isPositive,jdbcType=CHAR}, #{positiveDate,jdbcType=DATE}, #{dimissionDate,jdbcType=DATE}, 
+      #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.MoneymgrRoster" >
+    insert into f_moneymgr_roster
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeNo != null" >
+        employee_no,
+      </if>
+      <if test="referralCode != null" >
+        referral_code,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="employeeName != null" >
+        employee_name,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="orgPrincipal != null" >
+        org_principal,
+      </if>
+      <if test="level4Department != null" >
+        level4_department,
+      </if>
+      <if test="level4Principal != null" >
+        level4_principal,
+      </if>
+      <if test="level5Department != null" >
+        level5_department,
+      </if>
+      <if test="level5Principal != null" >
+        level5_principal,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="positionType != null" >
+        position_type,
+      </if>
+      <if test="entryDate != null" >
+        entry_date,
+      </if>
+      <if test="isPositive != null" >
+        is_positive,
+      </if>
+      <if test="positiveDate != null" >
+        positive_date,
+      </if>
+      <if test="dimissionDate != null" >
+        dimission_date,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="employeeNo != null" >
+        #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="referralCode != null" >
+        #{referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null" >
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPrincipal != null" >
+        #{orgPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="level4Department != null" >
+        #{level4Department,jdbcType=VARCHAR},
+      </if>
+      <if test="level4Principal != null" >
+        #{level4Principal,jdbcType=VARCHAR},
+      </if>
+      <if test="level5Department != null" >
+        #{level5Department,jdbcType=VARCHAR},
+      </if>
+      <if test="level5Principal != null" >
+        #{level5Principal,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="positionType != null" >
+        #{positionType,jdbcType=VARCHAR},
+      </if>
+      <if test="entryDate != null" >
+        #{entryDate,jdbcType=DATE},
+      </if>
+      <if test="isPositive != null" >
+        #{isPositive,jdbcType=CHAR},
+      </if>
+      <if test="positiveDate != null" >
+        #{positiveDate,jdbcType=DATE},
+      </if>
+      <if test="dimissionDate != null" >
+        #{dimissionDate,jdbcType=DATE},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.MoneymgrRosterExample" resultType="java.lang.Integer" >
+    select count(*) from f_moneymgr_roster
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_moneymgr_roster
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.employeeNo != null" >
+        employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referralCode != null" >
+        referral_code = #{record.referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeName != null" >
+        employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtName != null" >
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgPrincipal != null" >
+        org_principal = #{record.orgPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level4Department != null" >
+        level4_department = #{record.level4Department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level4Principal != null" >
+        level4_principal = #{record.level4Principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level5Department != null" >
+        level5_department = #{record.level5Department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level5Principal != null" >
+        level5_principal = #{record.level5Principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionType != null" >
+        position_type = #{record.positionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entryDate != null" >
+        entry_date = #{record.entryDate,jdbcType=DATE},
+      </if>
+      <if test="record.isPositive != null" >
+        is_positive = #{record.isPositive,jdbcType=CHAR},
+      </if>
+      <if test="record.positiveDate != null" >
+        positive_date = #{record.positiveDate,jdbcType=DATE},
+      </if>
+      <if test="record.dimissionDate != null" >
+        dimission_date = #{record.dimissionDate,jdbcType=DATE},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_moneymgr_roster
+    set id = #{record.id,jdbcType=BIGINT},
+      employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      referral_code = #{record.referralCode,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      org_principal = #{record.orgPrincipal,jdbcType=VARCHAR},
+      level4_department = #{record.level4Department,jdbcType=VARCHAR},
+      level4_principal = #{record.level4Principal,jdbcType=VARCHAR},
+      level5_department = #{record.level5Department,jdbcType=VARCHAR},
+      level5_principal = #{record.level5Principal,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      position_type = #{record.positionType,jdbcType=VARCHAR},
+      entry_date = #{record.entryDate,jdbcType=DATE},
+      is_positive = #{record.isPositive,jdbcType=CHAR},
+      positive_date = #{record.positiveDate,jdbcType=DATE},
+      dimission_date = #{record.dimissionDate,jdbcType=DATE},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.MoneymgrRoster" >
+    update f_moneymgr_roster
+    <set >
+      <if test="employeeNo != null" >
+        employee_no = #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="referralCode != null" >
+        referral_code = #{referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null" >
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPrincipal != null" >
+        org_principal = #{orgPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="level4Department != null" >
+        level4_department = #{level4Department,jdbcType=VARCHAR},
+      </if>
+      <if test="level4Principal != null" >
+        level4_principal = #{level4Principal,jdbcType=VARCHAR},
+      </if>
+      <if test="level5Department != null" >
+        level5_department = #{level5Department,jdbcType=VARCHAR},
+      </if>
+      <if test="level5Principal != null" >
+        level5_principal = #{level5Principal,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="positionType != null" >
+        position_type = #{positionType,jdbcType=VARCHAR},
+      </if>
+      <if test="entryDate != null" >
+        entry_date = #{entryDate,jdbcType=DATE},
+      </if>
+      <if test="isPositive != null" >
+        is_positive = #{isPositive,jdbcType=CHAR},
+      </if>
+      <if test="positiveDate != null" >
+        positive_date = #{positiveDate,jdbcType=DATE},
+      </if>
+      <if test="dimissionDate != null" >
+        dimission_date = #{dimissionDate,jdbcType=DATE},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.MoneymgrRoster" >
+    update f_moneymgr_roster
+    set employee_no = #{employeeNo,jdbcType=VARCHAR},
+      referral_code = #{referralCode,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      employee_name = #{employeeName,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_principal = #{orgPrincipal,jdbcType=VARCHAR},
+      level4_department = #{level4Department,jdbcType=VARCHAR},
+      level4_principal = #{level4Principal,jdbcType=VARCHAR},
+      level5_department = #{level5Department,jdbcType=VARCHAR},
+      level5_principal = #{level5Principal,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      position_type = #{positionType,jdbcType=VARCHAR},
+      entry_date = #{entryDate,jdbcType=DATE},
+      is_positive = #{isPositive,jdbcType=CHAR},
+      positive_date = #{positiveDate,jdbcType=DATE},
+      dimission_date = #{dimissionDate,jdbcType=DATE},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 计算指定机构管理人员数量 -->
+   <select id="getManagerNum" resultType="long" parameterType="string">
+  	select count(r.id) manager_num 
+  	from f_moneymgr_roster r
+	join f_org_map m 
+		on r.org_name=m.roster_org_name
+	where m.moneymgr_org_name=#{orgSimpleName} 
+	and r.position_type='销售管理序列'
+	and r.dimission_date is null
+  </select>
+  
+  <!-- 计算指定机构咨询师人数数量 -->
+	<select id="getCounselorNum" resultType="long" parameterType="string">
+	  	select count(r.id) manager_num 
+	  	from f_moneymgr_roster r
+		join f_org_map m 
+			on r.org_name=m.roster_org_name
+		where m.moneymgr_org_name=#{orgSimpleName} 
+		and r.position_type='销售序列'
+		and r.dimission_date is null
+	</select>
+   <!-- 批量插入 理财人力花名册 数据 -->
+  <insert id="insertMoneymgrRoster" parameterType="java.util.List">
+	 insert into f_moneymgr_roster (id, employee_no, referral_code, 
+      id_card, employee_name, district_name, 
+      org_name, org_principal, level4_department, 
+      level4_principal, level5_department, level5_principal, 
+      position, position_type, entry_date, 
+      is_positive, positive_date, dimission_date, 
+      creator_id, create_time) values
+	<foreach collection="list" item="item" index="index" separator=",">
+	(#{item.id,jdbcType=BIGINT}, #{item.employeeNo,jdbcType=VARCHAR}, #{item.referralCode,jdbcType=VARCHAR}, 
+      #{item.idCard,jdbcType=VARCHAR}, #{item.employeeName,jdbcType=VARCHAR}, #{item.districtName,jdbcType=VARCHAR}, 
+      #{item.orgName,jdbcType=VARCHAR}, #{item.orgPrincipal,jdbcType=VARCHAR}, #{item.level4Department,jdbcType=VARCHAR}, 
+      #{item.level4Principal,jdbcType=VARCHAR}, #{item.level5Department,jdbcType=VARCHAR}, #{item.level5Principal,jdbcType=VARCHAR}, 
+      #{item.position,jdbcType=VARCHAR}, #{item.positionType,jdbcType=VARCHAR}, #{item.entryDate,jdbcType=DATE}, 
+      #{item.isPositive,jdbcType=CHAR}, #{item.positiveDate,jdbcType=DATE}, #{item.dimissionDate,jdbcType=DATE}, 
+      #{item.creatorId,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP})
+	</foreach>
+</insert>
+  <!--  理财人力花名册 分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		id,
+		employee_no,
+		referral_code,
+		REPLACE(id_card, SUBSTR(id_card,6,8), '********') id_card,
+		employee_name,
+		district_name,
+		org_name,
+		org_principal,
+		level4_department,
+		level4_principal,
+		level5_department,
+		level5_principal,
+		position,
+		position_type,
+		DATE_FORMAT(entry_date, '%Y-%m-%d') entry_date,
+		CASE 
+	WHEN is_positive = '1' THEN
+		'是'
+	WHEN is_positive = '0' THEN
+		'否'
+	END is_positive,
+	 DATE_FORMAT(positive_date, '%Y-%m-%d') positive_date,
+	 DATE_FORMAT(dimission_date, '%Y-%m-%d') dimission_date,
+	 creator_id,
+	 create_time
+ FROM
+	f_moneymgr_roster
+	WHERE
+		1 = 1
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--理财人力花名册 总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_moneymgr_roster
+	WHERE 1=1
+  </select>
+  
+  <!-- 根据机构简称获得机构负责人名字 -->
+  <select id="getOrgPrincipal" parameterType="string" resultType="string">
+  	SELECT DISTINCT r.org_principal 
+	FROM f_moneymgr_roster r
+	JOIN f_org_map m ON r.org_name=m.roster_org_name
+	WHERE m.moneymgr_org_name=#{orgName}
+	LIMIT 1
+  </select>
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.OrgMapMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.OrgMap" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bi_org_name" property="biOrgName" jdbcType="VARCHAR" />
+    <result column="roster_org_name" property="rosterOrgName" jdbcType="VARCHAR" />
+    <result column="moneymgr_org_name" property="moneymgrOrgName" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bi_org_name, roster_org_name, moneymgr_org_name, creator_id, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.OrgMapExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_org_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_org_map
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_org_map
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.OrgMapExample" >
+    delete from f_org_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.OrgMap" >
+    insert into f_org_map (id, bi_org_name, roster_org_name, 
+      moneymgr_org_name, creator_id, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{biOrgName,jdbcType=VARCHAR}, #{rosterOrgName,jdbcType=VARCHAR}, 
+      #{moneymgrOrgName,jdbcType=VARCHAR}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.OrgMap" >
+    insert into f_org_map
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="biOrgName != null" >
+        bi_org_name,
+      </if>
+      <if test="rosterOrgName != null" >
+        roster_org_name,
+      </if>
+      <if test="moneymgrOrgName != null" >
+        moneymgr_org_name,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="biOrgName != null" >
+        #{biOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="rosterOrgName != null" >
+        #{rosterOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="moneymgrOrgName != null" >
+        #{moneymgrOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.OrgMapExample" resultType="java.lang.Integer" >
+    select count(*) from f_org_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_org_map
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.biOrgName != null" >
+        bi_org_name = #{record.biOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rosterOrgName != null" >
+        roster_org_name = #{record.rosterOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneymgrOrgName != null" >
+        moneymgr_org_name = #{record.moneymgrOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_org_map
+    set id = #{record.id,jdbcType=BIGINT},
+      bi_org_name = #{record.biOrgName,jdbcType=VARCHAR},
+      roster_org_name = #{record.rosterOrgName,jdbcType=VARCHAR},
+      moneymgr_org_name = #{record.moneymgrOrgName,jdbcType=VARCHAR},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.OrgMap" >
+    update f_org_map
+    <set >
+      <if test="biOrgName != null" >
+        bi_org_name = #{biOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="rosterOrgName != null" >
+        roster_org_name = #{rosterOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="moneymgrOrgName != null" >
+        moneymgr_org_name = #{moneymgrOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.OrgMap" >
+    update f_org_map
+    set bi_org_name = #{biOrgName,jdbcType=VARCHAR},
+      roster_org_name = #{rosterOrgName,jdbcType=VARCHAR},
+      moneymgr_org_name = #{moneymgrOrgName,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- 批量插入 理财机构对应关系 数据 -->
+  <insert id="insertOrgMap" parameterType="java.util.List">
+    INSERT INTO f_org_map(bi_org_name,roster_org_name,moneymgr_org_name,creator_id,create_time) values
+  <foreach collection="list" item="item" index="index" separator="," >
+		(#{item.biOrgName},#{item.rosterOrgName},#{item.moneymgrOrgName},#{item.creatorId},#{item.createTime})
+  </foreach>
+  </insert>
+  
+  <!--  理财机构对应关系列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+		om.bi_org_name bi_org_name,
+		om.roster_org_name roster_org_name,
+		om.moneymgr_org_name moneymgr_org_name,
+		ol.abscissa abscissa,
+		ol.ordinate ordinate,
+    	ol.address address
+	FROM
+		f_org_map om
+	LEFT JOIN f_org_location ol ON om.moneymgr_org_name = ol.org_name
+WHERE
+	1 = 1
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--理财机构对应关系分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_org_map
+	WHERE 1=1
+  </select>
+</mapper>

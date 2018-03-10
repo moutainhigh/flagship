@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzcf.flagship.dao.MoneymgrMonthHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hzcf.flagship.model.MoneymgrMonthHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="record_date" property="recordDate" jdbcType="DATE" />
+    <result column="record_name" property="recordName" jdbcType="VARCHAR" />
+    <result column="index_name" property="indexName" jdbcType="VARCHAR" />
+    <result column="index_value" property="indexValue" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, record_date, record_name, index_name, index_value, create_time, creator_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_moneymgr_month_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from f_moneymgr_month_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_moneymgr_month_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistoryExample" >
+    delete from f_moneymgr_month_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistory" >
+    insert into f_moneymgr_month_history (id, record_date, record_name, 
+      index_name, index_value, create_time, 
+      creator_id)
+    values (#{id,jdbcType=BIGINT}, #{recordDate,jdbcType=DATE}, #{recordName,jdbcType=VARCHAR}, 
+      #{indexName,jdbcType=VARCHAR}, #{indexValue,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistory" >
+    insert into f_moneymgr_month_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recordDate != null" >
+        record_date,
+      </if>
+      <if test="recordName != null" >
+        record_name,
+      </if>
+      <if test="indexName != null" >
+        index_name,
+      </if>
+      <if test="indexValue != null" >
+        index_value,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordDate != null" >
+        #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="recordName != null" >
+        #{recordName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexName != null" >
+        #{indexName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexValue != null" >
+        #{indexValue,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistoryExample" resultType="java.lang.Integer" >
+    select count(*) from f_moneymgr_month_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update f_moneymgr_month_history
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDate != null" >
+        record_date = #{record.recordDate,jdbcType=DATE},
+      </if>
+      <if test="record.recordName != null" >
+        record_name = #{record.recordName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexName != null" >
+        index_name = #{record.indexName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexValue != null" >
+        index_value = #{record.indexValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update f_moneymgr_month_history
+    set id = #{record.id,jdbcType=BIGINT},
+      record_date = #{record.recordDate,jdbcType=DATE},
+      record_name = #{record.recordName,jdbcType=VARCHAR},
+      index_name = #{record.indexName,jdbcType=VARCHAR},
+      index_value = #{record.indexValue,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      creator_id = #{record.creatorId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistory" >
+    update f_moneymgr_month_history
+    <set >
+      <if test="recordDate != null" >
+        record_date = #{recordDate,jdbcType=DATE},
+      </if>
+      <if test="recordName != null" >
+        record_name = #{recordName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexName != null" >
+        index_name = #{indexName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexValue != null" >
+        index_value = #{indexValue,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzcf.flagship.model.MoneymgrMonthHistory" >
+    update f_moneymgr_month_history
+    set record_date = #{recordDate,jdbcType=DATE},
+      record_name = #{recordName,jdbcType=VARCHAR},
+      index_name = #{indexName,jdbcType=VARCHAR},
+      index_value = #{indexValue,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator_id = #{creatorId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+   <!-- 批量插入 历史月度累计 数据 -->
+  <insert id="insertMoneymgrMonthHistory" parameterType="java.util.List">
+	insert into f_moneymgr_month_history (id, record_date, record_name,
+	index_name, index_value, create_time,
+	creator_id) values
+	<foreach collection="list" item="item" index="index" separator=",">
+		(#{item.id,jdbcType=BIGINT}, #{item.recordDate,jdbcType=DATE},
+		#{item.recordName,jdbcType=VARCHAR},
+		#{item.indexName,jdbcType=CHAR},
+		 #{item.indexValue,jdbcType=DECIMAL},
+		#{item.createTime,jdbcType=TIMESTAMP},
+		#{item.creatorId,jdbcType=INTEGER})
+	</foreach>
+</insert>
+  <!-- 设置查询条件 -->
+  <sql id="dynamicPageWhere">
+  	<if test="orgName != null">
+  		and record_name LIKE CONCAT('%',#{orgName},'%') 
+ 	</if>
+	<if test="start_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') >= #{start_time}
+ 		]]>
+ 	</if>
+ 	<if test="end_time != null">
+ 	<![CDATA[
+ 		AND DATE_FORMAT(record_date ,'%Y-%m-%d') <= #{end_time}
+ 	]]>
+ 	</if>
+  </sql>
+  
+  <!--  理财历史月度累计列表分页 -->
+  <select id="findAllRetMapByPage" resultType="hashmap" parameterType="hashmap">
+  	SELECT
+  	id,
+    DATE_FORMAT(record_date,'%Y/%m/%d') record_date,
+    record_name,
+    index_name,
+    IF (
+	index_name = '计划达成率',
+	CONCAT(index_value, '%'),
+	index_value
+	)  index_value
+	FROM f_moneymgr_month_history
+	WHERE 1=1
+	<include refid="dynamicPageWhere"/>
+	order by record_date desc ,id desc 
+	limit #{startIndex},#{pageSize}
+  </select>
+  
+   <!--理财历史月度累计分页总数 -->
+  <select id="findAllByPageCount" resultType="long" parameterType="hashmap">
+  	SELECT COUNT(*) FROM f_moneymgr_month_history
+	WHERE 1=1
+	<include refid="dynamicPageWhere"/>
+  </select>
+
+
+  <!--  理财历史月度累计 统计 -->
+  <select id="findPerformanceByYear" resultType="hashmap" parameterType="hashmap">
+    SELECT
+    Month(record_date) monthOfYear,
+    SUM(index_value) performanceValue
+    FROM f_moneymgr_month_history
+	WHERE index_name = '业绩' AND DATE_FORMAT(record_date,'%Y') = #{yearValue}
+    GROUP BY  DATE_FORMAT(record_date,'%Y%M')
+    ORDER BY monthOfYear
+  </select>
+
+  <!--  理财历史月度达成率 统计 -->
+  <select id="findPerformanceRateByYear" resultType="hashmap" parameterType="hashmap">
+    SELECT
+    Month(record_date) monthOfYear,
+    index_value rateValue
+    FROM f_moneymgr_month_history
+	WHERE index_name = '计划达成率' AND DATE_FORMAT(record_date,'%Y') = #{yearValue}
+	ORDER BY monthOfYear
+  </select>
+
+  <!-- 理财历史月度 机构数目 -->
+  <select id="findOrgNumByYear" resultType="hashmap" parameterType="hashmap">
+    SELECT
+    Month(record_date) monthOfYear,
+    index_value orgNum
+    FROM f_moneymgr_month_history
+	WHERE index_name = '机构数目' AND DATE_FORMAT(record_date,'%Y') = #{yearValue}
+	ORDER BY monthOfYear
+  </select>
+
+  <!-- 理财历史月度 新客户数 -->
+  <select id="findNewClientNumByYear" resultType="hashmap" parameterType="hashmap">
+    SELECT
+    Month(record_date) monthOfYear,
+    SUM(index_value) newClientNum
+    FROM f_moneymgr_month_history
+	WHERE index_name = '新客户数' AND DATE_FORMAT(record_date,'%Y') = #{yearValue}
+    GROUP BY  DATE_FORMAT(record_date,'%Y%M')
+    ORDER BY monthOfYear
+  </select>
+
+  <!-- 理财人员人效 月度 人均新客户数 -->
+  <select id="findPerCapitaNewClientByYear" resultType="hashmap" parameterType="hashmap">
+    SELECT ROUND((performance / avg_num),2) perCapitaNewClient, SUBSTR(counselor.months,6) monthOfYear
+    FROM (SELECT (this_month_num + last_month_num) / 2 AS avg_num, this.months
+        FROM (SELECT SUM(index_value) AS this_month_num, DATE_FORMAT(record_date, '%Y-%m') AS months
+            FROM f_moneymgr_month_history
+            WHERE index_name = '咨询师人数'
+                AND year(record_date) = #{yearValue}
+            GROUP BY months
+            ) this, (SELECT SUM(index_value) AS last_month_num, DATE_FORMAT(DATE_ADD(record_date, INTERVAL 1 MONTH), '%Y-%m') AS months
+                FROM f_moneymgr_month_history
+                WHERE index_name = '咨询师人数'
+                GROUP BY months
+                ) last
+        WHERE this.months = last.months
+        ) counselor, (SELECT SUM(index_value) AS performance, DATE_FORMAT(record_date, '%Y-%m') AS months
+            FROM f_moneymgr_month_history
+            WHERE index_name = '新客户数'
+                AND year(record_date) = #{yearValue}
+            GROUP BY months
+            ) performance
+    WHERE counselor.months = performance.months
+  </select>
+
+  <!-- 理财人员人效 月度 人均产能 -->
+  <select id="findPerCapitaCapacityByYear" resultType="hashmap" parameterType="hashmap">
+    SELECT ROUND((performance / avg_num),2) perCapitaCapacity, SUBSTR(counselor.months,6) monthOfYear
+    FROM (SELECT (this_month_num + last_month_num) / 2 AS avg_num, this.months
+    FROM (SELECT SUM(index_value) AS this_month_num, DATE_FORMAT(record_date, '%Y-%m') AS months
+    FROM f_moneymgr_month_history
+    WHERE index_name = '咨询师人数'
+    AND year(record_date) = #{yearValue}
+    GROUP BY months
+    ) this, (SELECT SUM(index_value) AS last_month_num, DATE_FORMAT(DATE_ADD(record_date, INTERVAL 1 MONTH), '%Y-%m') AS months
+    FROM f_moneymgr_month_history
+    WHERE index_name = '咨询师人数'
+    GROUP BY months
+    ) last
+    WHERE this.months = last.months
+    ) counselor, (SELECT SUM(index_value) AS performance, DATE_FORMAT(record_date, '%Y-%m') AS months
+    FROM f_moneymgr_month_history
+    WHERE index_name = '业绩'
+    AND year(record_date) = #{yearValue}
+    GROUP BY months
+    ) performance
+    WHERE counselor.months = performance.months
+  </select>
+  
+   <select id="getDiffOfCountAndIndexNumByDate" resultType="hashmap" parameterType="Date">
+  	SELECT COUNT(COALESCE(record_name,'NULL'))-COUNT(DISTINCT COALESCE(record_name,'NULL'),COALESCE(index_name,'NULL') ) diff
+	FROM f_moneymgr_month_history
+	WHERE record_date=#{date,jdbcType=DATE}
+  </select>
+</mapper>
